@@ -5,4 +5,5 @@ import { Subject } from 'rxjs';
 })
 export class DataService {
   data:string="";
+  watchedTime:number=0;
 }
