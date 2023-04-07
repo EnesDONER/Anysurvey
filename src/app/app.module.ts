@@ -17,6 +17,9 @@ import { WalletComponent } from './components/wallet/wallet.component';
 import { PartnershipComponent } from './components/partnership/partnership.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PaymentComponent } from './components/payment/payment.component';
+import { CreateaSurveyWithOneQuestionComponent } from './components/createa-survey-with-one-question/createa-survey-with-one-question.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +34,9 @@ import { PaymentComponent } from './components/payment/payment.component';
     WalletComponent,
     PartnershipComponent,
     PaymentComponent,
+    CreateaSurveyWithOneQuestionComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

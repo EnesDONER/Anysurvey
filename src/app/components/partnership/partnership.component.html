@@ -24,7 +24,7 @@
                             <label for="floatingInput">Video Url</label>
                         </div>
                     </div>
-                    <a href="" class="btn btn-primary px-4 mx-auto mb-4">Go to Pay</a>
+                    <a (click)="openModal()" class="btn btn-primary px-4 mx-auto mb-4">Go to Pay</a>
                 </div>
             </div>
             <div class="col-lg-6 mb-5">
@@ -33,7 +33,7 @@
                         <h4 class="card-title">Post a Survey</h4>
                         <p class="card-text">Please select your survey package</p>
                     </div>
-                    <div class="card-footer package py-4 px-5" >
+                    <div routerLink="/createaSurveyWithoneQuestion" class="card-footer package py-4 px-5" >
                         <div class="row">
                             <div class="col-6 py-1 text-right border-right"><strong>Number of questions</strong></div>
                             <div class="col-6 py-1">1</div>

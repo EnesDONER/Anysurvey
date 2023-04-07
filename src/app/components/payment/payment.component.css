@@ -27,6 +27,7 @@
   left: 0;
   right: 0;
   width: 680px;
+
 }
 .container .col1 {
   perspective: 1000;
@@ -36,8 +37,9 @@
   position: relative;
   width: 420px;
   height: 250px;
-  margin-bottom: 85px;
+  margin-bottom: 25px;
   margin-right: 10px;
+  margin-left: 10px;
   border-radius: 17px;
   box-shadow: 0 5px 20px -5px rgba(0, 0, 0, 0.1);
   transition: all 1s;
@@ -168,6 +170,8 @@
   padding-top: 3px;
   padding-bottom: 3px;
   margin: 7px;
+  margin-left: 12vh;
+  align-items: center;
   font-size: 17px;
   border-radius: 20px;
   background: rgba(0, 0, 0, 0.05);
@@ -181,6 +185,7 @@
 }
 .container .col2 label {
   padding-left: 8px;
+  margin-left: 12vh;
   font-size: 15px;
   color: #444;
 }

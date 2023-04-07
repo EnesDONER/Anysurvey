@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import SolveQuestionnaireComponent from './components/solve-questionnaire/solve-questionnaire.component';
 import { PartnershipComponent } from './components/partnership/partnership.component';
+import { CreateaSurveyWithOneQuestionComponent } from './components/createa-survey-with-one-question/createa-survey-with-one-question.component';
 const routes: Routes = [
   {path:"",pathMatch:"full",component:HomeComponent},
   {path:"home",component:HomeComponent},
@@ -14,8 +15,7 @@ const routes: Routes = [
   {path:"solvequestionnaire",component:SolveQuestionnaireComponent},
   {path:"wallet",component:WalletComponent},
   {path:"partnership",component:PartnershipComponent},
-
-
+  {path:"createaSurveyWithoneQuestion",component:CreateaSurveyWithOneQuestionComponent}
 ];
 
 @NgModule({

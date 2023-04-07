@@ -1,33 +1,33 @@
-
-    <div id="card" class="container">
-      <div class="col1">
-        <div class="card">
-          <div class="front">
-            <div class="type">
-              <img class="bankid"/>
-            </div>
-            <span class="chip"></span>
-            <span id="card_number" class="card_number">&#x25CF;&#x25CF;&#x25CF;&#x25CF; &#x25CF;&#x25CF;&#x25CF;&#x25CF; &#x25CF;&#x25CF;&#x25CF;&#x25CF; &#x25CF;&#x25CF;&#x25CF;&#x25CF; </span>
-            <div id="date" class="date"><span class="date_value">MM / YYYY</span></div>
-            <span id="fullname" class="fullname">FULL NAME</span>
-          </div>
-          <div class="back">
-            <div class="magnetic"></div>
-            <div class="bar"></div>
-            <span class="chip"></span><span class="disclaimer">This card is property of Random Bank of Random corporation. <br> If found please return to Random Bank of Random corporation - 21968 Paris, Verdi Street, 34 </span>
-          </div>
+<div id="card"  class="container mt-3 mb-3">
+  <div class="row">
+  <div class="col col1">
+    <div class="card">
+      <div class="front">
+        <div class="type">
+          <img class="bankid"/>
         </div>
+        <span class="chip"></span>
+        <span id="card_number" class="card_number">&#x25CF;&#x25CF;&#x25CF;&#x25CF; &#x25CF;&#x25CF;&#x25CF;&#x25CF; &#x25CF;&#x25CF;&#x25CF;&#x25CF; &#x25CF;&#x25CF;&#x25CF;&#x25CF; </span>
+        <div id="date" class="date"><span class="date_value">MM / YYYY</span></div>
+        <span id="fullname" class="fullname">FULL NAME</span>
       </div>
-      <div class="col2">
-        <label>Card Number</label>
-        <input (keyup)="cardNumber()"  class="number" [(ngModel)]="ncard" type="text"   maxlength="19"/>
-        <label>Cardholder name</label>
-        <input class="inputname" [(ngModel)]="namecard"type="text" placeholder=""/>
-        <label>Expiry date</label>
-        <input class="expire" type="text" [(ngModel)]="date" placeholder="MM / YYYY"/>
-        <label>Security Number</label>
-        <input class="ccv" type="text" [(ngModel)]="ccv" placeholder="CVC" maxlength="3" />
-        <button class="buy"><i class="material-icons">lock</i> Pay --.-- €</button>
+      <div class="back">
+        <div class="magnetic"></div>
+        <div class="bar"></div>
+        <span class="chip"></span><span class="disclaimer">This card is property of Random Bank of Random corporation. <br> If found please return to Random Bank of Random corporation - 21968 Paris, Verdi Street, 34 </span>
       </div>
     </div>
-   
+  </div>
+  <div class="col col2">
+    <label>Card Number</label>
+    <input (keyup)="cardNumber()"  class="number" [(ngModel)]="ncard" type="text"   maxlength="19"/>
+    <label>Cardholder name</label>
+    <input class="inputname" [(ngModel)]="namecard"type="text" placeholder=""/>
+    <label>Expiry date</label>
+    <input class="expire" type="text" [(ngModel)]="date" placeholder="MM / YYYY"/>
+    <label>Security Number</label>
+    <input class="ccv" type="text" [(ngModel)]="ccv" placeholder="CVC" maxlength="3" />
+    <button class="buy"><i class="material-icons"></i> Pay --.-- €</button>
+  </div>
+</div>
+</div>
