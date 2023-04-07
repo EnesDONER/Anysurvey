@@ -1,0 +1,29 @@
+.row{
+    background-color: aqua;
+    border-style: dashed;
+    border-width: 2px;
+    border-color:black;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 12px;
+    width: 90%;
+    margin-left: 3vw;
+}
+.container-fluild{
+    background-color: #041858;
+    padding: 20px;
+    margin-bottom: 15px;
+    margin-top: 25px;
+    color: white;
+    border-radius: 10px;
+}
+.container{
+    justify-content: center;
+    width: 50%;
+    height: 50%;
+    border-style: solid;
+    border-width: 1px;
+    border-color:black;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

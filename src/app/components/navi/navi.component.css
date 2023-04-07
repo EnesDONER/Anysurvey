@@ -1,3 +1,17 @@
 nav{
-    background-color: #e4a723;
+    background-color: #041858;
+    color: white;
+    padding: 10px;
 }
+a{
+    color: white;
+    font-size: medium;
+}
+#header{
+    text-shadow: 2px 2px grey;
+    font-size: x-large;
+    font-family: Comic Sans MS, Arial, Helvetica, sans-serif;
+}
+.navbar-toggler span {
+    color: white;
+  }

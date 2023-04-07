@@ -11,8 +11,12 @@ import SolveQuestionnaireComponent from './components/solve-questionnaire/solve-
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { FormsModule } from '@angular/forms';
 import { SafePipe } from './pipes/safe.pipe';
-
-
+import { AdsComponent } from './components/ads/ads.component';
+import { WatchAdsComponent } from './components/watch-ads/watch-ads.component';
+import { WalletComponent } from './components/wallet/wallet.component';
+import { PartnershipComponent } from './components/partnership/partnership.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PaymentComponent } from './components/payment/payment.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,12 +26,18 @@ import { SafePipe } from './pipes/safe.pipe';
     QuestionnaireComponent,
     SolveQuestionnaireComponent,
     SafePipe,
+    AdsComponent,
+    WatchAdsComponent,
+    WalletComponent,
+    PartnershipComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MdbModalModule,
     FormsModule,
+    BrowserAnimationsModule,
     ToastrModule.forRoot({
       positionClass:"toast-bottom-right"
     })
