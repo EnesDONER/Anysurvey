@@ -1,0 +1,129 @@
+<div class="container">
+        <div>
+            <button (click)="addQuestion()" class="btn btn-success" >+</button>
+            <div class="add info"> Add a Question</div>
+        </div>
+        <div >
+            <button (click)="removeQuestion()" *ngIf="questionCount>1" class="btn btn-danger mx-4">-</button>
+            <div class="remove info"  *ngIf="questionCount>1"> Remove a Question</div>
+        </div>
+    
+    
+    <div class="row">
+        <div class="col-md-5" >
+            <p class="text-center"> Add question</p>
+            <form [formGroup]="questionAddForm1">
+                <div class="mb-3">
+                    <label for="productName" >Ürün Adı</label>
+                    <div class="form-group">
+                        <input type="text" 
+                        id="productName"
+                        formControlName="productName" class="form-control"
+                        placeholder="Ürün adı"/>
+                    </div>
+                </div> 
+                <div class="mb-3">
+                    <label for="productName" >Ürün Adı</label>
+                    <div class="form-group">
+                        <input type="text" 
+                        id="productName"
+                        formControlName="productName" class="form-control"
+                        placeholder="Ürün adı"/>
+                    </div>
+                </div>  
+                <div class="mb-3">
+                    <label for="productName" >Ürün Adı</label>
+                    <div class="form-group">
+                        <input type="text" 
+                        id="productName"
+                        formControlName="productName" class="form-control"
+                        placeholder="Ürün adı"/>
+                    </div>
+                </div>  
+                <div class="mb-3">
+                    <label for="unitPrice">Ürün Fiyatı</label>
+                    <div class="form-group">
+                        <input type="number"
+                        id="unitPrice"
+                        formControlName="unitPrice" class="form-control"
+                        placeholder="Ürün Fiyatı"/>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="unitPrice">Ürün Fiyatı</label>
+                    <div class="form-group">
+                        <input type="number"
+                        id="unitPrice"
+                        formControlName="unitPrice" class="form-control"
+                        placeholder="Ürün Fiyatı"/>
+                    </div>
+                </div>   
+            </form>
+        </div>
+        <div  *ngIf="questionCount>=2" class="col-md-5">
+            
+            <form [formGroup]="questionAddForm">
+                <div class="mb-3">
+                    <label for="productName" >Ürün Adı</label>
+                    <div class="form-group">
+                        <input type="text" 
+                        id="productName"
+                        formControlName="productName" class="form-control"
+                        placeholder="Ürün adı"/>
+                    </div>
+                </div> 
+                <div class="mb-3">
+                    <label for="productName" >Ürün Adı</label>
+                    <div class="form-group">
+                        <input type="text" 
+                        id="productName"
+                        formControlName="productName" class="form-control"
+                        placeholder="Ürün adı"/>
+                    </div>
+                </div>  
+                <div class="mb-3">
+                    <label for="productName" >Ürün Adı</label>
+                    <div class="form-group">
+                        <input type="text" 
+                        id="productName"
+                        formControlName="productName" class="form-control"
+                        placeholder="Ürün adı"/>
+                    </div>
+                </div>  
+                <div class="mb-3">
+                    <label for="unitPrice">Ürün Fiyatı</label>
+                    <div class="form-group">
+                        <input type="number"
+                        id="unitPrice"
+                        formControlName="unitPrice" class="form-control"
+                        placeholder="Ürün Fiyatı"/>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="unitPrice">Ürün Fiyatı</label>
+                    <div class="form-group">
+                        <input type="number"
+                        id="unitPrice"
+                        formControlName="unitPrice" class="form-control"
+                        placeholder="Ürün Fiyatı"/>
+                    </div>
+                </div>   
+            </form>
+        </div>
+    </div>
+    <div *ngIf="questionCount>=3" class="row">
+        <div class="col-md-5" >
+            fds
+        </div>
+        <div  *ngIf="questionCount>=4" class="col-md-5" >
+            fds
+        </div>
+    </div>
+    <div *ngIf="questionCount>=5" class="row">
+        <div class="col-md-5" >
+            fds
+        </div>
+    </div>
+
+
+</div>

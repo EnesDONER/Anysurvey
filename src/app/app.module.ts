@@ -9,7 +9,7 @@ import { QuestionnaireComponent } from './components/questionnaire/questionnaire
 import { ToastrModule } from 'ngx-toastr';
 import SolveQuestionnaireComponent from './components/solve-questionnaire/solve-questionnaire.component';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SafePipe } from './pipes/safe.pipe';
 import { AdsComponent } from './components/ads/ads.component';
 import { WatchAdsComponent } from './components/watch-ads/watch-ads.component';
@@ -17,9 +17,9 @@ import { WalletComponent } from './components/wallet/wallet.component';
 import { PartnershipComponent } from './components/partnership/partnership.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PaymentComponent } from './components/payment/payment.component';
-import { CreateaSurveyWithOneQuestionComponent } from './components/createa-survey-with-one-question/createa-survey-with-one-question.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { CreateSurveyComponent } from './components/create-survey/create-survey.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,15 +34,16 @@ import { RegisterComponent } from './components/register/register.component';
     WalletComponent,
     PartnershipComponent,
     PaymentComponent,
-    CreateaSurveyWithOneQuestionComponent,
     LoginComponent,
     RegisterComponent,
+    CreateSurveyComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MdbModalModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       positionClass:"toast-bottom-right"

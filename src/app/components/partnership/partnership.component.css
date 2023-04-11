@@ -13,7 +13,9 @@
     z-index: 1;
     font-size: larger;
   }
-  
+  .container-fluid{
+    margin-bottom: 6em;
+  }
   .section-title::before {
     position: absolute;
     content: "";
@@ -31,4 +33,7 @@
   .package:hover{
     background-color:  lightblue;
     font-size: large;
+  }
+  button{
+    margin-left: 35%;
   }

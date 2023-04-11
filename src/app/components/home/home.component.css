@@ -148,15 +148,14 @@ button:focus{outline: 0;}
 }
 #partnership:hover{
   color: #041858;
-  background-color: yellow;
-  
+  background-color: gold;
 }
 .heading_container h2::before {
   content: "";
   position: absolute;
   width: 20px;
   height: 20px;
-  background-color: #d8bf36;
+  background-color: #ebd76b;
   top: 50%;
   right: -30px;
   border-radius: 100%;

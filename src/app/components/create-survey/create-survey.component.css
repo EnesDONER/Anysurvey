@@ -1,0 +1,39 @@
+.container{
+    margin-bottom: 30em;
+}
+.info{
+    display: inline;
+    margin-left: 20px;
+    color: white;
+    padding: 10px;
+    border-radius: 12px;
+}
+.add{
+    background: green;
+}
+.remove{
+    background: rgb(195, 12, 12);
+}
+button{
+    padding-left: 25px;
+    padding-right: 25px;
+    font-size: xx-large;
+    margin-top: 15px;
+    border-radius: 15px;
+}
+.col-md-5{
+    padding: 50px;
+    background-color: lightgray;
+    margin: 10px;
+    display: inline-block;
+    border: 2px lightgray solid;
+    border-radius: 35px;
+    box-shadow: 5px 5px black;
+}
+
+p{
+    font-size:4em;
+    font: bolder;
+    font-family: 'STCaiyun', sans-serif;
+                                                
+}
