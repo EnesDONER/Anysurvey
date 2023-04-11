@@ -1,54 +1,57 @@
+import { Question } from './../../models/question';
 import { ToastrService } from 'ngx-toastr';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-create-survey',
   templateUrl: './create-survey.component.html',
   styleUrls: ['./create-survey.component.css']
 })
-export class CreateSurveyComponent {
+export class CreateSurveyComponent implements OnInit {
   infoVisible = false;
   removeInfoVisible = false;
   questionCount:number=1;
   questionAddForm:FormGroup;
   questionAddForm1:FormGroup;
+  questions:Question[]=[];
+  
 
   constructor(private toastrService:ToastrService,private formBuilder:FormBuilder){}
+  ngOnInit(): void {
+    this.createQuestionAddForm();
+  }
  
   createQuestionAddForm(){
     this.questionAddForm = this.formBuilder.group({
-      productName:["",Validators.required],
-      unitPrice: ["",Validators.required]
+      id:"",
+      description: ["",Validators.required],
+      section1: ["",Validators.required],
+      section2: ["",Validators.required], 
+      section3: ["",Validators.required], 
+      section4: ["",Validators.required] 
     })
  }
- createQuestionAddForm1(){
-  this.questionAddForm1 = this.formBuilder.group({
-    productName:["",Validators.required],
-    unitPrice: ["",Validators.required]
-  })
-}
- 
-  showInfo() {
-    this.infoVisible = true;
-  }
 
-  hideInfo() {
-    this.infoVisible = false;
-  }
-  showRemoveInfo() {
-    this.removeInfoVisible = true;
-  }
+ addQuestion(){
+  if(this.questionAddForm.valid && this.questions.length<3){ 
+    this.questionAddForm.get('id').setValue(1,undefined)
+    console.log(this.questionAddForm.value)
+    this.questions.push(this.questionAddForm.value);
 
-  hideRemoveInfo() {
-    this.removeInfoVisible = false;
+    
+  }else if(this.questions.length==3){
+    this.toastrService.error("You have reached the maximum number of questions you can add.");
   }
-  addQuestion(){
-    this.questionCount = Number(1+this.questionCount);
-    if(this.questionCount>5){
-      this.toastrService.error("You have reached the maximum number of questions you can add.")
-    }
+  else{
+    this.toastrService.error("Your form is missing");
   }
+ }
+ deleteQuestion(question:Question){
+  let index = this.questions.indexOf(question);
+  this.questions.splice(index,1);
+ }
   removeQuestion(){
     this.questionCount = Number(this.questionCount-1);
   }

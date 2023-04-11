@@ -1,6 +1,3 @@
-.container{
-    margin-bottom: 30em;
-}
 .info{
     display: inline;
     margin-left: 20px;
@@ -15,11 +12,8 @@
     background: rgb(195, 12, 12);
 }
 button{
-    padding-left: 25px;
-    padding-right: 25px;
-    font-size: xx-large;
-    margin-top: 15px;
-    border-radius: 15px;
+    padding: 8px;
+    margin-top: 8px;
 }
 .col-md-5{
     padding: 50px;
@@ -29,11 +23,38 @@ button{
     border: 2px lightgray solid;
     border-radius: 35px;
     box-shadow: 5px 5px black;
+    height: auto;
 }
 
-p{
+.question{
+    margin-top: 15px;
+    border: white 2px solid;
+    padding: 20px;
+    padding: 50px;
+    background-color: lightgray;
+    margin: 10px;
+    display: block;
+    border: 2px lightgray solid;
+    border-radius: 35px;
+    box-shadow: 5px 5px black;
+    height: 100px;
+    position: relative;
+    height: auto;
+}
+.outline{
+    position: relative;
+   
+    padding-top: 10px;
+    padding-right: 5px;
+
+}
+.addQuestion{
     font-size:4em;
     font: bolder;
     font-family: 'STCaiyun', sans-serif;
                                                 
+}
+span{
+    width: 7%;
+    z-index: 1;
 }
