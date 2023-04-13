@@ -4,7 +4,7 @@ import { QuestionnaireComponent } from './components/questionnaire/questionnaire
 import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import SolveQuestionnaireComponent from './components/solve-questionnaire/solve-questionnaire.component';
+import {SolveQuestionnaireComponent} from './components/solve-questionnaire/solve-questionnaire.component';
 import { PartnershipComponent } from './components/partnership/partnership.component';
 import { CreateSurveyComponent } from './components/create-survey/create-survey.component';
 const routes: Routes = [
@@ -12,7 +12,7 @@ const routes: Routes = [
   {path:"home",component:HomeComponent},
   {path:"questionnaire",component:QuestionnaireComponent},
   {path:"ads",component:AdsComponent},
-  {path:"solvequestionnaire",component:SolveQuestionnaireComponent},
+  {path:"solve-questionnaire",component:SolveQuestionnaireComponent},
   {path:"wallet",component:WalletComponent},
   {path:"partnership",component:PartnershipComponent},
   {path:"create-survey",component:CreateSurveyComponent},

@@ -7,7 +7,7 @@ import { NaviComponent } from './components/navi/navi.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
 import { ToastrModule } from 'ngx-toastr';
-import SolveQuestionnaireComponent from './components/solve-questionnaire/solve-questionnaire.component';
+import {SolveQuestionnaireComponent} from './components/solve-questionnaire/solve-questionnaire.component';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SafePipe } from './pipes/safe.pipe';

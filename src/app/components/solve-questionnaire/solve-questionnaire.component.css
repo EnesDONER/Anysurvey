@@ -7,14 +7,16 @@
     padding: 20px;
     margin-bottom: 12px;
     width: 90%;
+    justify-content: center;
     margin-left: 3vw;
 }
 .container-fluild{
-    background-color: #041858;
+    background-color: #e3f2fd;;
     padding: 20px;
     margin-bottom: 15px;
     margin-top: 25px;
-    color: white;
+    color: black;
+    font-weight: 500;
     border-radius: 10px;
 }
 .container{
@@ -26,4 +28,5 @@
     border-color:black;
     margin-top: 20px;
     margin-bottom: 20px;
+    box-shadow: 3px 3px 3px black;
 }

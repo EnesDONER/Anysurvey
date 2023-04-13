@@ -1,6 +1,6 @@
 import {  ToastrService } from 'ngx-toastr';
 import { DataService } from './../../services/data.service';
-import SolveQuestionnaireComponent from './../solve-questionnaire/solve-questionnaire.component';
+import {SolveQuestionnaireComponent} from './../solve-questionnaire/solve-questionnaire.component';
 import { Component, OnInit, AfterViewInit, AfterViewChecked, AfterContentChecked, AfterContentInit, DoCheck, OnChanges } from '@angular/core';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 
