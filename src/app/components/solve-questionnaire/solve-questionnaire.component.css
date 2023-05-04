@@ -1,6 +1,5 @@
 .row{
     background-color: aqua;
-    border-style: dashed;
     border-width: 2px;
     border-color:black;
     border-radius: 20px;
@@ -21,12 +20,14 @@
 }
 .container{
     justify-content: center;
-    width: 50%;
-    height: 50%;
+    width: 60%;
+    height: 60%;
     border-style: solid;
     border-width: 1px;
     border-color:black;
-    margin-top: 20px;
-    margin-bottom: 20px;
+
     box-shadow: 3px 3px 3px black;
+}
+.body{
+  background-image: url(../../../assets/images/bg.jpg);
 }

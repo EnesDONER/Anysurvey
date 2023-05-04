@@ -11,7 +11,7 @@ import { QuestionnaireComponent } from './components/questionnaire/questionnaire
 import { ToastrModule } from 'ngx-toastr';
 import {SolveQuestionnaireComponent} from './components/solve-questionnaire/solve-questionnaire.component';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { SafePipe } from './pipes/safe.pipe';
 import { AdsComponent } from './components/ads/ads.component';
 import { WalletComponent } from './components/wallet/wallet.component';
