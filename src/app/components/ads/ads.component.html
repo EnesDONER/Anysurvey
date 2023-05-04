@@ -1,4 +1,22 @@
 
+<!-- Modal -->
+<div class="modal fade mb-3" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true" (hidden.bs.modal)="stopVideo()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body d-flex justify-content-center align-items-center">
+        <iframe width="100%" height="420" [src]="'https://www.youtube.com/embed/'+data+'?autoplay=1' |safe" title="YouTube video player" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
 <section class="meetings-page" id="meetings">
     <div class="container" >
       <div class="row">
@@ -18,7 +36,7 @@
                       <div>Lorem ipsum dolor sit amet.</div>
                       <h4></h4>
                       <div  class="input-group mb-3">
-                        <button (click)="sendData('H5NA_UTSYeE')" (click)="openModal()" class="btn btn-outline-success" type="button" id="button-addon2">Watch Video</button>
+                        <button  (click)="data='H5NA_UTSYeE'" data-bs-toggle="modal" data-bs-target="#videoModal"  class="btn btn-outline-success" type="button" id="button-addon2">Watch Video</button>
                       </div>
                     </div>
                   </div>
@@ -37,7 +55,7 @@
                         <div>Lorem ipsumdwwd.</div>
                         <h4></h4>
                         <div  class="input-group mb-3">
-                          <button (click)="sendData('yzv-NeubqGk')" (click)="openModal()" class="btn btn-outline-success" type="button" id="button-addon2">Watch Video</button>
+                          <button (click)="data='36geLo26AFM'" data-bs-toggle="modal" data-bs-target="#videoModal" class="btn btn-outline-success" type="button" id="button-addon2">Watch Video</button>
                         </div>
                       </div>
                     </div>
@@ -55,7 +73,7 @@
                         <div>Lorem ipsum dolor sit amet.</div>
                         <h4></h4>
                         <div  class="input-group mb-3">
-                          <button (click)="sendData('7uqc3-NdQXg')"(click)="openModal()" class="btn btn-outline-success" type="button" id="button-addon2">Watch Video</button>
+                          <button (click)="data='7uqc3-NdQXg'" data-bs-toggle="modal" data-bs-target="#videoModal" class="btn btn-outline-success" type="button" id="button-addon2">Watch Video</button>
                         </div>
                       </div>
                     </div>

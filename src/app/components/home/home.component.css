@@ -290,3 +290,18 @@ button:focus{outline: 0;}
   a{
     text-decoration: none;
 }
+@media (max-width: 850px) {
+  .slider {
+    height: 450px !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (min-width: 850px) {
+  .slider {
+    height: 690px !important;
+    max-width: 80% !important;
+    margin-left: 10% !important;
+
+  }
+}

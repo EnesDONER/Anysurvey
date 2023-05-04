@@ -14,7 +14,7 @@ export class WatchAdsComponent {
   time:number;
   constructor(public modalRef: MdbModalRef<WatchAdsComponent>,private dataService:DataService,private toastrService:ToastrService){this.time=dataService.watchedTime}
   ngOnInit(): void {
-    this.data = 'https://www.youtube.com/embed/'+this.dataService.data;
+    this.data = 'https://www.youtube.com/embed/'+this.dataService.data+'?autoplay=1';
     console.log(this.data);
 
   }
