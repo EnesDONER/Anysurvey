@@ -136,7 +136,7 @@
   }
   section.meetings-page
   {
-  /* background-image: url(../../../assets/images/2.jpg); */
+  background-image: url(../../../assets/images/bg.jpg);
   background-position: center center;
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -144,11 +144,6 @@
   padding-top: 140px;
   padding-bottom: 0px;
   }
-.border{
-      border-radius: 20px;
-      margin: 20px;
-
-}
 
 body {
   font-family: Arial, sans-serif;
@@ -212,37 +207,4 @@ h1 {
   border-radius: 5px;
   width: 30%;
   position: relative;
-  transition: all 5s ease-in-out;
-}
-
-.popup h2 {
-  margin-top: 0;
-  color: #333;
-  font-family: Tahoma, Arial, sans-serif;
-}
-.popup .close {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  transition: all 200ms;
-  font-size: 30px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #333;
-}
-.popup .close:hover {
-  color: #06D85F;
-}
-.popup .content {
-  max-height: 30%;
-  overflow: auto;
-}
-
-@media screen and (max-width: 700px){
-  .box{
-    width: 70%;
-  }
-  .popup{
-    width: 70%;
-  }
 }

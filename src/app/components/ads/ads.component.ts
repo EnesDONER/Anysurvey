@@ -1,8 +1,6 @@
 import { Component, OnChanges } from '@angular/core';
-import { DataService } from 'src/app/services/data.service';
 import { ToastrService } from 'ngx-toastr';
 
-declare var $: any;
 
 @Component({
   selector: 'app-ads',
@@ -11,25 +9,30 @@ declare var $: any;
 })
 export class AdsComponent {
   data:string="";
-  autoplay:number=1;
-  isVideoOpen:boolean= false;
-  constructor(private dataService:DataService,private toastrService:ToastrService) {this.data=dataService.data}
+  startedTime:number;
+  watchedTime:number=3000;
+  constructor(private toastrService:ToastrService) {}
 
   stopVideo(): void {
     const iframe = document.querySelector('#videoModal iframe') as HTMLIFrameElement;
     iframe.src = '';
     this.data=iframe.src;
+    const finishedTime = performance.now(); // bileşen ekrandan kaldırıldığında bitiş zamanını kaydedin
+    const time= finishedTime - this.startedTime; // iki zaman damgası arasındaki farkı hesaplayın
+    console.log(`MyComponentComponent bileşeninin ekranda görüntülenme süresi: ${time} milisaniye`);
+    if(time >= this.watchedTime){
+      this.payment();
+    }
+    else(
+      this.toastrService.error("Ödül Verilmedi.")
+    ) 
   }
-  onModalHidden() {
-    
+  startTimer(){
+    this.startedTime = performance.now();
   }
-
-  // openModal() {
-  //   console.time('openModal');
-  //   this.modalRef = this.modalService.open(WatchAdsComponent, {
-  //     modalClass: 'modal-dialog-centered'
-  //   })
-
-  // }
-
+  payment(){
+    //ödeme işlemleri
+    //başarılı olursa
+    this.toastrService.success("Ödül Verildi.");
+  }
 }

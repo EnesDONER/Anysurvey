@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {SolveQuestionnaireComponent} from './components/solve-questionnaire/solve-questionnaire.component';
 import { PartnershipComponent } from './components/partnership/partnership.component';
 import { CreateSurveyComponent } from './components/create-survey/create-survey.component';
+import { ContactComponent } from './components/contact/contact.component';
 const routes: Routes = [
   {path:"",pathMatch:"full",component:HomeComponent},
   {path:"home",component:HomeComponent},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path:"wallet",component:WalletComponent},
   {path:"partnership",component:PartnershipComponent},
   {path:"create-survey",component:CreateSurveyComponent},
+  {path:"contact",component:ContactComponent}
 
 ];
 

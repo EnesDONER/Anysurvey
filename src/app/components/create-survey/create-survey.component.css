@@ -1,3 +1,6 @@
+.body{
+    background-image: url(../../../assets/images/bg.jpg);
+}
 .info{
     display: inline;
     margin-left: 20px;
@@ -15,6 +18,7 @@ button{
     padding: 8px;
     margin-top: 8px;
 }
+
 .col-md-5{
     padding: 50px;
     background-color: lightgray;

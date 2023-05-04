@@ -1,4 +1,13 @@
-.section-title {
+
+.contact-form .help-block ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  .body{
+    background-image: url(../../../assets/images/bg.jpg);
+  }
+  .section-title {
     position: relative;
     display: inline-block;
     letter-spacing: 1px;
@@ -16,11 +25,7 @@
     font-size: xx-large;
     background: #71BDCA;
   }
-  .container-fluid{
-    padding-bottom: 6em;
-    background-image: url(../../../assets/images/bg.jpg);
 
-  }
   .section-title::before {
     position: absolute;
     content: "";
@@ -30,7 +35,4 @@
     height: 3px;
     background: rgb(133, 252, 252);
   }
- 
-  button{
-    margin-left: 35%;
-  }
+
