@@ -283,9 +283,6 @@ button:focus{outline: 0;}
     background-color: #d8bf36;
     top: 50%;
     right: -30px;
-    border-radius: 100%;
-    -webkit-transform: translateY(-50%);
-            transform: translateY(-50%);
   }
   a{
     text-decoration: none;

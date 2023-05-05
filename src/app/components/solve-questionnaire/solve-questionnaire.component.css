@@ -31,3 +31,6 @@
 .body{
   background-image: url(../../../assets/images/bg.jpg);
 }
+.row:active{
+    background: green;
+}

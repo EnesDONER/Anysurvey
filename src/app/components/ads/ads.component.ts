@@ -8,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./ads.component.css']
 })
 export class AdsComponent {
-  data:string="";
+  data:string;
   startedTime:number;
   watchedTime:number=3000;
   constructor(private toastrService:ToastrService) {}

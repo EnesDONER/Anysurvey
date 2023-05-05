@@ -13,5 +13,8 @@ a{
     font-family: Comic Sans MS, Arial, Helvetica, sans-serif;
 }
 .navbar-toggler span {
-    color: white;
-  }
+    color: white !important; 
+}
+li{
+    margin-right: 8px;
+}

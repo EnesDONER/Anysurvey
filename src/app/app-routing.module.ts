@@ -8,6 +8,9 @@ import {SolveQuestionnaireComponent} from './components/solve-questionnaire/solv
 import { PartnershipComponent } from './components/partnership/partnership.component';
 import { CreateSurveyComponent } from './components/create-survey/create-survey.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { LoginComponent } from './components/login/login.component';
+import { registerLocaleData } from '@angular/common';
+import { RegisterComponent } from './components/register/register.component';
 const routes: Routes = [
   {path:"",pathMatch:"full",component:HomeComponent},
   {path:"home",component:HomeComponent},
@@ -17,7 +20,9 @@ const routes: Routes = [
   {path:"wallet",component:WalletComponent},
   {path:"partnership",component:PartnershipComponent},
   {path:"create-survey",component:CreateSurveyComponent},
-  {path:"contact",component:ContactComponent}
+  {path:"contact",component:ContactComponent},
+  {path:"login",component:LoginComponent},
+  {path:"register",component:RegisterComponent},
 
 ];
 
