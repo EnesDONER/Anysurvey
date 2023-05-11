@@ -21,6 +21,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CreateSurveyComponent } from './components/create-survey/create-survey.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,8 @@ import { ContactComponent } from './components/contact/contact.component';
     AppRoutingModule,
     MdbModalModule,
     FormsModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
