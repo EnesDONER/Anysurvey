@@ -11,7 +11,7 @@
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
         <form [formGroup]="loginForm">
           <!-- Email input -->
-          <div class="form-outline mt-5 mb-4">
+          <div [ngClass]="{ 'has-error': loginForm.get('email').touched && loginForm.get('email').invalid }" class="form-outline mt-5 mb-1">
             <input
               type="email"
               id="email"
@@ -20,6 +20,7 @@
               placeholder="Enter a valid email address"
             />
             <label class="form-label" for="email">Email address</label>
+            <p class="help-block text-danger" *ngIf="loginForm.get('email').touched && loginForm.get('email').errors?.['email']">Please enter a valid email</p>
           </div>
         
           <!-- Password input -->
@@ -46,7 +47,7 @@
               >
               </re-captcha>
             </div>
-            <a href="#!" class="text-body">Forgot password?</a>
+            <a routerLink="/forgetPassword" class="text-body">Forgot password?</a>
           </div>
         
           <div class="text-center text-lg-start mt-4 pt-2">
@@ -60,7 +61,7 @@
             </button>
             <p class="small fw-bold mt-2 pt-1 mb-0">
               Don't have an account?
-              <a href="#!" class="link-danger">Register</a>
+              <a routerLink="/register" class="link-danger">Register</a>
             </p>
           </div>
         </form>

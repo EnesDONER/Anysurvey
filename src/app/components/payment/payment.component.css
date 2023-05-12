@@ -38,7 +38,7 @@
   -webkit-transform: translateZ(1px);
   transition: background 0.3s;
   z-index: 50;
-  background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), -webkit-linear-gradient(-245deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.2) 70%, rgba(255, 255, 255, 0) 90%);
+  
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
@@ -214,4 +214,7 @@
   bottom: 0;
   margin: auto;
   background: #ddd;
+}
+span{
+  font-weight: 400;
 }

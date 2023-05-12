@@ -22,6 +22,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { CreateSurveyComponent } from './components/create-survey/create-survey.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
     RegisterComponent,
     CreateSurveyComponent,
     ContactComponent,
+    ForgetPasswordComponent,
   ],
   imports: [
     BrowserModule,

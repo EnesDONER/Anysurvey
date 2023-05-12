@@ -10,7 +10,7 @@ export class LoginComponent {
 
   loginForm: FormGroup;
 
-  constructor(private formbuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
     this.createLoginForm();
@@ -19,7 +19,7 @@ export class LoginComponent {
     return this.loginForm.get('recaptcha');
   }
   createLoginForm(){ 
-    this.loginForm = this.formbuilder.group({
+    this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       recaptcha: [null, Validators.required],

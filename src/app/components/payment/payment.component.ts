@@ -1,4 +1,5 @@
 import { Component, DoCheck, Input } from '@angular/core';
+import { isNumber } from '@ng-bootstrap/ng-bootstrap/util/util';
 
 @Component({
   selector: 'app-payment',
@@ -11,20 +12,75 @@ export class PaymentComponent implements DoCheck{
 
   ngDoCheck(){
     if(this.ncard)
-      document.getElementById('card_number').innerHTML=this.ncard;
+      document.getElementById('card_number').innerHTML= this.ncard.toString();
+      this.backGround();
     if(this.namecard)
-      document.getElementById('fullname').innerHTML=this.namecard;
+      document.getElementById('fullname').innerHTML=this.namecard.toUpperCase();
     if(this.date)
       document.getElementById('date').innerHTML=this.date;
+    if(this.cvv)
+      document.getElementById('cvv').innerHTML=this.cvv.toString();
   }
-  ncard:string;
+  ncard:number;
   namecard:string;
-  ccv:string;
+  cvv:number;
   date:string;
-  cardNumber(){
-   
-    if(this.namecard[0]=='4'){
-      document.getElementById('card').style.backgroundImage=('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2000px-Visa_Inc._logo.svg.png";"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2000px-Visa_Inc._logo.svg.png');
+  
+  
+  onCardNumberKeyDown(event: KeyboardEvent,lenght:number) {
+    const input = event.target as HTMLInputElement;
+    const currentValue = input.value;
+    const maxLength = lenght; // Max length that is allowed
+    
+    if (currentValue.length >= maxLength && event.key !== 'Backspace') {
+      event.preventDefault(); // Prevent any further input if we reached the limit
     }
   }
+  backGround() {
+    //ön gözüküyorsa
+    if(document.getElementById('back').style.visibility =='hidden'){
+      if (this.ncard && this.ncard.toString()[0] == '4') {
+        document.getElementById('card').style.backgroundImage = 'url("../../../assets/images/masterCard.png")';
+        document.getElementById('card').style.backgroundRepeat = 'no-repeat';
+        document.getElementById('card').style.backgroundSize = 'cover';
+        document.getElementById('front').style.color = 'black';
+      }
+      else if (this.ncard && this.ncard.toString()[0] == '5') {
+        document.getElementById('card').style.backgroundImage = 'url("../../../assets/images/visaCard.png")';
+        document.getElementById('card').style.backgroundRepeat = 'no-repeat';
+        document.getElementById('card').style.backgroundSize = 'cover';
+        document.getElementById('front').style.color = 'orange';
+      }
+      else if (!this.ncard){
+        document.getElementById('card').style.backgroundColor = 'lightgray';
+        document.getElementById('card').style.backgroundImage = '';
+        document.getElementById('front').style.color = 'orange';
+      }
+    }
+    //arkası gözüküyorsa
+    else if(document.getElementById('back').style.visibility =='visible'){
+      if (this.ncard && this.ncard.toString()[0] == '4') {
+        document.getElementById('card').style.backgroundImage = '';
+        document.getElementById('card').style.backgroundColor = 'gold';
+      }
+      if (this.ncard && this.ncard.toString()[0] == '5') {
+        document.getElementById('card').style.backgroundImage = '';
+        document.getElementById('card').style.backgroundColor = 'darkblue';
+      }
+    }
+  }
+  turn(){
+    if( document.getElementById('back').style.visibility =='hidden'){
+      document.getElementById('back').style.visibility = 'visible';
+      document.getElementById('front').style.visibility = 'hidden';
+      this.backGround();
+    } 
+    else{ 
+      document.getElementById('back').style.visibility = 'hidden';
+      document.getElementById('front').style.visibility = 'visible';
+      this.backGround()
+    }
+   
+  }
+  
 }

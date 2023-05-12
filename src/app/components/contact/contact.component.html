@@ -10,32 +10,40 @@
             <div class="col-lg-7 mb-5">
                 <div class="contact-form">
                     <div id="success"></div>
-                    <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                    <form  [formGroup]="contactForm" id="contactForm" novalidate="novalidate">
                         <div class="control-group">
-                            <input type="text" class="form-control" id="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />
+                            <input type="text" formControlName="name" class="form-control" id="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group mb-3" [ngClass]="{ 'has-error': contactForm.get('email').touched && contactForm.get('email').invalid }">
+                            <input type="email" formControlName="email" class="form-control" id="email" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" />
+                            <p class="help-block text-danger" *ngIf="contactForm.get('email').touched && contactForm.get('email').errors?.['email']">Please enter a valid email</p>
+                        </div>                          
+                        <div class="control-group">
+                            <input type="text" formControlName="subject" class="form-control" id="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter a subject" />
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="control-group">
-                            <input type="email" class="form-control" id="email" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" />
+                            <textarea class="form-control" formControlName="message" rows="6" id="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>
                             <p class="help-block text-danger"></p>
                         </div>
-                        <div class="control-group">
-                            <input type="text" class="form-control" id="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter a subject" />
-                            <p class="help-block text-danger"></p>
-                        </div>
-                        <div class="control-group">
-                            <textarea class="form-control" rows="6" id="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>
-                            <p class="help-block text-danger"></p>
-                        </div>
+                        <div class="form-check mb-0" style="float: right;">
+                            <label for="recaptcha"></label>
+                            <re-captcha
+                              siteKey="6LeRlwAmAAAAADLnv7RTDhyN9IgWNN8AIWGksy-r"
+                              formControlName="recaptcha"
+                              reCaptchaValueAccessor
+                            >
+                            </re-captcha>
+                          </div>
                         <div>
-                            <button style="background: rgb(180, 255, 255);" class="btn  py-2 px-4" type="submit" id="sendMessageButton">Send Message</button>
+                        <button [disabled]="!contactForm.valid" style="background: rgb(180, 255, 255);" class="btn  py-2 px-4 " type="submit" id="sendMessageButton">Send Message</button>
                         </div>
                     </form>
                 </div>
             </div>
-            <div class="col-lg-5 mb-5">
-                <p>Labore sea amet kasd diam justo amet ut vero justo. Ipsum ut et kasd duo sit, ipsum sea et erat est dolore, magna ipsum et magna elitr. Accusam accusam lorem magna, eos et sed eirmod dolor est eirmod eirmod amet.</p>
-                <div class="d-flex">
+            <div class="col-lg-5 mb-5 ">
+                <div class="d-flex mt-1">
                     <i class="fa fa-map-marker-alt d-inline-flex align-items-center justify-content-center text-secondary rounded-circle" style="background: rgb(180, 255, 255); margin-right: 10px; width:45px; height: 45px;"></i>
                     <div class="pl-3">
                         <h5>Address</h5>
