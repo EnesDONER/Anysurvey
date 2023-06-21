@@ -56,7 +56,7 @@
                   </div>
 
                   <!-- Submit button -->
-                  <button type="submit" [disabled]="registerForm.invalid" class="btn btn-primary btn-block  mb-4">
+                  <button (click)="register()" type="submit" [disabled]="registerForm.invalid" class="btn btn-primary btn-block  mb-4">
                     Sign up
                   </button>
                 </form>

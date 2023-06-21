@@ -1,7 +1,8 @@
+import { SurveyService } from 'src/app/services/survey.service';
 import {  ToastrService } from 'ngx-toastr';
-import {SolveQuestionnaireComponent} from './../solve-questionnaire/solve-questionnaire.component';
-import { Component, OnInit, AfterViewInit, AfterViewChecked, AfterContentChecked, AfterContentInit, DoCheck, OnChanges } from '@angular/core';
-import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { Component, OnInit } from '@angular/core';
+import { Survey } from 'src/app/models/survey';
+
 
 @Component({
   selector: 'app-questionnaire',
@@ -9,9 +10,20 @@ import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
   styleUrls: ['./questionnaire.component.css']
 })
 export class QuestionnaireComponent {
-  data:string="";
-  time:number;
-  isWatched:boolean;
-  constructor(private toastrService:ToastrService) {}
+  surveys:Survey[];
+  constructor(private toastrService:ToastrService, private surveyService:SurveyService) {}
 
+  ngOnInit(): void {
+    
+    this.getAllSurvey();
+  }
+
+  getAllSurvey(){
+    this.surveyService.getAll().subscribe(response=>{
+      if(response.success)
+        this.surveys=response.data;
+      else
+        this.toastrService.error(response.message);
+    })
+  }
 }

@@ -10,7 +10,7 @@ import { RegisterModel } from '../models/registerModel';
   providedIn: 'root'
 })
 export class AuthService {
-  apiUrl="https://localhost:44314/api/auth/";
+  apiUrl="https://localhost:7162/api/auth/";
   constructor(private httpClient:HttpClient) { }
 
   login(loginModel:LoginModel){
@@ -25,6 +25,12 @@ export class AuthService {
     }
     else{
       return false;
+    }
+  }
+
+  logout(){
+    if(this.isAuthenticated){
+      localStorage.removeItem('token');
     }
   }
 }

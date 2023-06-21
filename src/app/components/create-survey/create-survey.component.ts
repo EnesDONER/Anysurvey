@@ -1,7 +1,9 @@
+import { Survey } from './../../models/survey';
 import { Question } from './../../models/question';
 import { ToastrService } from 'ngx-toastr';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SurveyService } from 'src/app/services/survey.service';
 
 
 @Component({
@@ -16,9 +18,9 @@ export class CreateSurveyComponent implements OnInit {
   questionAddForm:FormGroup;
   questionAddForm1:FormGroup;
   questions:Question[]=[];
-  
+  @Input() survey:Survey;
 
-  constructor(private toastrService:ToastrService,private formBuilder:FormBuilder){}
+  constructor(private toastrService:ToastrService,private formBuilder:FormBuilder, private surveyService:SurveyService){}
   ngOnInit(): void {
     this.createQuestionAddForm();
   }
@@ -54,5 +56,26 @@ export class CreateSurveyComponent implements OnInit {
  }
   removeQuestion(){
     this.questionCount = Number(this.questionCount-1);
+  }
+  createSurvey(){
+    if(this.questionAddForm.valid){
+
+      let productModel = Object.assign({},this.questionAddForm.value)
+
+      this.surveyService.add(productModel).subscribe(response=>{
+        this.toastrService.success(response.message,"Success")
+      },
+      responseError=>{
+        if(responseError.error.Errors.length>0){
+          for (let i = 0; i <responseError.error.Errors.length; i++) {
+            this.toastrService.error(responseError.error.Errors[i].ErrorMessage
+              ,"Validation Rules")
+          }       
+        } 
+      })
+      
+    }else{
+      this.toastrService.error("Formunuz eksik","Dikkat")
+    }
   }
 }

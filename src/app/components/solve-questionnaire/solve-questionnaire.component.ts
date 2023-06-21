@@ -1,5 +1,9 @@
 import { Question } from './../../models/question';
-import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { SurveyService } from 'src/app/services/survey.service';
+import { Component} from '@angular/core';
+import { Survey } from 'src/app/models/survey';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-solve-questionnaire',
@@ -7,14 +11,31 @@ import { Component } from '@angular/core';
   styleUrls: ['./solve-questionnaire.component.css']
 })
 export class SolveQuestionnaireComponent  {
-  questions:Question[]=[
-  {id:1,description:'1',section1:'a',section2:'b',section3:'c',section4:'d'},
-  {id:2,description:'2',section1:'a',section2:'b',section3:'c',section4:'d'},
-  {id:3,description:'3',section1:'a',section2:'b',section3:'c',section4:'d'}];
+  survey:Survey;
   currentIndex=0;
-  showNext() {
-    this.currentIndex = (this.currentIndex + 1) % this.questions.length;
-  }
-  constructor(){}
 
+  constructor(private activatedRoute:ActivatedRoute, private surveyService:SurveyService,private toastrService:ToastrService){}
+  
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe(params => {
+      if (params['surveyId']) {
+        this.getSurveyById(params['surveyId']);
+      }
+    });
+  }
+
+  getSurveyById(surveyId:string){
+    this.surveyService.getById(surveyId).subscribe(
+      response=>{
+        if(response.success){
+          this.survey = response.data;
+        }
+        else{
+          this.toastrService.error(response.message);
+        }
+    })
+  }
+  showNext() {
+    this.currentIndex = (this.currentIndex + 1) % this.survey.questions.length;
+  }
 }

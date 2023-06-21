@@ -1,5 +1,7 @@
+import { AuthService } from './../../services/auth.service';
 import { Component } from '@angular/core';
-import { FormControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -8,8 +10,10 @@ import { FormControl, FormBuilder, Validators, FormGroup } from '@angular/forms'
 })
 export class RegisterComponent {
   registerForm:FormGroup;
-
-  constructor(private formBuilder:FormBuilder ){ 
+  
+  constructor(private formBuilder:FormBuilder,
+    private authService:AuthService,
+    private toastrService:ToastrService){ 
   }
   ngOnInit(){
     this.createLoginForm();
@@ -20,8 +24,16 @@ export class RegisterComponent {
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      recaptcha: [null, Validators.required],
+      recaptcha: [null, Validators.required]
     });
   }
+  register(){
+    if(this.registerForm.valid){
+      console.log(this.registerForm.value);
 
+      let registerModel = Object.assign({},this.registerForm.value);
+      this.authService.register(registerModel).subscribe(response=>{this.toastrService.info(response.message)},
+      responseError=>{this.toastrService.error(responseError.error)})
+    }
+  }
 }

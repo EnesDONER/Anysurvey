@@ -1,5 +1,6 @@
 import { Component, DoCheck, Input } from '@angular/core';
-import { isNumber } from '@ng-bootstrap/ng-bootstrap/util/util';
+import { FormGroup } from '@angular/forms';
+import { Survey } from 'src/app/models/survey';
 
 @Component({
   selector: 'app-payment',
