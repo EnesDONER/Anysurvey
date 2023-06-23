@@ -1,7 +1,7 @@
 import { Survey } from './../../models/survey';
 import { Question } from './../../models/question';
 import { ToastrService } from 'ngx-toastr';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SurveyService } from 'src/app/services/survey.service';
 
