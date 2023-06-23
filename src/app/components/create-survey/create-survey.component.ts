@@ -1,11 +1,12 @@
+import { Router } from '@angular/router';
 import { Survey } from './../../models/survey';
 import { Question } from './../../models/question';
 import { ToastrService } from 'ngx-toastr';
-import { Component,OnInit } from '@angular/core';
+import { Component,OnChanges,OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder} from '@angular/forms';
 import { SurveyService } from 'src/app/services/survey.service';
 
-
+declare var bootstrap: any; 
 
 @Component({
   selector: 'app-create-survey',
@@ -13,7 +14,9 @@ import { SurveyService } from 'src/app/services/survey.service';
   styleUrls: ['./create-survey.component.css']
 })
 export class CreateSurveyComponent implements OnInit {
+  isItPaid: boolean=false;
   currentQuestionId:number=0;
+  fee:number=0;
   survey: Survey = {
     id: '',
     title: '',
@@ -29,9 +32,17 @@ export class CreateSurveyComponent implements OnInit {
   surveyTitle:string="";
   surveyDescription:string="";
   options: string[] = [];
-  constructor(private toastrService:ToastrService,private formBuilder:FormBuilder, private surveyService:SurveyService){}
+  constructor(private toastrService:ToastrService, private formBuilder:FormBuilder, private surveyService:SurveyService){}
   ngOnInit(): void {
-
+    
+  }
+ 
+  receiveData(data: boolean) {
+    this.isItPaid = data;
+    console.log(this.isItPaid)
+    if(this.isItPaid){
+      this.addSurvey();
+    }
   }
   getCountArray(count: number): number[] {
     return Array(count).fill(0).map((x, i) => i);
@@ -70,17 +81,24 @@ export class CreateSurveyComponent implements OnInit {
   setCurrentQuestion(index:number){
     this.currentQuestionId=index;
   }
-
-  addSurvey(){
+  checkIfSurveyNull(){
     this.isTitleEmpty = this.surveyTitle.trim() === '';
     this.isDescriptionEmpty = this.surveyDescription.trim() === '';
     if (this.isTitleEmpty || this.isDescriptionEmpty)
-      return; 
+      return false; 
     if(this.survey.questions.length < 1){
       this.isQuestionEmptyError =true;
       this.toastrService.error("You must add at least 1 question");
-      return;
+      return false;
     }
+    this.fee= this.survey.questions.length *10;
+    var payModal = new bootstrap.Modal(document.getElementById('payModal'));
+      payModal.show();
+    return true;
+    
+  }
+
+  addSurvey(){
     this.survey.title= this.surveyTitle;
     this.survey.description = this.surveyDescription;
     console.log(this.survey)
@@ -95,7 +113,6 @@ export class CreateSurveyComponent implements OnInit {
       };
       this.surveyTitle="";
       this.surveyDescription="";
-      
     },
     responseError=>{
         if(responseError.error.Errors.length>0){
@@ -104,7 +121,7 @@ export class CreateSurveyComponent implements OnInit {
               ,"Error")
           }       
         } 
-      })
-    
+    })
+
   }
 }

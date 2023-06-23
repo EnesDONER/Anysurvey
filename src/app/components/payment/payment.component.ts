@@ -1,7 +1,6 @@
-import { Component, DoCheck, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { Survey } from 'src/app/models/survey';
+import { Component, DoCheck, EventEmitter, Input, Output } from '@angular/core';
 
+declare var bootstrap: any;
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
@@ -10,7 +9,8 @@ import { Survey } from 'src/app/models/survey';
 export class PaymentComponent implements DoCheck{
 
   @Input() fee:number;
-
+  @Output() dataEvent = new EventEmitter<boolean>();
+  isItPaid:boolean = true;
   ngDoCheck(){
     if(this.ncard)
       document.getElementById('card_number').innerHTML= this.ncard.toString();
@@ -27,7 +27,12 @@ export class PaymentComponent implements DoCheck{
   cvv:number;
   date:string;
   
-  
+  setDataEvent() {
+    
+    var payModal = new bootstrap.Modal(document.getElementById('payModal'));
+      payModal.hide();
+      this.dataEvent.emit(this.isItPaid);
+  }
   onCardNumberKeyDown(event: KeyboardEvent,lenght:number) {
     const input = event.target as HTMLInputElement;
     const currentValue = input.value;
@@ -37,6 +42,7 @@ export class PaymentComponent implements DoCheck{
       event.preventDefault(); // Prevent any further input if we reached the limit
     }
   }
+
   backGround() {
     //ön gözüküyorsa
     if(document.getElementById('back').style.visibility =='hidden'){

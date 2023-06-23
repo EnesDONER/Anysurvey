@@ -1,8 +1,8 @@
 <div
   class="modal fade mb-3"
-  id="videoModal"
+  id="payModal"
   tabindex="-1"
-  aria-labelledby="videoModalLabel"
+  aria-labelledby="payModalLabel"
   aria-hidden="true"
 >
   <div class="modal-dialog ">
@@ -46,7 +46,7 @@
               <input class="expire" type="month" [(ngModel)]="date"/>
               <label>Security Number</label>
               <input (focus)="turn()" (blur)="turn()" class="cvv" type="number" [(ngModel)]="cvv" placeholder="CVV" (keydown)="onCardNumberKeyDown($event,3)"  />
-              <button class="buy"><i class="material-icons"></i> Pay --.-- €</button>
+              <button class="buy" data-bs-dismiss="modal" (click)="setDataEvent()"><i class="material-icons"></i> Pay --.-- €</button>
             </div>
           </div>
           </div>

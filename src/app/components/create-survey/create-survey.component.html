@@ -1,9 +1,11 @@
-<app-payment [fee]="5"></app-payment>
-
+<app-payment  (dataEvent)="receiveData($event)" [fee]="fee"></app-payment>
+<div class="container mt-4 mb-3">
+  <img  class="img-fluid" src=".././../../assets/images/createSurvey.jpg"alt="" style="margin-left: 22%; width: 56%; box-shadow: 2px 2px darkblue; border-radius: 8px;">
+</div>
 <div class="container vh-100">    
-    <div class="py-4 px-5">
-        <h2 class="mb-4 text-center">Create Survey</h2>
-        <div class="form-floating mb-3">
+    <div class="py-2 px-5">
+        <h2 class="text-center mb-4" style=" color: #041858;"> Add Survey</h2>
+        <div class="form-floating mb-4">
           <input type="text" class="form-control" [(ngModel)]="surveyTitle" id="title" placeholder="name@example.com" [ngClass]="{ 'is-invalid': isTitleEmpty }">
           <label for="floatingInput">Survey Title</label>
           <div class="invalid-feedback" *ngIf="isTitleEmpty">
@@ -30,7 +32,9 @@
         <div style="display: flex; flex-direction: column; align-items: flex-end;">
           <button class="btn btn-outline-success " data-bs-toggle="modal" data-bs-target="#addQuestion">+ Increase Question</button>
           <div  style="color: red;" *ngIf="isQuestionEmptyError "> Click here!</div>
-          <button class="btn btn-success mt-3" (click)="addSurvey()">Add Survey</button>
+          <button 
+          class="btn btn-success mt-3" 
+          (click)="checkIfSurveyNull()">Add Survey</button>
         </div>
         
     </div>
