@@ -27,13 +27,13 @@ export class SurveyService {
     return this.httpClient
       .get<SingleResponseModel<Survey>>(newPath);
   }
-  add(product:Survey):Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>(this.apiUrl+"survey/add",product)
+  add(survey:Survey):Observable<ResponseModel>{
+    return this.httpClient.post<ResponseModel>(this.apiUrl+"survey/add",survey)
   }
-  remove(product:Survey):Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>(this.apiUrl+"surevey/remove",product)
+  remove(survey:Survey):Observable<ResponseModel>{
+    return this.httpClient.post<ResponseModel>(this.apiUrl+"surevey/remove",survey)
   }
-  update(product:Survey):Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>(this.apiUrl+"survey/update",product)
+  update(survey:Survey):Observable<ResponseModel>{
+    return this.httpClient.post<ResponseModel>(this.apiUrl+"survey/update",survey)
   }
 }
