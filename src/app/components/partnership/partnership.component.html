@@ -1,5 +1,5 @@
-<app-payment [fee]="1"></app-payment>
-
+<app-payment  (dataEvent)="receiveData($event)" [fee]="2"></app-payment>
+{{isItPaid}}
 <div class="container-fluid pt-5">
     <div class="container">
         <div class="text-center pb-2">
@@ -12,22 +12,21 @@
                         <h4 class="card-title">Post an Ad Video</h4>
                         <p class="card-text">You must upload the video you want to add to a Blut system and enter the link.</p>
                     </div>
-                    <div class="card-footer bg-transparent py-4 px-5">
+                    <div class="card-footer bg-transparent py-4 px-5" [formGroup]="adForm">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
-                            <label for="floatingInput">Company Name</label>
+                            <input type="text" class="form-control" formControlName="companyName" id="companyName" placeholder="name@example.com">
+                            <label for="companyName">Company Name</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
-                            <label for="floatingInput">What About This Ads Video</label>
+                            <input type="text" class="form-control"formControlName="description" id="description" placeholder="name@example.com">
+                            <label for="description">What About This Ads Video</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
-                            <label for="floatingInput">Video Url</label>
+                            <input type="text" class="form-control" formControlName="videoURL" id="videoURL" placeholder="name@example.com">
+                            <label for="videoURL">Video Url</label>
                         </div>
                     </div>
-                    <a data-bs-toggle="modal"
-                    data-bs-target="#videoModal" class="btn btn-primary px-4 mx-auto mb-4">Go to Pay</a>
+                    <a (click)="checkIfSurveyNull()" class="btn btn-primary px-4 mx-auto mb-4">Go to Pay</a>
                 </div>
             </div>
             <div class="col-lg-6 mb-5">

@@ -1,5 +1,5 @@
 import { WalletComponent } from './components/wallet/wallet.component';
-import { AdsComponent } from './components/ads/ads.component';
+import { AdComponent } from './components/ad/ad.component';
 import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
 import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
@@ -15,7 +15,7 @@ const routes: Routes = [
   {path:"",pathMatch:"full",component:HomeComponent},
   {path:"home",component:HomeComponent},
   {path:"questionnaire",component:QuestionnaireComponent},
-  {path:"ads",component:AdsComponent},
+  {path:"ad",component:AdComponent},
   {path:"solve-questionnaire/:surveyId", component: SolveQuestionnaireComponent },
   {path:"wallet",component:WalletComponent},
   {path:"partnership",component:PartnershipComponent},

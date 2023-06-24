@@ -14,7 +14,6 @@ import {SolveQuestionnaireComponent} from './components/solve-questionnaire/solv
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { SafePipe } from './pipes/safe.pipe';
-import { AdsComponent } from './components/ads/ads.component';
 import { WalletComponent } from './components/wallet/wallet.component';
 import { PartnershipComponent } from './components/partnership/partnership.component';
 import { PaymentComponent } from './components/payment/payment.component';
@@ -24,6 +23,8 @@ import { CreateSurveyComponent } from './components/create-survey/create-survey.
 import { ContactComponent } from './components/contact/contact.component';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { AdComponent } from './components/ad/ad.component';
+import { VideoIdPipe } from './pipes/video-id.pipe';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,6 @@ import { ForgetPasswordComponent } from './components/forget-password/forget-pas
     QuestionnaireComponent,
     SolveQuestionnaireComponent,
     SafePipe,
-    AdsComponent,
     WalletComponent,
     PartnershipComponent,
     PaymentComponent,
@@ -43,6 +43,8 @@ import { ForgetPasswordComponent } from './components/forget-password/forget-pas
     CreateSurveyComponent,
     ContactComponent,
     ForgetPasswordComponent,
+    AdComponent,
+    VideoIdPipe,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,3 @@
-import { Router } from '@angular/router';
 import { Survey } from './../../models/survey';
 import { Question } from './../../models/question';
 import { ToastrService } from 'ngx-toastr';
@@ -42,6 +41,7 @@ export class CreateSurveyComponent implements OnInit {
     console.log(this.isItPaid)
     if(this.isItPaid){
       this.addSurvey();
+      data=false;
     }
   }
   getCountArray(count: number): number[] {

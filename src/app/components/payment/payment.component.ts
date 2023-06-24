@@ -11,6 +11,9 @@ export class PaymentComponent implements DoCheck{
   @Input() fee:number;
   @Output() dataEvent = new EventEmitter<boolean>();
   isItPaid:boolean = true;
+  ngOnInit(){
+    this.isItPaid=true;
+  }
   ngDoCheck(){
     if(this.ncard)
       document.getElementById('card_number').innerHTML= this.ncard.toString();
