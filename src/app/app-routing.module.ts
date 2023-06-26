@@ -11,12 +11,13 @@ import { ContactComponent } from './components/contact/contact.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { LoginGuard } from './guards/login.guard';
 const routes: Routes = [
   {path:"",pathMatch:"full",component:HomeComponent},
   {path:"home",component:HomeComponent},
-  {path:"questionnaire",component:QuestionnaireComponent},
-  {path:"ad",component:AdComponent},
-  {path:"solve-questionnaire/:surveyId", component: SolveQuestionnaireComponent },
+  {path:"questionnaire",component:QuestionnaireComponent, canActivate:[LoginGuard]},
+  {path:"ad",component:AdComponent, canActivate:[LoginGuard]},
+  {path:"solve-questionnaire/:surveyId", component: SolveQuestionnaireComponent, canActivate:[LoginGuard] },
   {path:"wallet",component:WalletComponent},
   {path:"partnership",component:PartnershipComponent},
   {path:"create-survey",component:CreateSurveyComponent},
