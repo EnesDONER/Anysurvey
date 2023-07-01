@@ -19,6 +19,20 @@ export class AuthService {
   register(registerModel:RegisterModel){
     return this.httpClient.post<SingleResponseModel<ResponseModel>>(this.apiUrl + "register",registerModel);
   }
+  registerPartnership(registerModel:RegisterModel){
+    return this.httpClient.post<SingleResponseModel<ResponseModel>>(this.apiUrl + "registerpartnership",registerModel);
+  }
+  loginPartenship(loginModel:LoginModel){
+    return this.httpClient.post<SingleResponseModel<TokenModel>>(this.apiUrl + "loginpartnership",loginModel);
+  }
+  isPartnership(){
+    if(localStorage.getItem("auth")=="partnership"){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
   isAuthenticated(){
     if(localStorage.getItem("token")){
       return true;
@@ -27,10 +41,10 @@ export class AuthService {
       return false;
     }
   }
-
+  
   logout(){
     if(this.isAuthenticated){
-      localStorage.removeItem('token');
+      localStorage.clear();
     }
   }
 

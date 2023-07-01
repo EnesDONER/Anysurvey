@@ -1,10 +1,8 @@
-import { AdService } from './../../services/ad.service';
-
+import { AuthService } from './../../services/auth.service';
 import { Component} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-
-declare var bootstrap: any; 
 
 
 @Component({
@@ -13,48 +11,33 @@ declare var bootstrap: any;
   styleUrls: ['./partnership.component.css']
 })
 export class PartnershipComponent{
-  adForm:FormGroup;
-  isItPaid:boolean;
-  constructor(private formBuilder:FormBuilder,private adService:AdService ,private toastrService:ToastrService) {}
+ 
+  registerForm:FormGroup;
+  
+  constructor(private formBuilder:FormBuilder,
+    private router:Router,
+    private authService:AuthService,
+    private toastrService:ToastrService){ 
+  }
   ngOnInit(){
-    this.createAdForm();
+    this.createPartnershipForm();
   }
-  receiveData(data: boolean) {
-    this.isItPaid = data;
-    console.log(this.isItPaid)
-    if(this.isItPaid){
-      this.addAd();
-      data=false;
-    }
-  }
-  createAdForm(){ 
-    this.adForm = this.formBuilder.group({
-      description :['', Validators.required],
-      companyName: ['', Validators.required],
-      videoURL: ['', [Validators.required]],
+  createPartnershipForm(){ 
+    this.registerForm = this.formBuilder.group({
+      firstName :['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+      recaptcha: [null, Validators.required]
     });
   }
-  checkIfSurveyNull(){
-    if(this.adForm.valid){
-      var payModal = new bootstrap.Modal(document.getElementById('payModal'));
-      payModal.show();
-      return true;
-    }
-    //this.fee= this.survey.questions.length *10;
-    
-    return false;
-
-  }
-  addAd(){
-    if(this.checkIfSurveyNull){
-      console.log(this.adForm.value);
-
-      let adModel = Object.assign({},this.adForm.value);
-      this.adService.add(adModel).subscribe(response=>{this.toastrService.info(response.message)},
-      responseError=>{this.toastrService.error(responseError.error);
-        console.log(responseError.error)} 
-      )
+  registerPartnership(){
+    if(this.registerForm.valid){
+      console.log(this.registerForm.value);
+      this.router.navigateByUrl("/loginpartnership");
+      let registerModel = Object.assign({},this.registerForm.value);
+      this.authService.registerPartnership(registerModel).subscribe(response=>{this.toastrService.info(response.message)},
+      responseError=>{this.toastrService.error(responseError.error)})
     }
   }
-  
 }

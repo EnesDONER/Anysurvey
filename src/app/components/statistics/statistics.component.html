@@ -1,0 +1,40 @@
+<div class="row mt-3 mx-4" style="min-height: 100px;">
+    <div class="col-sm-6">
+      <h2>Ad Videos</h2>
+      <hr>
+      <div class="row">
+        <div *ngFor="let ad of ads; let i=index" class="col-sm-6 mb-2">
+          <div class="card" [ngClass]="{ 'flipped': flippedCards[i] }" (click)="flipCard(i)">
+            <div class="card-face card-front">
+              <div class="card-body">
+                <h5 class="card-title text-center mb-3">{{ad.description}}</h5>
+                <div class="d-flex justify-content-center align-items-center">
+                  <iframe
+                    width="100%"
+                    height="420"
+                    [src]="'https://www.youtube.com/embed/' + setCurrentAd(ad) | safe"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+            <div class="card-face card-back">
+              <h5 class="card-title text-center my-3">{{ad.description}}</h5>
+              <p>İzleyen kişi Sayısı : {{users.length}}</p>
+              <div *ngFor="let user of users" class="card-body">
+                <p>{{user.firstName}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 vertical-line">
+      <h2>Solve</h2>
+      <hr>
+    </div>
+  </div>
+  

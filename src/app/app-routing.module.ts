@@ -1,3 +1,4 @@
+import { PartnershipLoginComponent } from './components/partnership-login/partnership-login.component';
 import { WalletComponent } from './components/wallet/wallet.component';
 import { AdComponent } from './components/ad/ad.component';
 import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
@@ -12,6 +13,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { LoginGuard } from './guards/login.guard';
+import { AddContentComponent } from './components/add-content/add-content.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 const routes: Routes = [
   {path:"",pathMatch:"full",component:HomeComponent},
   {path:"home",component:HomeComponent},
@@ -24,6 +27,9 @@ const routes: Routes = [
   {path:"contact",component:ContactComponent},
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
+  {path:"add-content",component:AddContentComponent},
+  {path:"loginpartnership",component:PartnershipLoginComponent},
+  {path:"statistics",component:StatisticsComponent},
   {path:"forgetPassword",component:ForgetPasswordComponent},
 
 ];

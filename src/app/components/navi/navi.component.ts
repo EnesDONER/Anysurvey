@@ -13,6 +13,9 @@ constructor(private authService:AuthService){}
 isAuthenticated(){
   return this.authService.isAuthenticated();
 }
+isPartnership(){
+  return this.authService.isPartnership();
+}
 logout(){
   this.authService.logout();
 }

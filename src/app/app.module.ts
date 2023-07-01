@@ -26,6 +26,9 @@ import { ForgetPasswordComponent } from './components/forget-password/forget-pas
 import { AdComponent } from './components/ad/ad.component';
 import { VideoIdPipe } from './pipes/video-id.pipe';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { AddContentComponent } from './components/add-content/add-content.component';
+import { PartnershipLoginComponent } from './components/partnership-login/partnership-login.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +49,9 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     ForgetPasswordComponent,
     AdComponent,
     VideoIdPipe,
+    AddContentComponent,
+    PartnershipLoginComponent,
+    StatisticsComponent,
   ],
   imports: [
     BrowserModule,

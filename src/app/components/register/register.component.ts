@@ -16,9 +16,9 @@ export class RegisterComponent {
     private toastrService:ToastrService){ 
   }
   ngOnInit(){
-    this.createLoginForm();
+    this.createRegisterForm();
   }
-  createLoginForm(){ 
+  createRegisterForm(){ 
     this.registerForm = this.formBuilder.group({
       firstName :['', Validators.required],
       lastName: ['', Validators.required],

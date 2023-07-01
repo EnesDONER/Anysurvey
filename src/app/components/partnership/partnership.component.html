@@ -1,46 +1,93 @@
-<app-payment  (dataEvent)="receiveData($event)" [fee]="2"></app-payment>
-{{isItPaid}}
-<div class="container-fluid pt-5">
-    <div class="container">
-        <div class="text-center pb-2">
-            <p class="section-title px-5"><span class="px-2">Our Services</span></p>
-        </div>
-        <div class="row">
-            <div class="col-lg-6 mb-5">
-                <div class="card border-0 bg-light shadow-sm pb-2 mb-2">
-                    <div class="card-body text-center">
-                        <h4 class="card-title">Post an Ad Video</h4>
-                        <p class="card-text">You must upload the video you want to add to a Blut system and enter the link.</p>
+<!-- Section: Design Block -->
+<section style="height: 700px;">
+    <!-- Jumbotron -->
+    <div class="pb-1 pt-5 px-md-5 text-center text-lg-start" >
+      <div class="container">
+        <div class="row gx-lg-5 align-items-center">
+          <div class="col-lg-6 mb-2 mb-lg-0">
+            <h1 class="mt-2 display-3 fw-bold ls-tight">
+              The best option <br />
+              <span class="text-primary">for your business</span>
+            </h1>
+            <div class="row mt-3">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Special title treatment</h5>
+                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                      <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
-                    <div class="card-footer bg-transparent py-4 px-5" [formGroup]="adForm">
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" formControlName="companyName" id="companyName" placeholder="name@example.com">
-                            <label for="companyName">Company Name</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control"formControlName="description" id="description" placeholder="name@example.com">
-                            <label for="description">What About This Ads Video</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" formControlName="videoURL" id="videoURL" placeholder="name@example.com">
-                            <label for="videoURL">Video Url</label>
-                        </div>
-                    </div>
-                    <a (click)="checkIfSurveyNull()" class="btn btn-primary px-4 mx-auto mb-4">Go to Pay</a>
+                  </div>
                 </div>
-            </div>
-            <div class="col-lg-6 mb-5">
-                <div class="card border-0 bg-light shadow-sm pb-2 mb-2">
-                    <div class="card-body text-center">
-                        <h4 class="card-title">Post a Survey</h4>
-                        <p class="card-text">Conduct surveys and get data. you can add up to 5 questions to your survey</p>
+                <div class="col-sm-6">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Special title treatment</h5>
+                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                      <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
-                    <div class="card-footer bg-transparent py-4 px-5">
-                        resim filan eklenebilir
-                        <button routerLink="/create-survey" class="btn btn-primary px-4 mt-3 mb-1 ">Create a Survey</button>
-                    </div>
+                  </div>
                 </div>
+              </div>
+
+          </div>
+
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <div class="card">
+              <div class="card-body py-4 px-md-5">
+                <form [formGroup]="registerForm">
+                  <!-- 2 column grid layout with text inputs for the first and last names -->
+                  <div class="row">
+                    <p class="mb-3 display-4 fw-bold ls-tight text-center">Become a business partner</p>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="text" formControlName="firstName" id="firstName" class="form-control" />
+                        <label class="form-label" for="firstName">First name</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="text" formControlName="lastName" id="lastName" class="form-control" />
+                        <label class="form-label" for="lastName">Last name</label>
+                      </div>
+                    </div>
+                  </div>
+  
+                  <!-- Email input -->
+                  <div [ngClass]="{ 'has-error': registerForm.get('email').touched && registerForm.get('email').invalid }"  class="form-outline mb-4">
+                    <input type="email" formControlName="email" id="email" class="form-control" />
+                    <label class="form-label" for="email">Email address</label>
+                    <p class="help-block text-danger" *ngIf="registerForm.get('email').touched && registerForm.get('email').errors?.['email']">Please enter a valid email</p>
+                  </div>
+  
+                  <!-- Password input -->
+                  <div class="form-outline mb-1">
+                    <input type="password" formControlName="password" id="password" class="form-control" />
+                    <label class="form-label" for="password">Password</label>
+                  </div>
+                  
+                  <div class="form-check mb-2">
+                    <label for="recaptcha"></label>
+                    <re-captcha
+                      siteKey="6LeRlwAmAAAAADLnv7RTDhyN9IgWNN8AIWGksy-r"
+                      formControlName="recaptcha"
+                      reCaptchaValueAccessor
+                    >
+                    </re-captcha>
+                  </div>
+
+                  <!-- Submit button -->
+                  <button style="float: right;" (click)="registerPartnership()" type="submit" [disabled]="registerForm.invalid" class="btn btn-primary btn-block  mb-3">
+                    Sign up
+                  </button>
+                  <a  routerLink="/loginpartnership">You have an account?</a>
+                </form>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+    <!-- Jumbotron -->
+  </section>
+  <!-- Section: Design Block -->
