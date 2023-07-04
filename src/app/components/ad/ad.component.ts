@@ -81,7 +81,7 @@ export class AdComponent {
   }
   addWatchedAd(adId:string){
     // let watchAdModel = Object.assign({},this.watchedAd)
-    this.statisticsService.add(adId).subscribe(response=>{
+    this.statisticsService.addWatchedAd(adId).subscribe(response=>{
       if(!response.success){
         this.toastrService.error(response.message)
       }
