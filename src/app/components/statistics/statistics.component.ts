@@ -6,6 +6,7 @@ import { StatisticsService } from './../../services/statistics.service';
 import { Component } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { Ad } from 'src/app/models/ad';
+import { AdFilter } from 'src/app/models/adFilter';
 
 @Component({
   selector: 'app-statistics',
@@ -18,6 +19,7 @@ export class StatisticsComponent {
   users : User[]=[];
   flippedCards: boolean[] = [];
   adFilterForm:FormGroup;
+  adFilter:AdFilter=null;
   constructor(private statisticsService :StatisticsService, private toastrService:ToastrService, private formBuilder:FormBuilder, private adService:AdService ){
   }
   ngOnInit(){
@@ -35,6 +37,7 @@ export class StatisticsComponent {
   
   flipCard(index: number): void {
     this.flippedCards[index] = !this.flippedCards[index];
+    this.flippedCards = this.flippedCards.map((card, i) => i === index ? true : false);
     this.getAllUsersWhoWatchedAdsByAdId(this.ads[index].id);
   }
   getAllAdByOwnerUserId(){
@@ -48,14 +51,42 @@ export class StatisticsComponent {
     }
     );
   }
-  addAdFilter(adId:string){
+  getAdFilter(adId:string){
+    this.statisticsService.getAdFilterByAdId(adId).subscribe(response=>{;
+      this.adFilter = response.data;
+    })
+  }
+  // checkIfAdFilterExistAndAdd(adId:string){
+  //   if(this.getAdFilter(adId)){
+  //     this.addAdFilter(adId);
+  //   }
+  //   else{
+  //     this.updateFilter(adId);
+  //   }
+  // }
+  // updateFilter(adId:string){
+  //   this.adFilterForm.get('id').setValue(,undefined)
+  //   this.adFilterForm.get('adId').setValue(adId,undefined)
+  //   if(this.adFilterForm.valid){
+  //     console.log(this.adFilterForm.value);
+  //     let adFilterModel = Object.assign({},this.adFilterForm.value);
+  //     console.log(adFilterModel)
+  //     this.statisticsService.updateAdFilter(adFilterModel).subscribe(response=>{this.toastrService.info(response.message,"filtre güncellendi");
+  //     console.log(adFilterModel)
+  //     },
+  //     responseError=>{this.toastrService.error(responseError.error)})
+  //   }
+  // }
+  updateAdFilter(adId:string){
     this.adFilterForm.get('adId').setValue(adId,undefined)
+    
     if(this.adFilterForm.valid){
       console.log(this.adFilterForm.value);
       let adFilterModel = Object.assign({},this.adFilterForm.value);
       console.log(adFilterModel)
-      this.statisticsService.addAdFilter(adFilterModel).subscribe(response=>{this.toastrService.info(response.message,"filtre eklendi");
+      this.statisticsService.updateAdFilter(adFilterModel).subscribe(response=>{this.toastrService.info(response.message,"filtre güncellendi");
       console.log(adFilterModel)
+      this.adFilter=adFilterModel;
       },
       responseError=>{this.toastrService.error(responseError.error)})
     }

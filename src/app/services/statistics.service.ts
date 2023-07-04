@@ -7,6 +7,7 @@ import { WatchedAd } from '../models/watchedAd';
 import { User} from '../models/user';
 import { LoginModel } from '../models/loginModel';
 import { AdFilter } from '../models/adFilter';
+import { SingleResponseModel } from '../models/singleResponseModel';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,13 @@ export class StatisticsService {
   addWatchedAd(adId:string):Observable<ResponseModel>{
     return this.httpClient.post<ResponseModel>(this.apiUrl+"statistics/addwatchedad?adId="+adId,adId)
   }
-  addAdFilter(adFilter:AdFilter):Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>(this.apiUrl+"statistics/addadfilter",adFilter)
+  // addAdFilter(adFilter:AdFilter):Observable<ResponseModel>{
+  //   return this.httpClient.post<ResponseModel>(this.apiUrl+"filter/addadfilter",adFilter)
+  // }
+  updateAdFilter(adFilter:AdFilter):Observable<ResponseModel>{
+    return this.httpClient.post<ResponseModel>(this.apiUrl+"filter/updateadfilter",adFilter)
+  }
+  getAdFilterByAdId(adId:string):Observable<SingleResponseModel<AdFilter>>{
+    return this.httpClient.get<SingleResponseModel<AdFilter>>(this.apiUrl+"filter/getadfilterbyadid?adId="+adId)
   }
 }
