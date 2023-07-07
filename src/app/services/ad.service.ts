@@ -33,7 +33,7 @@ export class AdService {
     return this.httpClient
       .get<ListResponseModel<Ad>>(newPath);
   }
-  getAllUnWatchedAd():Observable<ListResponseModel<Ad>>{
+  getAllUnWatchedAd():Observable<ListResponseModel<Ad>>{   //s takıları eksik
     let newPath =this.apiUrl + "content/getallunwatchedads";
     return this.httpClient
       .get<ListResponseModel<Ad>>(newPath);

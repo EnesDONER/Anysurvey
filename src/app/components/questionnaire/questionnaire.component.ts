@@ -14,18 +14,15 @@ export class QuestionnaireComponent {
   constructor(private toastrService:ToastrService, private surveyService:SurveyService) {}
 
   ngOnInit(): void {
-    
-    this.getAllSurvey();
+    this.getAllUnWatchedAd();
+  
+  }
+  getAllUnWatchedAd(){
+    this.surveyService.getAllUnsolvedSurveys().subscribe
+    (response=>{this.surveys = response.data;
+      this.dataLoaded=true;
+    },
+    responseError=>{this.toastrService.error(responseError.error)})
   }
 
-  getAllSurvey(){
-    this.surveyService.getAll().subscribe(response=>{
-      if(response.success){
-        this.surveys=response.data;
-        this.dataLoaded = true;
-      }
-      else
-        this.toastrService.error(response.message);
-    })
-  }
 }

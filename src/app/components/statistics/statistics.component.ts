@@ -1,3 +1,5 @@
+import { Survey } from './../../models/survey';
+import { SurveyService } from 'src/app/services/survey.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AdService } from 'src/app/services/ad.service';
 import { ToastrService } from 'ngx-toastr';
@@ -8,6 +10,7 @@ import { User } from 'src/app/models/user';
 import { Ad } from 'src/app/models/ad';
 import { AdFilter } from 'src/app/models/adFilter';
 
+
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
@@ -16,15 +19,17 @@ import { AdFilter } from 'src/app/models/adFilter';
 export class StatisticsComponent {
   watchedAds: WatchedAd[]=[];
   ads: Ad[]=[];
+  surveys: Survey[]=[];
   users : User[]=[];
   flippedCards: boolean[] = [];
   adFilterForm:FormGroup;
   adFilter:AdFilter=null;
-  constructor(private statisticsService :StatisticsService, private toastrService:ToastrService, private formBuilder:FormBuilder, private adService:AdService ){
+  constructor(private statisticsService :StatisticsService, private toastrService:ToastrService,private surveyService:SurveyService, private formBuilder:FormBuilder, private adService:AdService ){
   }
   ngOnInit(){
     this.createAdFilterForm();
     this.getAllAdByOwnerUserId();
+    this.getAllSurveyByOwnerUserId();
   }
   createAdFilterForm() {
     this.adFilterForm = this.formBuilder.group({
@@ -77,6 +82,17 @@ export class StatisticsComponent {
   //     responseError=>{this.toastrService.error(responseError.error)})
   //   }
   // }
+  getAllSurveyByOwnerUserId(){
+    this.surveyService.getAllSurveyByOwnerUserId().subscribe(response=>{
+      if(response.success){
+        this.surveys = response.data;
+      }
+      else{
+      this.toastrService.error(response.message);
+      }
+    }
+    );
+  }
   updateAdFilter(adId:string){
     this.adFilterForm.get('adId').setValue(adId,undefined)
     

@@ -31,6 +31,12 @@
 .body{
   background-image: url(../../../assets/images/bg.jpg);
 }
-.row:active{
-    background: green;
+.selected{
+    background-color: black;
+    margin: 80px;
 }
+.row.active {
+    background-color: black;
+    color: white;
+  }
+  

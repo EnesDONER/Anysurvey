@@ -8,50 +8,23 @@
                     <br>
                     <p style="font-size: 20px; padding:1em;">{{question.description}}</p>
                 </div>
-                <div *ngFor="let option of question.options" class="row">
-                    {{option.description}}    
+                <!-- <div  (click)="setQuestionAnswer(question,option)" *ngFor="let option of question.options; let i = index" class="row" >
+                    {{ option.description }}
+                </div>         -->
+                <div *ngFor="let option of question.options; let i = index" class="row"
+                [ngStyle]="{'background-color': isSelected(i) ? 'blue' : 'lightblue'}"
+                (click)="toggleSelected(i); setQuestionAnswer(question,option)">
+                {{ option.description }}
                 </div>
+          
                 <div *ngIf="currentIndex!=survey.questions.length-1" (click)="showNext()" style="float:right; height: 10%; width: 10%;">
-                    <svg fill="green" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M334.5 414c8.8 3.8 19 2 26-4.6l144-136c4.8-4.5 7.5-10.8 7.5-17.4s-2.7-12.9-7.5-17.4l-144-136c-7-6.6-17.2-8.4-26-4.6s-14.5 12.5-14.5 22l0 72L32 192c-17.7 0-32 14.3-32 32l0 64c0 17.7 14.3 32 32 32l288 0 0 72c0 9.6 5.7 18.2 14.5 22z"/></svg>
+                    <svg fill="green" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M334.5 414c8.8 3.8 19 2 26-4.6l144-136c4.8-4.5 7.5-10.8 7.5-17.4s-2.7-12.9-7.5-17.4l-144-136c-7-6.6-17.2-8.4-26-4.6s-14.5 12.5-14.5 22l0 72L32 192c-17.7 0-32 14.3-32 32l0 64c0 17.7 14.3 32 32 32l288 0 0 72c0 9.6 5.7 18.2 14.5 22z"/></svg>
                 </div>
                 <div *ngIf="currentIndex==survey.questions.length-1"> 
-                    <button style="float:right; height: 10%; width: 18%;" class="btn btn-success m-2 mb-3">Send</button>
+                    <button style="float:right; height: 10%; width: 18%;" (click)="addSolvedSurvey()"  class="btn btn-success m-2 mb-3">Send</button>
                 </div>
                 
             </main>
         </section>
     </div>
-</div> 
-
-<!-- <div class="body pt-5" style="height: 100vh;">
-    <div *ngFor="let question of questions.slice(currentIndex, currentIndex+1)" class="container wh-50 " style="height: auto; overflow:auto;">
-        <section class="section-1" id="section-1">
-            <main>
-                <div class="text-container">
-                    <h3>Pure CSS Quiz</h3>
-                    <p>QUESTION 1 OF 5</p>
-                    <p>{{question.description}}</p>
-                </div>
-                <form>
-                    <div class="quiz-options">
-                        <input type="radio" class="input-radio one-a jshdgdgwgdwfdfwdwjfdjwwdwdco" id="one-a" name="yes-1" required>
-                        <label class="radio-label jsjwjdwjdwjdwco" for="one-a">
-                            <span class="alphabet">A</span> {{question.id}} <img class="icon jdsjkefkefkefefexco" src="https://res.cloudinary.com/dvhndpbun/image/upload/v1588518387/jdsjkefkefkefefexco.svg" alt="">
-                        </label>
-                        <input type="radio" class="input-radio one-b jshdgdgwgdwfdfwdwjfdjwwdwdin" id="one-b" name="yes-1">
-                        <label class="radio-label jsjwjdwjdwjdwin" for="one-b">
-                            <span class="alphabet">B</span> Creative Screen Styling <img class="icon jfdedgwfzexf4hjin" src="https://res.cloudinary.com/dvhndpbun/image/upload/v1588517753/jfdedgwfzexf4hjin.svg">
-                        </label>
-                        <input type="radio" class="input-radio one-c jshdgdgwgdwfdfwdwjfdjwwdwdin" id="one-c" name="yes-1">
-                        <label class="radio-label jsjwjdwjdwjdwin" for="one-c">
-                            <span class="alphabet">C</span> Cascading Style Screen <img class="icon jfdedgwfzexf4hjin" src="https://res.cloudinary.com/dvhndpbun/image/upload/v1588517753/jfdedgwfzexf4hjin.svg">
-                        </label>
-                    </div>
-                    <a id="btn" type="submit" (click)="showNext()" >Next</a>
-                </form>
-            </main>
-        </section>
-    
-
-    </div>
-</div> -->
+</div>  

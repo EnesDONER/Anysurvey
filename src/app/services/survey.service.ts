@@ -27,6 +27,16 @@ export class SurveyService {
     return this.httpClient
       .get<SingleResponseModel<Survey>>(newPath);
   }
+  getAllSurveyByOwnerUserId():Observable<ListResponseModel<Survey>>{
+    let newPath =this.apiUrl + "content/getallsurveysbyowneruserid";
+    return this.httpClient
+      .get<ListResponseModel<Survey>>(newPath);
+  }
+  getAllUnsolvedSurveys():Observable<ListResponseModel<Survey>>{
+    let newPath =this.apiUrl + "content/getallunsolvedsurveys";
+    return this.httpClient
+      .get<ListResponseModel<Survey>>(newPath);
+  }
   add(survey:Survey):Observable<ResponseModel>{
     return this.httpClient.post<ResponseModel>(this.apiUrl+"content/addsurvey",survey)
   }
