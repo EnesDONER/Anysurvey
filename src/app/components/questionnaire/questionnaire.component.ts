@@ -21,6 +21,9 @@ export class QuestionnaireComponent {
     this.surveyService.getAllUnsolvedSurveys().subscribe
     (response=>{this.surveys = response.data;
       this.dataLoaded=true;
+      if(response.data.length==0){
+        this.toastrService.error("No resolvable questionnaire was found.")
+      }
     },
     responseError=>{this.toastrService.error(responseError.error)})
   }

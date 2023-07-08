@@ -10,7 +10,7 @@ import { NaviComponent } from './components/navi/navi.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
 import { ToastrModule } from 'ngx-toastr';
-import {SolveQuestionnaireComponent} from './components/solve-questionnaire/solve-questionnaire.component';
+import { SolveQuestionnaireComponent } from './components/solve-questionnaire/solve-questionnaire.component';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { SafePipe } from './pipes/safe.pipe';
@@ -28,7 +28,9 @@ import { VideoIdPipe } from './pipes/video-id.pipe';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AddContentComponent } from './components/add-content/add-content.component';
 import { PartnershipLoginComponent } from './components/partnership-login/partnership-login.component';
-import { StatisticsComponent } from './components/statistics/statistics.component';
+import { SurveyStatisticsComponent } from './components/survey-statistics/survey-statistics.component';
+import { AdStatisticsComponent } from './components/ad-statistics/ad-statistics.component';
+
 
 @NgModule({
   declarations: [
@@ -51,7 +53,8 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
     VideoIdPipe,
     AddContentComponent,
     PartnershipLoginComponent,
-    StatisticsComponent,
+    AdStatisticsComponent,
+    SurveyStatisticsComponent,
   ],
   imports: [
     BrowserModule,

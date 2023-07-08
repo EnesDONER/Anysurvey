@@ -128,11 +128,14 @@
         <li *ngIf="isAuthenticated()" class="nav-item">
           <a class="nav-link" routerLink="/add-content">Add Content</a>
         </li>
-        <!-- statistics -->
+        <!-- survey statistics -->
         <li *ngIf="isAuthenticated()" class="nav-item">
-          <a  class="nav-link" routerLink="/statistics">Statistics</a>
+          <a  class="nav-link" routerLink="/survey-statistics">Survey Statistics</a>
         </li>
-
+        <!-- ad statistics -->
+        <li *ngIf="isAuthenticated()" class="nav-item">
+          <a  class="nav-link" routerLink="/ad-statistics">Ad Statistics</a>
+        </li>
         <!-- logout -->
         <span *ngIf="isAuthenticated()" style="height: 21px; width: 24px; margin-top: 6px">
           <svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">

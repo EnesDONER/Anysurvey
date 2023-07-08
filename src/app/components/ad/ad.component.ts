@@ -29,6 +29,9 @@ export class AdComponent {
     this.adService.getAllUnWatchedAd().subscribe
     (response=>{this.ads = response.data;
       this.dataLoaded=true;
+      if(response.data.length==0){
+        this.toastrService.error("No watchable ads found.")
+      }
     },
     responseError=>{this.toastrService.error(responseError.error)})
 
@@ -43,7 +46,7 @@ export class AdComponent {
       payModal.show();
       this.currentAdId=ad.id;
     } else {
-      this.toastrService.error("hata")
+      this.toastrService.error("This video cannot be played")
     }
     
   }

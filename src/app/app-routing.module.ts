@@ -14,7 +14,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { LoginGuard } from './guards/login.guard';
 import { AddContentComponent } from './components/add-content/add-content.component';
-import { StatisticsComponent } from './components/statistics/statistics.component';
+import { AdStatisticsComponent } from './components/ad-statistics/ad-statistics.component';
+import { SurveyStatisticsComponent } from './components/survey-statistics/survey-statistics.component';
 const routes: Routes = [
   {path:"",pathMatch:"full",component:HomeComponent},
   {path:"home",component:HomeComponent},
@@ -29,7 +30,8 @@ const routes: Routes = [
   {path:"register",component:RegisterComponent},
   {path:"add-content",component:AddContentComponent},
   {path:"loginpartnership",component:PartnershipLoginComponent},
-  {path:"statistics",component:StatisticsComponent},
+  {path:"ad-statistics",component:AdStatisticsComponent},
+  {path:"survey-statistics",component:SurveyStatisticsComponent},
   {path:"forgetPassword",component:ForgetPasswordComponent},
 
 ];

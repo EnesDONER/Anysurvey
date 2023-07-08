@@ -6,8 +6,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Anysurvey';
-  // data:string="app";
-  // setData(event:any){
-  //   this.data=event;
-  // }
 }
