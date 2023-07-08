@@ -50,13 +50,27 @@ export class CreateSurveyComponent implements OnInit {
   
   addOption(){
     if(this.options[this.optionCount-1]==null){
-      this.toastrService.error("d")
+      this.toastrService.error("Option can not be null")
       return;
     }
     this.optionCount+=1;
   }
-  addQuestion() {
-    if(this.questionDescription !=""){
+  addClassicQuestion(){
+    if(this.questionDescription.length > 4){
+      const question: Question = {
+        description: this.questionDescription,
+        options: [{ description: "classic question" }]
+      };
+    this.survey.questions.push(question);
+    }
+    else{
+      this.toastrService.error("Question description cannot be less than 5 characters");
+      
+    }
+    this.questionDescription=""
+  }
+  addTestQuestion() {
+    if(this.questionDescription.length > 4){
       if(this.options.length<2){
         this.toastrService.error("You must add at least 2 options");
         return;
@@ -67,16 +81,20 @@ export class CreateSurveyComponent implements OnInit {
         options: this.options.map(option => ({ description: option }))
       };
       console.log(question)
-    this.survey.questions.push(question);
-
+    let optionDescriptionLenght = this.options.findIndex(o=>(o.length<2))
+    if(optionDescriptionLenght!=-1){
+      this.toastrService.error("Option description cannot be less than 2 characters");
+    }
+    else{
+      this.survey.questions.push(question);
+    }
     this.isQuestionEmptyError=false;
     this.questionDescription = '';
     this.options = [];
     this.optionCount=1;
     }
     else
-      this.toastrService.error("Question descripton cannot be null");
-      
+    this.toastrService.error("Question description cannot be less than 5 characters");
   }
   setCurrentQuestion(index:number){
     this.currentQuestionId=index;

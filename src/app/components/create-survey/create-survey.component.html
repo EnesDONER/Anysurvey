@@ -1,44 +1,86 @@
-<app-payment  (dataEvent)="receiveData($event)" [fee]="fee"></app-payment>
+<app-payment (dataEvent)="receiveData($event)" [fee]="fee"></app-payment>
 <div class="container mt-4 mb-3">
-  <img  class="img-fluid" src=".././../../assets/images/createSurvey.jpg"alt="" style="margin-left: 22%; width: 56%; box-shadow: 2px 2px darkblue; border-radius: 8px;">
+  <img
+    class="img-fluid"
+    src=".././../../assets/images/createSurvey.jpg"
+    alt=""
+    style="
+      margin-left: 22%;
+      width: 56%;
+      box-shadow: 2px 2px darkblue;
+      border-radius: 8px;
+    "
+  />
 </div>
-<div class="container vh-100">    
-    <div class="py-2 px-5">
-        <h2 class="text-center mb-4" style=" color: #041858;"> Add Survey</h2>
-        <div class="form-floating mb-4">
-          <input type="text" class="form-control" [(ngModel)]="surveyTitle" id="title" placeholder="name@example.com" [ngClass]="{ 'is-invalid': isTitleEmpty }">
-          <label for="floatingInput">Survey Title</label>
-          <div class="invalid-feedback" *ngIf="isTitleEmpty">
-            Title is required!
-          </div>
-        </div>
-        <div class="form-floating mb-3">
-          <input type="text" class="form-control" [(ngModel)]="surveyDescription" id="description" placeholder="name@example.com" [ngClass]="{ 'is-invalid': isDescriptionEmpty }">
-          <label for="floatingInput">Survey Description</label>
-          <div class="invalid-feedback" *ngIf="isDescriptionEmpty">
-            Description is required!
-          </div>
-        </div>
-        <hr class="mb-3">
-        <h4 style="color: gold;">Questions</h4>
-        <a   
-        *ngFor="let item of survey.questions; let i = index"
-        (click)="setCurrentQuestion(i)"
-        style="display: block; color: black; margin-left: 25px; font-size: large; padding: 15px;"
-        data-bs-toggle="modal"
-        data-bs-target="#questionDetails"
-        class="text-decoration-none mt-2"
-        >{{i+1}} - {{survey.questions[i].description}} </a>
-        <div style="display: flex; flex-direction: column; align-items: flex-end;">
-          <button class="btn btn-outline-success " data-bs-toggle="modal" data-bs-target="#addQuestion">+ Increase Question</button>
-          <div  style="color: red;" *ngIf="isQuestionEmptyError "> Click here!</div>
-          <button 
-          class="btn btn-success mt-3" 
-          (click)="checkIfSurveyNull()">Add Survey</button>
-        </div>
-        
+<div class="container vh-100">
+  <div class="py-2 px-5">
+    <h2 class="text-center mb-4" style="color: #041858">Add Survey</h2>
+    <div class="form-floating mb-4">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="surveyTitle"
+        id="title"
+        placeholder="name@example.com"
+        [ngClass]="{ 'is-invalid': isTitleEmpty }"
+      />
+      <label for="floatingInput">Survey Title</label>
+      <div class="invalid-feedback" *ngIf="isTitleEmpty">
+        Title is required!
+      </div>
     </div>
-
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="surveyDescription"
+        id="description"
+        placeholder="name@example.com"
+        [ngClass]="{ 'is-invalid': isDescriptionEmpty }"
+      />
+      <label for="floatingInput">Survey Description</label>
+      <div class="invalid-feedback" *ngIf="isDescriptionEmpty">
+        Description is required!
+      </div>
+    </div>
+    <hr class="mb-3" />
+    <h4 style="color: gold">Questions</h4>
+    <a
+      *ngFor="let item of survey.questions; let i = index"
+      (click)="setCurrentQuestion(i)"
+      style="
+        display: block;
+        color: black;
+        margin-left: 25px;
+        font-size: large;
+        padding: 15px;
+      "
+      data-bs-toggle="modal"
+      data-bs-target="#questionDetails"
+      class="text-decoration-none mt-2"
+      >{{ i + 1 }} - {{ survey.questions[i].description }}
+    </a>
+    <div style="display: flex; flex-direction: column; align-items: flex-end">
+      <button
+        class="btn btn-outline-success mb-2"
+        data-bs-toggle="modal"
+        data-bs-target="#addTestQuestion"
+      >
+        + Increase Test Question
+      </button>
+      <button
+        class="btn btn-outline-success"
+        data-bs-toggle="modal"
+        data-bs-target="#addClassicQuestion"
+      >
+        + Increase Classic Question
+      </button>
+      <div style="color: red" *ngIf="isQuestionEmptyError">Click here!</div>
+      <button class="btn btn-success mt-3" (click)="checkIfSurveyNull()">
+        Add Survey
+      </button>
+    </div>
+  </div>
 </div>
 
 <div
@@ -47,12 +89,16 @@
   tabindex="-1"
   aria-hidden="true"
 >
-  <div class="modal-dialog ">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <div *ngIf="survey && survey.questions && survey.questions.length > 0">
-          <h4 class="text-center"><span style="color: goldenrod ; font-weight: 700; margin-right: 15px;">Question {{currentQuestionId+1}}</span>
-            {{ survey.questions[currentQuestionId].description }}</h4>
+          <h4 class="text-center">
+            <span style="color: goldenrod; font-weight: 700; margin-right: 15px"
+              >Question {{ currentQuestionId + 1 }}</span
+            >
+            {{ survey.questions[currentQuestionId].description }}
+          </h4>
         </div>
         <button
           type="button"
@@ -62,20 +108,27 @@
         ></button>
       </div>
       <div class="modal-body d-flex justify-content-center align-items-center">
-        <div class="container mt-3 mb-3" *ngIf="survey && survey.questions && survey.questions.length > 0">
-          <div *ngFor="let option of survey.questions[currentQuestionId].options; let i = index;" class="container mt-3 mb-3 row">
-            <div class="col-sm-3 " style="font-weight: bold;" >
-              Option {{i+1}}
-              <hr class="mt-2">
+        <div
+          class="container mt-3 mb-3"
+          *ngIf="survey && survey.questions && survey.questions.length > 0"
+        >
+          <div
+            *ngFor="
+              let option of survey.questions[currentQuestionId].options;
+              let i = index
+            "
+            class="container mt-3 mb-3 row"
+          >
+            <div class="col-sm-3" style="font-weight: bold">
+              Option {{ i + 1 }}
+              <hr class="mt-2" />
             </div>
             <div class="col-sm-9">
-              {{option.description}}
-              <hr class="mt-2">
+              {{ option.description }}
+              <hr class="mt-2" />
             </div>
-            
+          </div>
         </div>
-        </div>
-        
       </div>
     </div>
   </div>
@@ -83,14 +136,14 @@
 
 <div
   class="modal fade mb-3"
-  id="addQuestion"
+  id="addTestQuestion"
   tabindex="-1"
   aria-hidden="true"
 >
-  <div class="modal-dialog ">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h3> </h3>
+        <h3></h3>
         <button
           type="button"
           class="btn-close"
@@ -100,23 +153,96 @@
       </div>
       <div class="modal-body d-flex justify-content-center align-items-center">
         <div class="container mt-3 mb-3">
-            <div class="form-floating mb-3">
-                <input type="text" [(ngModel)]="questionDescription" class="form-control" id="floatingInput" placeholder="name@example.com">
-                <label for="floatingInput">Question Description</label>
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              [(ngModel)]="questionDescription"
+              class="form-control"
+              id="floatingInput"
+              placeholder="name@example.com"
+            />
+            <label for="floatingInput">Question Description</label>
+          </div>
+          <hr />
+          <div class="input-group mb-3">
+            <div
+              *ngFor="let item of getCountArray(optionCount); let i = index"
+              class="input-group mb-3"
+              style="margin-left: 30px"
+            >
+              <span class="input-group-text">Option {{ item + 1 }}</span>
+              <input
+                type="text"
+                [(ngModel)]="options[i]"
+                aria-label="Option"
+                class="form-control"
+              />
             </div>
-            <hr>
-            <div class="input-group mb-3">
-              <div *ngFor="let item of getCountArray(optionCount); let i = index" class="input-group mb-3" style="margin-left: 30px;">
-                <span class="input-group-text">Option {{ item + 1 }}</span>
-                <input type="text" [(ngModel)]="options[i]" aria-label="Option" class="form-control">
-              </div>
-              <button class="btn btn-outline-success ms-auto" (click)="addOption()" >+ Increase Option</button>
-              <br>
-              <button class="btn btn-success" (click)="addQuestion()" style="float: initial;">Add Question</button>
-            </div>
-               
+            <button
+              class="btn btn-outline-success ms-auto"
+              (click)="addOption()"
+            >
+              + Increase Option
+            </button>
+            <br />
+            <button
+              class="btn btn-success"
+              (click)="addTestQuestion()"
+              style="float: initial"
+            >
+              Add Question
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
+
+  <div
+    class="modal fade mb-3"
+    id="addClassicQuestion"
+    tabindex="-1"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3></h3>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div
+          class="modal-body d-flex justify-content-center align-items-center"
+        >
+          <div class="container mt-3 mb-3">
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                [(ngModel)]="questionDescription"
+                class="form-control"
+                id="floatingInput"
+                placeholder="name@example.com"
+              />
+              <label for="floatingInput">Question Description</label>
+            </div>
+            <hr />
+            <div class="input-group mb-3">
+              <button
+                class="btn btn-success"
+                (click)="addClassicQuestion()"
+                style="float: initial"
+              >
+                Add Question
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 

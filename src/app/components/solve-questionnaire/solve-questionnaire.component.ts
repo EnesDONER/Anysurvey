@@ -20,14 +20,14 @@ import { Router } from '@angular/router';
 export class SolveQuestionnaireComponent  {
   
   currentIndex=0;
-
+  answer:string="";
   survey :Survey={
     id:"",
     description:"",
     title:"",
     questions:[]
   };
-
+  
   solvedSurvey :SolvedSurvey={
     surveyId:"",
     userId:0,
@@ -60,6 +60,18 @@ export class SolveQuestionnaireComponent  {
       this.selectedItems.push(index);
     }
   }
+  setClassicQuestionAnswer(question:Question){
+    debugger
+    if(this.answer!=""){
+      let questionAnswer: QuestionAnswer = {
+        questionDescription: question.description,
+        ////HATA
+        selectedAnswers: [{ selectedOptionDescription: this.answer.toString() }]
+      };
+      this.solvedSurvey.questionsAnswers.push(questionAnswer);
+    }
+    this.answer="";
+  }
   setQuestionAnswer(question:Question,option:Option){
     //soru yoksa cevabı soruyla birlikte ekle
     if(!this.solvedSurvey.questionsAnswers.some(item => item.questionDescription === question.description)){
@@ -68,7 +80,6 @@ export class SolveQuestionnaireComponent  {
         selectedAnswers: [{ selectedOptionDescription: option.description }]
       };
       this.solvedSurvey.questionsAnswers.push(questionAnswer);
-      document.getElementsByClassName("option")
     } 
     //soru varsa o soruya cevabı yükle
     else{
