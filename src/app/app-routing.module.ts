@@ -16,6 +16,7 @@ import { LoginGuard } from './guards/login.guard';
 import { AddContentComponent } from './components/add-content/add-content.component';
 import { AdStatisticsComponent } from './components/ad-statistics/ad-statistics.component';
 import { SurveyStatisticsComponent } from './components/survey-statistics/survey-statistics.component';
+
 const routes: Routes = [
   {path:"",pathMatch:"full",component:HomeComponent},
   {path:"home",component:HomeComponent},
@@ -32,8 +33,8 @@ const routes: Routes = [
   {path:"loginpartnership",component:PartnershipLoginComponent},
   {path:"ad-statistics",component:AdStatisticsComponent},
   {path:"survey-statistics",component:SurveyStatisticsComponent},
+  {path:"forgetPassword/:resetToken",component:ForgetPasswordComponent},
   {path:"forgetPassword",component:ForgetPasswordComponent},
-
 ];
 
 @NgModule({
