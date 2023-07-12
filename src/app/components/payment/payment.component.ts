@@ -1,4 +1,9 @@
+import { PaymentService } from './../../services/payment.service';
+import { ToastrService } from 'ngx-toastr';
 import { Component, DoCheck, EventEmitter, Input, Output } from '@angular/core';
+import { Card } from 'src/app/models/card';
+import { response } from 'express';
+
 
 declare var bootstrap: any;
 @Component({
@@ -10,9 +15,17 @@ export class PaymentComponent implements DoCheck{
 
   @Input() fee:number;
   @Output() dataEvent = new EventEmitter<boolean>();
-  isItPaid:boolean = true;
+  isItPaid:boolean = false;
+  cards:Card[]=[];
+  selectedCardId:number=0;
+  ncard:number;
+  namecard:string;
+  cvv:number;
+  date:string;
+  cardId:number=0;
   ngOnInit(){
-    this.isItPaid=true;
+    this.isItPaid=false;
+    this.getAllCard();
   }
   ngDoCheck(){
     if(this.ncard)
@@ -25,13 +38,12 @@ export class PaymentComponent implements DoCheck{
     if(this.cvv)
       document.getElementById('cvv').innerHTML=this.cvv.toString();
   }
-  ncard:number;
-  namecard:string;
-  cvv:number;
-  date:string;
   
+  
+  constructor(private toastrService:ToastrService,private paymentService:PaymentService){
+
+  }
   setDataEvent() {
-    
     var payModal = new bootstrap.Modal(document.getElementById('payModal'));
       payModal.hide();
       this.dataEvent.emit(this.isItPaid);
@@ -92,5 +104,72 @@ export class PaymentComponent implements DoCheck{
     }
    
   }
-  
+  getAllCard(){
+    this.paymentService.getAllCard().subscribe(response=>{
+      if(response.success){
+        this.cards=response.data;
+        console.log(this.cards)
+      }
+      else{
+        this.toastrService.error("kart yok")
+      }
+    })
+  }
+  addCard(){
+    let [expireYear, expireMonth] = this.date.split("-");
+    const cardModel: Card = {
+      id:0,
+      cardNumber : this.ncard.toString(),
+      holderName : this.namecard,
+      cvc : this.cvv.toString(),
+      expireMonth : expireYear,
+      expireYear : expireMonth
+    };
+    this.setCardId(cardModel.id);
+
+    this.paymentService.addCard(cardModel).subscribe(response=>{
+      if(response.success){
+        this.toastrService.success(response.message,"Card aded");
+        this.ncard=0;
+        this.namecard="";
+        this.cvv=0;
+        this.date="";
+        this.payment();
+        setTimeout(() => window.location.reload(), 1000)
+        }
+      else{
+        this.toastrService.error(response.message);
+      }
+      },responseError=>{
+        this.toastrService.error(responseError.error);
+      })
+
+  }
+  setCardId(id:number){
+    this.cardId=id;
+  }
+  payment(){
+    debugger
+      this.paymentService.payment(this.cardId ,this.fee).subscribe(response=>{
+       debugger
+         if(response.success){
+          this.toastrService.success(response.message,"Payment success");
+          console.log(response.data);
+          this.isItPaid=true;
+          this.setDataEvent();
+
+        }
+        else{
+          this.toastrService.error(response.message,"Payment error");
+          this.isItPaid=false;
+          this.setDataEvent();
+
+        }
+      },responseError=>{
+        this.toastrService.error(responseError.error);
+        this.isItPaid=false;
+        this.setDataEvent();
+      }
+      )
+    }  
 }

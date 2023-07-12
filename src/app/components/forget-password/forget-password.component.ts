@@ -35,7 +35,6 @@ export class ForgetPasswordComponent {
     });
   }
   resetPassword(){
-    debugger
     const resetPasswordModel: ResetPassword = {
       password: this.newPassword,
       resetToken: this.resetToken,
@@ -58,7 +57,8 @@ export class ForgetPasswordComponent {
     if(this.forgetPasswordForm.valid){
       let email = this.forgetPasswordForm.get("email").value;
       this.authService.sendResetPasswordMail(email).subscribe(response=>{
-        this.toastrService.info("check your mail box");
+        if(response.success)
+          this.toastrService.info("check your mail box");
       })
     }
     else{

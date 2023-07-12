@@ -41,7 +41,11 @@ export class CreateSurveyComponent implements OnInit {
     console.log(this.isItPaid)
     if(this.isItPaid){
       this.addSurvey();
-      data=false;
+      this.isItPaid=false;
+    }
+    else{
+      this.toastrService.error("payment has not been made");
+      this.isItPaid=false;
     }
   }
   getCountArray(count: number): number[] {
@@ -109,7 +113,7 @@ export class CreateSurveyComponent implements OnInit {
       this.toastrService.error("You must add at least 1 question");
       return false;
     }
-    this.fee= this.survey.questions.length *10;
+    this.fee= 2 + (this.survey.questions.length*1);
     var payModal = new bootstrap.Modal(document.getElementById('payModal'));
       payModal.show();
     return true;
@@ -137,7 +141,8 @@ export class CreateSurveyComponent implements OnInit {
           for (let i = 0; i <responseError.error.Errors.length; i++) {
             this.toastrService.error(responseError.error.Errors[i].ErrorMessage
               ,"Error")
-          }       
+          }
+          this.isItPaid=false;       
         } 
     })
 

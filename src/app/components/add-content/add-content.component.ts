@@ -12,18 +12,22 @@ declare var bootstrap: any;
 })
 export class AddContentComponent {
   adForm:FormGroup;
-  isItPaid:boolean;
+  isItPaid:boolean=false;
   constructor(private formBuilder:FormBuilder,private adService:AdService ,private toastrService:ToastrService) {}
   ngOnInit(){
     this.createAdForm();
   }
   receiveData(data: boolean) {
+    debugger
     this.isItPaid = data;
     console.log(this.isItPaid)
     if(this.isItPaid){
       this.addAd();
-      data=false;
     }
+    else{
+      this.toastrService.error("Payment has not been made")
+    }
+    
   }
   createAdForm(){ 
     this.adForm = this.formBuilder.group({
@@ -44,14 +48,14 @@ export class AddContentComponent {
 
   }
   addAd(){
-    if(this.checkIfSurveyNull){
+    if(this.checkIfSurveyNull && this.isItPaid){
       console.log(this.adForm.value);
-
+      this.isItPaid=false;
       let adModel = Object.assign({},this.adForm.value);
-      this.adService.add(adModel).subscribe(response=>{this.toastrService.info(response.message)},
+      this.adService.add(adModel).subscribe(response=>{this.toastrService.success(response.message,"Ad added")},
       responseError=>{this.toastrService.error(responseError.error);
-        console.log(responseError.error)} 
-      )
+        this.toastrService.error(responseError.error);
+      })
     }
   }
 }
