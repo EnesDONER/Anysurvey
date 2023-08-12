@@ -47,7 +47,7 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="row grid">
-
+          <h2 class="text-center" style="color: #1f272b;;" *ngIf="ads.length == 0">No video to watch</h2>
           <div *ngFor="let ad of ads" class="col-lg-4 templatemo-item-col mb-4">
             <div class="meeting-item">
               <div class="thumb">

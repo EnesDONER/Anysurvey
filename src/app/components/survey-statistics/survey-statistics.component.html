@@ -1,44 +1,75 @@
-<div class="container">
-    <div class="row">
-        <div *ngFor="let survey of surveys" class="col-md-6">
-            <h2>{{survey.title}}</h2>
-            <p>{{survey.description}}</p>
-            <button class="btn btn-outline-success" (click)="getAllUsersWhoSolvedSurveysBySurveyId(survey.id); getAllSolvedSurveyBySurveyId(survey.id); userData==!userData"> izleyen kişileri göster</button>
-            <div *ngIf="!userData">  <div *ngFor="let user of users"> {{user.email}} </div></div>
-            <div *ngIf="!userData">  <div *ngFor="let solvedSurvey of solvedSurveys"> {{solvedSurvey.userId}} 
-                <div *ngFor="let questionAnswer of solvedSurvey.questionsAnswers" >{{questionAnswer.questionDescription}}</div>
-            </div> 
-            
+<div class="body">
+
+<div *ngIf="surveyDetails" class="row two-canvas-container" >
+    <h3 class="text-center py-3"> Users who have solved the survey</h3>
+
+    <div class="canvas-wrapper">
+      <h4 class="text-center">Gender Chart</h4>
+      <canvas id="genderChart"></canvas>
+    </div>
+    <div class="canvas-wrapper">
+      <h4 class="text-center">Age Chart</h4>
+      <canvas id="ageChart"></canvas>
+    </div>
+  </div>
+
+<div class="container py-3">
+    <div *ngIf="!surveyDetails" class="row">
+      <h2 class="text-center mb-3">Your Surveys</h2>
+        <div *ngFor="let survey of surveys" class="col-md-4">
+            <div routerLink = "/survey-statistics/survey/{{survey.id}}"
+            class="card survey-list m-2 p-3 text-center ">
+                <h2>{{survey.title}}</h2>
+                <p>{{survey.description}}</p>
             </div>
-            
-            <div *ngFor="let question of survey.questions">
-                {{question.description}}
-                <div style="margin-left: 28px;" *ngFor="let option of question.options">
-                   - {{option.description}}
+        </div>   
+    </div>  
+    <div *ngIf="surveyDetails" class="row">
+      <hr class="my-3">
+      <h4 class="text-center">Question statistic</h4>
+       
+      <div class="row">
+        <div class="col card m-2 p-2" *ngFor="let groupedData of groupedStatistics">
+           <span class="fw-bold text-center">{{ groupedData.question }}</span> 
+            <div >
+              <div class="container" *ngFor="let dataItem of groupedData.items">
+                <div class="badge bg-secondary text-wrap" style="margin-right: 3px;">
+                  {{ dataItem.count }}
                 </div>
-            </div>
-            <button (click)="getSurveyFilterBySurveyId(survey.id)"> filtre</button>
-            <div *ngIf="surveyFilter"> {{surveyFilter.id}} </div>
-            <div class="card-footer bg-transparent " [formGroup]="surveyFilterForm">
-                
-                <div class="form-floating mb-3">
-                    <input type="number" class="form-control" formControlName="minAge" id="minAge" placeholder="name@example.com">
-                    <label for="minAge">Min Age</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <input type="number" class="form-control"formControlName="maxAge" id="maxAge" placeholder="name@example.com">
-                    <label for="maxAge">Max Age</label>
-                </div>
-                <div>
-                  <p style="display: inline-block; margin-right: 10px;">Gender:</p>
-                  <select class="form-select form-select-sm" formControlName="genderId" name="genderId" style="width:fit-content;  display:  inline-block;" aria-label=".form-select-sm example">
-                    <option value="1">Erkek</option>
-                    <option value="2">Kız</option>
-                  </select>
-                </div>
-                <button (click)="updateSurveyFilter(survey.id)"  class="btn btn-primary" style="float: right;"> Update Filter</button>
+                {{ dataItem.answer }} 
+
               </div>
+            </div>
+          </div>
+        </div>
+        <hr class="my-3">
+        <h4 class="text-center mb-3">Survey filter</h4>
+        <div class="filter">
+          <div class="my-3" *ngIf="surveyFilter">
+            Filter : {{surveyFilter.minAge}} - {{surveyFilter.maxAge}} years old
+            {{surveyFilter.genderId === 1 ? 'men' : (surveyFilter.genderId === 2 ? 'women' : '')}} can watching. You can update.
+          </div>
+          <div class="card-footer bg-transparent w-50" [formGroup]="surveyFilterForm">
+              
+              <div class="form-floating mb-3">
+                  <input  type="number" class="form-control" formControlName="minAge" id="minAge" placeholder="name@example.com">
+                  <label  for="minAge">Min Age</label>
+              </div>
+              <div class="form-floating mb-3">
+                  <input type="number" class="form-control"formControlName="maxAge" id="maxAge" placeholder="name@example.com">
+                  <label for="maxAge">Max Age</label>
+              </div>
+              <div>
+                <p style="display: inline-block; margin-right: 10px;">Gender:</p>
+                <select class="form-select form-select-sm" formControlName="genderId" name="genderId" style="width:fit-content;  display:  inline-block;" aria-label=".form-select-sm example">
+                  <option value="1">Erkek</option>
+                  <option value="2">Kız</option>
+                </select>
+              </div>
+              <button (click)="updateSurveyFilter()"  class="btn btn-primary" style="float: right;"> Update Filter</button>
+          </div>
             
         </div>
-    </div>
+      </div> 
+</div>
 </div>

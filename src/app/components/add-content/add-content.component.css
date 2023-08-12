@@ -33,7 +33,29 @@
   button{
     margin-left: 35%;
   }
-  
+  .fade-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.fade-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.fade-image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0)); /* Opaklığı belirli bölgede azalan gradient */
+    pointer-events: none;
+}
+
+
 
 
 

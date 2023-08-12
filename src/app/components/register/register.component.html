@@ -17,14 +17,14 @@
                 <form [formGroup]="registerForm">
                   <!-- 2 column grid layout with text inputs for the first and last names -->
                   <div class="row">
-                    <h2 class="mb-5 display-4 fw-bold ls-tight text-center">Register</h2>
-                    <div class="col-md-6 mb-4">
+                    <h2 class="mb-4 display-4 fw-bold ls-tight text-center">Register</h2>
+                    <div class="col-md-6 mb-3">
                       <div class="form-outline">
                         <input type="text" formControlName="firstName" id="firstName" class="form-control" />
                         <label class="form-label" for="firstName">First name</label>
                       </div>
                     </div>
-                    <div class="col-md-6 mb-4">
+                    <div class="col-md-6 mb-3">
                       <div class="form-outline">
                         <input type="text" formControlName="lastName" id="lastName" class="form-control" />
                         <label class="form-label" for="lastName">Last name</label>
@@ -45,7 +45,26 @@
                     <label class="form-label" for="password">Password</label>
                   </div>
                   
-                  <div class="form-check mb-2">
+                 
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <div class="form-outline">
+                        <input type="date" formControlName="birthDay" id="birthDay" class="form-control" />
+                        <label class="form-label" for="birthDay">Birth Day</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                      <div class="form-outline">
+                        <select class="form-select form-select-sm" formControlName="genderId" name="genderId"  aria-label=".form-select-sm example">
+                          <option value="1">Men</option>
+                          <option value="2">Women</option>
+                        </select>
+                        <label class="form-label " for="genderId">Gender</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-check mb-3">
                     <label for="recaptcha"></label>
                     <re-captcha
                       siteKey="6LeRlwAmAAAAADLnv7RTDhyN9IgWNN8AIWGksy-r"
@@ -53,12 +72,12 @@
                       reCaptchaValueAccessor
                     >
                     </re-captcha>
+                     <!-- Submit button -->
+                    <button (click)="register()" style="float: right;" type="submit" [disabled]="registerForm.invalid" class="btn btn-primary mb-2">
+                      Sign up
+                    </button>
                   </div>
-
-                  <!-- Submit button -->
-                  <button (click)="register()" type="submit" [disabled]="registerForm.invalid" class="btn btn-primary btn-block  mb-4">
-                    Sign up
-                  </button>
+                 
                 </form>
               </div>
             </div>

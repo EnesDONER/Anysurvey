@@ -6,13 +6,14 @@ import { SingleResponseModel } from '../models/singleResponseModel';
 import { TokenModel } from '../models/tokenModel';
 import { RegisterModel } from '../models/registerModel';
 import { ResetPassword } from '../models/resetPassword';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   apiUrl="https://localhost:7162/api/auth/";
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient:HttpClient,private router:Router) { }
   
   sendResetPasswordMail(email:string){
     return this.httpClient.post<SingleResponseModel<string>>(this.apiUrl + "sendresetpasswordmail?email="+email,email);
@@ -50,9 +51,8 @@ export class AuthService {
   }
   
   logout(){
-    if(this.isAuthenticated){
-      localStorage.clear();
-    }
+    localStorage.clear();
+    this.router.navigate(["/"])
   }
 
 }

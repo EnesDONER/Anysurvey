@@ -37,7 +37,14 @@
                             </re-captcha>
                           </div>
                         <div>
-                        <button [disabled]="!contactForm.valid" style="background: rgb(180, 255, 255);" class="btn  py-2 px-4 " type="submit" id="sendMessageButton">Send Message</button>
+                            <button (click)="sendMail()" [disabled]="sending" style="background: rgb(180, 255, 255);" class="btn py-2 px-4" type="submit" id="sendMessageButton">
+                                <span *ngIf="!sending">Send Message</span>
+                                <span *ngIf="sending">
+                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    Sending...
+                                </span>
+                            </button>
+                            
                         </div>
                     </form>
                 </div>

@@ -24,6 +24,8 @@ export class RegisterComponent {
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
+      birthDay: [Date, Validators.required],
+      genderId: [0, Validators.required],
       recaptcha: [null, Validators.required]
     });
   }

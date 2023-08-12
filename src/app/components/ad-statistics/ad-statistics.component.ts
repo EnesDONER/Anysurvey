@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { Ad } from 'src/app/models/ad';
 import { AdFilter } from 'src/app/models/adFilter';
+import { Chart,registerables } from 'node_modules/chart.js';
+Chart.register(...registerables);
 
 
 @Component({
@@ -18,7 +20,13 @@ export class AdStatisticsComponent {
   watchedAds: WatchedAd[]=[];
   ads: Ad[]=[];
   users : User[]=[];
+  maleUsersLenght:number=0;
+  femaleUsersLenght:number=0;
   flippedCards: boolean[] = [];
+  age0_17:number=0;
+  age18_30:number=0;
+  age31_50:number=0;
+  age51_old:number=0;
   adFilterForm:FormGroup;
   adFilter:AdFilter=null;
   constructor(private statisticsService :StatisticsService, private toastrService:ToastrService, private formBuilder:FormBuilder, private adService:AdService ){
@@ -26,6 +34,36 @@ export class AdStatisticsComponent {
   ngOnInit(){
     this.createAdFilterForm();
     this.getAllAdByOwnerUserId();
+  }
+  renderChart(){
+    const existingChart = Chart.getChart("adChart");
+    if (existingChart) {
+      existingChart.destroy();
+    }
+    new Chart("adChart", {
+      type: 'doughnut',
+      data: {
+        labels: [
+          'Women',
+          'Men'
+        ],
+        datasets: [{
+          label: 'Gender Statistic',
+          data: [5 ,2 ],
+          backgroundColor: [
+            'palevioletred',
+            'blue'
+          ]
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
   }
   createAdFilterForm() {
     this.adFilterForm = this.formBuilder.group({
@@ -86,6 +124,12 @@ export class AdStatisticsComponent {
     this.statisticsService.getAllUsersWhoWatchedAdsByAdId(adId).subscribe(response=>{
       if(response.success){
         this.users=response.data;
+        this.maleUsersLenght = this.users.filter(user => user.gender === 'Man').length;
+        this.femaleUsersLenght = this.users.filter(user => user.gender === 'Women').length;
+        this.age0_17 = this.users.filter(user=>user.age<18).length;
+        this.age18_30 = this.users.filter(user=>user.age>=18 && user.age<31).length;
+        this.age31_50 = this.users.filter(user=>user.age>=31 && user.age<51).length;
+        this.age51_old = this.users.filter(user=>user.age>=51).length;
       }
       else{
         this.toastrService.error(response.message);

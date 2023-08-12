@@ -16,6 +16,7 @@ import { LoginGuard } from './guards/login.guard';
 import { AddContentComponent } from './components/add-content/add-content.component';
 import { AdStatisticsComponent } from './components/ad-statistics/ad-statistics.component';
 import { SurveyStatisticsComponent } from './components/survey-statistics/survey-statistics.component';
+import { PartnershipGuard } from './guards/partnership.guard';
 
 const routes: Routes = [
   {path:"",pathMatch:"full",component:HomeComponent},
@@ -29,10 +30,11 @@ const routes: Routes = [
   {path:"contact",component:ContactComponent},
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
-  {path:"add-content",component:AddContentComponent},
+  {path:"add-content",component:AddContentComponent,canActivate:[PartnershipGuard]},
   {path:"loginpartnership",component:PartnershipLoginComponent},
-  {path:"ad-statistics",component:AdStatisticsComponent},
-  {path:"survey-statistics",component:SurveyStatisticsComponent},
+  {path:"ad-statistics",component:AdStatisticsComponent,canActivate:[PartnershipGuard]},
+  {path:"survey-statistics",component:SurveyStatisticsComponent,canActivate:[PartnershipGuard]},
+  {path:"survey-statistics/survey/:surveyId",component:SurveyStatisticsComponent,canActivate:[PartnershipGuard]},
   {path:"forgetPassword/:resetToken",component:ForgetPasswordComponent},
   {path:"forgetPassword",component:ForgetPasswordComponent},
 ];

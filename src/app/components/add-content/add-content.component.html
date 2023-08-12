@@ -1,5 +1,4 @@
 <app-payment  (dataEvent)="receiveData($event)" [fee]="2"></app-payment>
-{{isItPaid}}
 <div class="container-fluid pt-5">
     <div class="container">
         <div class="text-center pb-2">
@@ -36,8 +35,10 @@
                         <p class="card-text">Conduct surveys and get data. you can add up to 5 questions to your survey</p>
                     </div>
                     <div class="card-footer bg-transparent py-4 px-5">
-                        resim filan eklenebilir
-                        <button routerLink="/create-survey" class="btn btn-primary px-4 mt-3 mb-1 ">Create a Survey</button>
+                        <div class="fade-image">
+                            <img src="../../../assets/images/ass.jpg" alt="">
+                        </div>
+                        <button routerLink="/create-survey" class="btn btn-primary px-4 mt-3 mb-1">Create a Survey</button>
                     </div>
                 </div>
             </div>

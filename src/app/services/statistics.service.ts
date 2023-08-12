@@ -1,16 +1,14 @@
-import { Survey } from './../models/survey';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ResponseModel } from '../models/responseModel';
 import { Observable } from 'rxjs';
 import { ListResponseModel } from '../models/listResponseModel';
-import { WatchedAd } from '../models/watchedAd';
 import { User} from '../models/user';
-import { LoginModel } from '../models/loginModel';
 import { AdFilter } from '../models/adFilter';
 import { SingleResponseModel } from '../models/singleResponseModel';
 import { SurveyFilter } from '../models/surveyFilter';
 import { SolvedSurvey } from '../models/solvedSurvey';
+import { SurveyStatistic } from '../models/surveyStatistic';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +34,12 @@ export class StatisticsService {
     return this.httpClient
       .get<ListResponseModel<SolvedSurvey>>(newPath);
   }
+  getAllSurveyStatistics(id:string):Observable<ListResponseModel<SurveyStatistic>>{
+    let newPath =this.apiUrl + "statistics/getallsurveystatistics?id="+id;
+    return this.httpClient
+      .get<ListResponseModel<SurveyStatistic>>(newPath);
+  }
+
   addSolvedSurvey(solvedSurvey:SolvedSurvey):Observable<ResponseModel>{
     return this.httpClient.post<ResponseModel>(this.apiUrl+"statistics/addsolvedsurvey",solvedSurvey)
   }

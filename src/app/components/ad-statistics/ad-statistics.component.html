@@ -1,16 +1,17 @@
-<div class="row mt-3 mx-4" style="min-height: 100px;">
+<div class="body">
+<div class="row  mx-4" style="min-height: 100px;">
     <div class="container">
-      <h2>Ad Videos</h2>
-      <hr>
-      <div class="row">
-        <div *ngFor="let ad of ads; let i=index" class="col-lg-6 mb-2">
+      <h1 class="my-5 text-center" >Ad Videos</h1>
+      
+      <div class="row" >
+        <div  *ngFor="let ad of ads; let i=index" class="col-lg-6 mb-2">
           <div class="card" [ngClass]="{ 'flipped': flippedCards[i] }" >
-            <div class="card-face card-front">
+            <div class="card-face card-front text-center">
               <div class="card-body">
-                <h5 style="display: inline-block;" class="card-title text-center mb-3">{{ad.description}}</h5>
-                <svg  (click)="flipCard(i)" (click)="adFilter=null" (click)="getAdFilter(ad.id)" style="float: right;" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M48.5 224H40c-13.3 0-24-10.7-24-24V72c0-9.7 5.8-18.5 14.8-22.2s19.3-1.7 26.2 5.2L98.6 96.6c87.6-86.5 228.7-86.2 315.8 1c87.5 87.5 87.5 229.3 0 316.8s-229.3 87.5-316.8 0c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0c62.5 62.5 163.8 62.5 226.3 0s62.5-163.8 0-226.3c-62.2-62.2-162.7-62.5-225.3-1L185 183c6.9 6.9 8.9 17.2 5.2 26.2s-12.5 14.8-22.2 14.8H48.5z"/></svg>
-                <div class="d-flex justify-content-center align-items-center">
-                  <iframe
+                <h5 style="display: inline-block; color: antiquewhite;" class="card-title text-center mb-3">{{ad.description}}</h5>
+                <svg  (click)="flipCard(i)" (click)="adFilter=null" (click)="getAdFilter(ad.id);" style="float: right;" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M48.5 224H40c-13.3 0-24-10.7-24-24V72c0-9.7 5.8-18.5 14.8-22.2s19.3-1.7 26.2 5.2L98.6 96.6c87.6-86.5 228.7-86.2 315.8 1c87.5 87.5 87.5 229.3 0 316.8s-229.3 87.5-316.8 0c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0c62.5 62.5 163.8 62.5 226.3 0s62.5-163.8 0-226.3c-62.2-62.2-162.7-62.5-225.3-1L185 183c6.9 6.9 8.9 17.2 5.2 26.2s-12.5 14.8-22.2 14.8H48.5z"/></svg>
+                <div class=" justify-content-center align-items-center">
+                  <!-- <iframe
                     width="100%"
                     height="420"
                     [src]="'https://www.youtube.com/embed/' + setCurrentAd(ad) | safe"
@@ -18,27 +19,37 @@
                     frameborder="0"
                     allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowfullscreen
-                  ></iframe>
+                  ></iframe> -->
+                  <a href="{{ad.videoURL}}" target="_blank" style="display: block; color: antiquewhite;  margin-top: 410px;">Go to Video</a>
                 </div>
               </div>
             </div>
 
-            <div class="card-face card-back">
-              <h5 style="display: inline-block;" class="card-title text-center mb-3 mt-2">{{ad.description}}</h5>
+            <div class="card-face card-back text-center">
+              <h5 style="display: inline-block;" class="card-title text-center mb-3 mt-2 mx-5">{{ad.description}}</h5>
               <svg (click)=" flippedCards[i] = !this.flippedCards[i];" class="mt-2 mx-2" style="float: right;" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M48.5 224H40c-13.3 0-24-10.7-24-24V72c0-9.7 5.8-18.5 14.8-22.2s19.3-1.7 26.2 5.2L98.6 96.6c87.6-86.5 228.7-86.2 315.8 1c87.5 87.5 87.5 229.3 0 316.8s-229.3 87.5-316.8 0c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0c62.5 62.5 163.8 62.5 226.3 0s62.5-163.8 0-226.3c-62.2-62.2-162.7-62.5-225.3-1L185 183c6.9 6.9 8.9 17.2 5.2 26.2s-12.5 14.8-22.2 14.8H48.5z"/></svg>
     
-             
-              <p>İzleyen kişi Sayısı : {{users.length}}</p>
-              <div *ngFor="let user of users" class="card-body">
-                
-              </div>
+              
+              <p style="color: palevioletred;">Watched man lenght: {{maleUsersLenght }}</p>
+              <p style="color: blue;">Watched Woman lenght: {{femaleUsersLenght }}</p>
 
-              <div *ngIf="adFilter">
-                {{adFilter.minAge}} - {{adFilter.maxAge}} arası
-                {{adFilter.genderId === 1 ? 'Erkek' : (adFilter.genderId === 2 ? 'Kız' : '')}} kişiler izler
+              <div class="row "> 
+                <div class="col">18 younger: {{age0_17}}</div>
+                <div class="col">18-30 years old: {{age18_30}}</div>
+                <div class="col">31-50 years old: {{age31_50}}</div>
+                <div class="col">51 older: {{age51_old}}</div>
               </div>
               
-              <p>filtre ekleme</p>
+              <!-- <div *ngFor="let user of users" class="card-body">
+                
+              </div> -->
+
+              <div class="my-3 " *ngIf="adFilter">
+                Filter : {{adFilter.minAge}} - {{adFilter.maxAge}} years old
+                {{adFilter.genderId === 1 ? 'men' : (adFilter.genderId === 2 ? 'women' : '')}} can watching. You can update.
+              </div>
+              
+              <h4 class="text-center">Update Filter</h4>
 
               <div class="card-footer bg-transparent " [formGroup]="adFilterForm">
                 
@@ -65,4 +76,4 @@
       </div>
     </div>
   </div>
-  
+</div>

@@ -22,8 +22,6 @@ export class AdComponent {
   constructor(private toastrService:ToastrService,private adService:AdService, private statisticsService : StatisticsService) {}
   ngOnInit(){
     this.getAllUnWatchedAd();
-    
-   
   }
   getAllUnWatchedAd(){
     this.adService.getAllUnWatchedAd().subscribe
@@ -63,8 +61,9 @@ export class AdComponent {
       this.addWatchedAd(this.currentAdId);
       this.currentAdId="";
       this.payment();
-      setTimeout(() => window.location.reload(), 700)
-       
+      //setTimeout(() => window.location.reload(), 700)
+      const indexToDelete = this.ads.findIndex(item => item.id === this.currentAdId);
+      this.ads.splice(indexToDelete,1);
     }
     else(
       this.toastrService.error("Ödül Verilmedi.")
@@ -75,15 +74,13 @@ export class AdComponent {
     this.startedTime = performance.now();
   }
   payment(){
-    //ödeme işlemleri
-    //başarılı olursa
+
     if (this.setCurrentAd){
       this.toastrService.success("Ödül Verildi.");
     }
       
   }
   addWatchedAd(adId:string){
-    // let watchAdModel = Object.assign({},this.watchedAd)
     this.statisticsService.addWatchedAd(adId).subscribe(response=>{
       if(!response.success){
         this.toastrService.error(response.message)

@@ -1,7 +1,4 @@
-h2{
-    margin-bottom: 15px;
-    text-align: center;
-}
+
 .vertical-line {
     border-left: 1px solid lightgrey;
 }
@@ -14,6 +11,7 @@ h2{
     position: relative;
     transform-style: preserve-3d;
     transition: transform 0.8s;
+    border: 2px solid red;
   }
   
   .card.flipped {
@@ -43,6 +41,12 @@ h2{
   .card-title {
     margin-bottom: 0.5rem;
   }
+  .body{
+   background-image: url(../../../assets/images/bg.jpg) ;
+  }
   
-
-  
+  .card-front{
+    background-image: url(../../../assets/images/adw.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
