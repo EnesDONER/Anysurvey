@@ -44,6 +44,7 @@ export class PartnershipLoginComponent {
         console.log(response.data)
         localStorage.setItem("token",response.data.token),
         //localStorage.setItem("auth","partnership"),
+        location.reload();
         this.router.navigateByUrl("/");
       },
       responseError=>{this.toastrService.error(responseError.error)})

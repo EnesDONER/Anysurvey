@@ -1,3 +1,4 @@
+import { WatchedAd } from './../models/watchedAd';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ResponseModel } from '../models/responseModel';
@@ -56,8 +57,8 @@ export class StatisticsService {
     return this.httpClient
       .get<ListResponseModel<User>>(newPath);
   }
-  addWatchedAd(adId:string):Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>(this.apiUrl+"statistics/addwatchedad?adId="+adId,adId)
+  addWatchedAd(watchedAd:WatchedAd):Observable<ResponseModel>{
+    return this.httpClient.post<ResponseModel>(this.apiUrl+"statistics/addwatchedad",watchedAd)
   }
   // addAdFilter(adFilter:AdFilter):Observable<ResponseModel>{
   //   return this.httpClient.post<ResponseModel>(this.apiUrl+"filter/addadfilter",adFilter)

@@ -15,7 +15,7 @@ export class SurveyService {
 
   apiUrl="https://localhost:7162/api/"
 
-  constructor(private httpClient:HttpClient ) { }
+  constructor(private httpClient:HttpClient , private authService:AuthService ) { }
   
   getAll():Observable<ListResponseModel<Survey>>{
     let newPath =this.apiUrl + "content/getallsurveys";
@@ -28,12 +28,15 @@ export class SurveyService {
       .get<SingleResponseModel<Survey>>(newPath);
   }
   getAllSurveyByOwnerUserId():Observable<ListResponseModel<Survey>>{
-    let newPath =this.apiUrl + "content/getallsurveysbyowneruserid";
+    const userId = this.authService.findAuthenticatedUser();
+    let newPath =this.apiUrl + "content/getallsurveysbyowneruserid?userId="+userId;
     return this.httpClient
       .get<ListResponseModel<Survey>>(newPath);
   }
   getAllUnsolvedSurveys():Observable<ListResponseModel<Survey>>{
-    let newPath =this.apiUrl + "content/getallunsolvedsurveys";
+    const userId = this.authService.findAuthenticatedUser();
+
+    let newPath =this.apiUrl + "content/getallunsolvedsurveys?userId="+userId;
     return this.httpClient
       .get<ListResponseModel<Survey>>(newPath);
   }

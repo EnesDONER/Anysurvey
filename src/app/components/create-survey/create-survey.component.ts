@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/services/auth.service';
 import { Survey } from './../../models/survey';
 import { Question } from './../../models/question';
 import { ToastrService } from 'ngx-toastr';
@@ -18,6 +19,7 @@ export class CreateSurveyComponent implements OnInit {
   fee:number=0;
   survey: Survey = {
     id: '',
+    ownerUserId:0,
     title: '',
     description: '',
     questions: []
@@ -31,7 +33,7 @@ export class CreateSurveyComponent implements OnInit {
   surveyTitle:string="";
   surveyDescription:string="";
   options: string[] = [];
-  constructor(private toastrService:ToastrService, private formBuilder:FormBuilder, private surveyService:SurveyService){}
+  constructor(private toastrService:ToastrService,private authService:AuthService , private formBuilder:FormBuilder, private surveyService:SurveyService){}
   ngOnInit(): void {
     
   }
@@ -122,6 +124,7 @@ export class CreateSurveyComponent implements OnInit {
 
   addSurvey(){
     this.survey.title= this.surveyTitle;
+    this.survey.ownerUserId = this.authService.findAuthenticatedUser();
     this.survey.description = this.surveyDescription;
     console.log(this.survey)
     let surveyModel = Object.assign({},this.survey)
@@ -129,6 +132,7 @@ export class CreateSurveyComponent implements OnInit {
       this.toastrService.success(response.message,"The survey successfully added ")
       this.survey = {
         id: '',
+        ownerUserId:0,
         title: '',
         description: '',
         questions: []

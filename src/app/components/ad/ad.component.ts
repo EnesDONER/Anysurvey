@@ -4,6 +4,7 @@ import { Ad } from './../../models/ad';
 import { AdService } from './../../services/ad.service';
 import { Component, OnChanges } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth.service';
 
 declare var bootstrap: any; 
 
@@ -19,7 +20,8 @@ export class AdComponent {
   watchedTime:number=3000;
   ads:Ad[]= [];
   dataLoaded:boolean=false;
-  constructor(private toastrService:ToastrService,private adService:AdService, private statisticsService : StatisticsService) {}
+  constructor(private toastrService:ToastrService,private adService:AdService, 
+    private statisticsService : StatisticsService, private authService : AuthService) {}
   ngOnInit(){
     this.getAllUnWatchedAd();
   }
@@ -50,6 +52,7 @@ export class AdComponent {
   }
 
   stopVideo(): void {
+    debugger
     const iframe = document.querySelector('#videoModal iframe') as HTMLIFrameElement;
     iframe.src = '';
     this.videoId=iframe.src;
@@ -59,11 +62,12 @@ export class AdComponent {
 
     if(time >= this.watchedTime){
       this.addWatchedAd(this.currentAdId);
+      const indexToDelete = this.ads.findIndex(item => item.id === this.currentAdId);
+      this.ads.splice(indexToDelete,1);
       this.currentAdId="";
       this.payment();
       //setTimeout(() => window.location.reload(), 700)
-      const indexToDelete = this.ads.findIndex(item => item.id === this.currentAdId);
-      this.ads.splice(indexToDelete,1);
+    
     }
     else(
       this.toastrService.error("Ödül Verilmedi.")
@@ -81,7 +85,12 @@ export class AdComponent {
       
   }
   addWatchedAd(adId:string){
-    this.statisticsService.addWatchedAd(adId).subscribe(response=>{
+    let watchedAd :WatchedAd={
+      id:"",
+      adId: adId,
+      userId: this.authService.findAuthenticatedUser()
+    };
+    this.statisticsService.addWatchedAd(watchedAd).subscribe(response=>{
       if(!response.success){
         this.toastrService.error(response.message)
       }

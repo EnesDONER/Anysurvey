@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Component, DoCheck, EventEmitter, Input, Output } from '@angular/core';
 import { Card } from 'src/app/models/card';
 import { response } from 'express';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 declare var bootstrap: any;
@@ -40,7 +41,8 @@ export class PaymentComponent implements DoCheck{
   }
   
   
-  constructor(private toastrService:ToastrService,private paymentService:PaymentService){
+  constructor(private toastrService:ToastrService, private authService:AuthService,
+    private paymentService:PaymentService){
 
   }
   setDataEvent() {
@@ -119,11 +121,12 @@ export class PaymentComponent implements DoCheck{
     let [expireYear, expireMonth] = this.date.split("-");
     const cardModel: Card = {
       id:0,
+      userId:this.authService.findAuthenticatedUser(),
       cardNumber : this.ncard.toString(),
       holderName : this.namecard,
       cvc : this.cvv.toString(),
-      expireMonth : expireYear,
-      expireYear : expireMonth
+      expireMonth : expireMonth,
+      expireYear : expireYear
     };
     this.setCardId(cardModel.id);
 
@@ -149,9 +152,8 @@ export class PaymentComponent implements DoCheck{
     this.cardId=id;
   }
   payment(){
-    debugger
+
       this.paymentService.payment(this.cardId ,this.fee).subscribe(response=>{
-       debugger
          if(response.success){
           this.toastrService.success(response.message,"Payment success");
           console.log(response.data);

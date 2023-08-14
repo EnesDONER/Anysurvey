@@ -41,6 +41,9 @@ export class LoginComponent {
       this.authService.login(loginModel).subscribe(response=>{this.toastrService.info(response.message,"Giriş yapıldı") 
         localStorage.setItem("token",response.data.token),
         this.router.navigateByUrl("/");
+        location.reload();
+        this.router.navigateByUrl("/");
+        
       },
       responseError=>{this.toastrService.error(responseError.error)})
     }

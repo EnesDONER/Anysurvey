@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ListResponseModel } from '../models/listResponseModel';
@@ -13,7 +14,7 @@ export class AdService {
 
   apiUrl="https://localhost:7162/api/"
 
-  constructor(private httpClient:HttpClient ) { }
+  constructor(private httpClient:HttpClient , private authService:AuthService) { }
   
   // getAll():Observable<ListResponseModel<Ad>>{
   //   let newPath =this.apiUrl + "content/getallads";
@@ -29,12 +30,16 @@ export class AdService {
     return this.httpClient.post<ResponseModel>(this.apiUrl+"content/addad",ad)
   }
   getAllAdByOwnerUserId():Observable<ListResponseModel<Ad>>{
-    let newPath =this.apiUrl + "content/getalladsbyowneruserid";
+    const userId = this.authService.findAuthenticatedUser();
+
+    let newPath =this.apiUrl + "content/getalladsbyowneruserid?userId="+userId;
     return this.httpClient
       .get<ListResponseModel<Ad>>(newPath);
   }
-  getAllUnWatchedAd():Observable<ListResponseModel<Ad>>{   //s takıları eksik
-    let newPath =this.apiUrl + "content/getallunwatchedads";
+  getAllUnWatchedAd():Observable<ListResponseModel<Ad>>{   
+    const userId = this.authService.findAuthenticatedUser();
+    
+    let newPath =this.apiUrl + "content/getallunwatchedads?userId="+userId;
     return this.httpClient
       .get<ListResponseModel<Ad>>(newPath);
   }

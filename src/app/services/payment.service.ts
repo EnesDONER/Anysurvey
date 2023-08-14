@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Card } from '../models/card';
@@ -12,15 +13,17 @@ export class PaymentService {
 
   apiUrl="https://localhost:7162/api/"
 
-  constructor(private httpClient:HttpClient ) { }
+  constructor(private httpClient:HttpClient , private authService:AuthService) { }
 
   getAllCard():Observable<ListResponseModel<Card>>{
-    let newPath =this.apiUrl + "payment/getallcardbyuserid";
+    const userId = this.authService.findAuthenticatedUser();
+    let newPath =this.apiUrl + "payment/getallcardbyuserid?userId="+userId;
     return this.httpClient
       .get<ListResponseModel<Card>>(newPath);
   }
   payment(cardId:number,amount:number):Observable<ListResponseModel<Card>>{
-    let newPath =this.apiUrl + "payment/payment?cardid="+ cardId +"&amount="+amount;
+    const userId = this.authService.findAuthenticatedUser();
+    let newPath =this.apiUrl + "payment/payment?cardid="+ cardId +"&amount="+amount+"&userId="+userId;
     return this.httpClient
       .get<ListResponseModel<Card>>(newPath);
   }

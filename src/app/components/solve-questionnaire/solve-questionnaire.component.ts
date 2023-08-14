@@ -9,6 +9,7 @@ import { Component} from '@angular/core';
 import { Survey } from 'src/app/models/survey';
 import { ActivatedRoute, Route } from '@angular/router';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 
@@ -23,6 +24,7 @@ export class SolveQuestionnaireComponent  {
   answer:string="";
   survey :Survey={
     id:"",
+    ownerUserId:0,
     description:"",
     title:"",
     questions:[]
@@ -39,7 +41,9 @@ export class SolveQuestionnaireComponent  {
   }]
   selectedItems: number[] = [];
 
-  constructor(private activatedRoute:ActivatedRoute, private router:Router, private statisticsService:StatisticsService, private surveyService:SurveyService,private toastrService:ToastrService){}
+  constructor(private activatedRoute:ActivatedRoute, private authService:AuthService,
+     private router:Router, private statisticsService:StatisticsService, 
+     private surveyService:SurveyService,private toastrService:ToastrService){}
   
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -102,6 +106,7 @@ export class SolveQuestionnaireComponent  {
   
   addSolvedSurvey(){
     this.solvedSurvey.surveyId = this.survey.id;
+    this.solvedSurvey.userId = this.authService.findAuthenticatedUser();
     let solvedSurveyModel = Object.assign({},this.solvedSurvey)
 
     this.statisticsService.addSolvedSurvey(solvedSurveyModel).subscribe(response=>{

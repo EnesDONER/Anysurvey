@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AdService } from 'src/app/services/ad.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 declare var bootstrap: any; 
 
@@ -13,7 +14,7 @@ declare var bootstrap: any;
 export class AddContentComponent {
   adForm:FormGroup;
   isItPaid:boolean=false;
-  constructor(private formBuilder:FormBuilder,private adService:AdService ,private toastrService:ToastrService) {}
+  constructor(private formBuilder:FormBuilder,private authService:AuthService, private adService:AdService ,private toastrService:ToastrService) {}
   ngOnInit(){
     this.createAdForm();
   }
@@ -34,6 +35,8 @@ export class AddContentComponent {
       description :['', Validators.required],
       companyName: ['', Validators.required],
       videoURL: ['', [Validators.required]],
+      ownerUserId: [this.authService.findAuthenticatedUser(), [Validators.required]],
+      
     });
   }
   checkIfSurveyNull(){
@@ -52,7 +55,8 @@ export class AddContentComponent {
       console.log(this.adForm.value);
       this.isItPaid=false;
       let adModel = Object.assign({},this.adForm.value);
-      this.adService.add(adModel).subscribe(response=>{this.toastrService.success(response.message,"Ad added")},
+      this.adService.add(adModel).subscribe(response=>{this.toastrService.success(response.message,"Ad added");
+      this.createAdForm()},
       responseError=>{this.toastrService.error(responseError.error);
         this.toastrService.error(responseError.error);
       })
