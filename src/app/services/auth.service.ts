@@ -7,6 +7,9 @@ import { TokenModel } from '../models/tokenModel';
 import { RegisterModel } from '../models/registerModel';
 import { ResetPassword } from '../models/resetPassword';
 import { Router } from '@angular/router';
+import jwt_decode from 'jwt-decode';
+import { User } from '../models/user';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -33,8 +36,26 @@ export class AuthService {
   loginPartenship(loginModel:LoginModel){
     return this.httpClient.post<SingleResponseModel<TokenModel>>(this.apiUrl + "loginpartnership",loginModel);
   }
+  getuserbyid(id:Number):Observable<SingleResponseModel<User>>{
+    return this.httpClient.get<SingleResponseModel<User>>(this.apiUrl + "getuserbyid?id="+id);
+  }
+  
   isPartnership(){
-    if(localStorage.getItem("auth")=="partnership"){
+    const token = localStorage.getItem("token");
+    let hasPartnershipRole:boolean=false;
+    if(token){
+      const tokenPayload: any = jwt_decode(token); // Token'ı çöz
+
+      // Kullanıcının rollerini kontrol et
+      if (tokenPayload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']) {
+        const userRoles: string[] = tokenPayload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+
+        // "partnership" rolünün olup olmadığını kontrol et
+        hasPartnershipRole = userRoles.includes('partnership');
+      }
+    }
+    
+    if(hasPartnershipRole){
       return true;
     }
     else{
@@ -42,14 +63,19 @@ export class AuthService {
     }
   }
   isAuthenticated(){
-    if(localStorage.getItem("token")){
-      return true;
-    }
-    else{
-      return false;
-    }
+    const token = localStorage.getItem("token");
+    return !!token;
   }
-  
+  findAuthenticatedUser(): number {
+    const token = localStorage.getItem("token");
+    let userId: number = 0;
+    if (token) {
+      const tokenPayload: any = jwt_decode(token);
+      userId = Number(tokenPayload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']);
+    }
+    return userId;
+  }
+
   logout(){
     localStorage.clear();
     this.router.navigate(["/"])

@@ -43,7 +43,7 @@ export class PartnershipLoginComponent {
       this.authService.loginPartenship(loginModel).subscribe(response=>{this.toastrService.info(response.message,"Giriş yapıldı") 
         console.log(response.data)
         localStorage.setItem("token",response.data.token),
-        localStorage.setItem("auth","partnership"),
+        //localStorage.setItem("auth","partnership"),
         this.router.navigateByUrl("/");
       },
       responseError=>{this.toastrService.error(responseError.error)})

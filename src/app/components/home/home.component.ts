@@ -11,10 +11,8 @@ export class HomeComponent {
   ngOnInit(): void {
     if(auto) {
       slideInterval=setInterval(this.nextSlide,intervalTime)
-    }
-    
+    } 
   }
-  
   nextSlide(){
     const activeSlide= document.querySelector('.active');
     activeSlide?.classList.remove('active');

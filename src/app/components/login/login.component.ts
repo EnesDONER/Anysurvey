@@ -37,11 +37,8 @@ export class LoginComponent {
 
   login(){
     if(this.loginForm.valid){
-      console.log(this.loginForm.value);
       let loginModel = Object.assign({},this.loginForm.value);
-    
       this.authService.login(loginModel).subscribe(response=>{this.toastrService.info(response.message,"Giriş yapıldı") 
-        console.log(response.data)
         localStorage.setItem("token",response.data.token),
         this.router.navigateByUrl("/");
       },
