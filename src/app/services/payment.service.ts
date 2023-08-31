@@ -5,13 +5,15 @@ import { Card } from '../models/card';
 import { Observable } from 'rxjs';
 import { ListResponseModel } from '../models/listResponseModel';
 import { ResponseModel } from '../models/responseModel';
+import { AnySurveyToken } from '../models/anySurveyToken';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaymentService {
 
-  apiUrl="https://localhost:7162/api/"
+  apiUrl="https://localhost:7162/api/";
+  apiUrlNode="http://localhost:8080/";
 
   constructor(private httpClient:HttpClient , private authService:AuthService) { }
 
@@ -30,4 +32,15 @@ export class PaymentService {
   addCard(card:Card):Observable<ResponseModel>{
     return this.httpClient.post<ResponseModel>(this.apiUrl+"payment/addcard",card)
   }
+
+  transfer(){
+    return this.httpClient
+      .get<AnySurveyToken>(this.apiUrl);
+  }
+  adminTransfer(anySurveyToken:string){
+    return this.httpClient.post<AnySurveyToken>(this.apiUrlNode+"admintransfer",JSON.parse(anySurveyToken) )
+  }
+  // peartoPearTransfer(anySurveyToken:string){
+  //   return this.httpClient.post<AnySurveyToken>(this.apiUrlNode+"peartopeartransfer",JSON.parse(anySurveyToken) )
+  // }
 }

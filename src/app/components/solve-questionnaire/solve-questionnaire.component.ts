@@ -1,3 +1,4 @@
+import { PaymentService } from './../../services/payment.service';
 import { Option } from './../../models/option';
 import { QuestionAnswer } from './../../models/questionAnswer';
 import { SolvedSurvey } from './../../models/solvedSurvey';
@@ -10,6 +11,9 @@ import { Survey } from 'src/app/models/survey';
 import { ActivatedRoute, Route } from '@angular/router';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { AnySurveyToken } from 'src/app/models/anySurveyToken';
+import { User } from 'src/app/models/user';
+import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 
 
 
@@ -19,7 +23,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./solve-questionnaire.component.css']
 })
 export class SolveQuestionnaireComponent  {
-  
+  user:User;
   currentIndex=0;
   answer:string="";
   survey :Survey={
@@ -43,9 +47,12 @@ export class SolveQuestionnaireComponent  {
 
   constructor(private activatedRoute:ActivatedRoute, private authService:AuthService,
      private router:Router, private statisticsService:StatisticsService, 
+     private paymentService:PaymentService, private sweetAlertService:SweetAlertService,
      private surveyService:SurveyService,private toastrService:ToastrService){}
   
   ngOnInit(): void {
+    const userId = this.findAuthenticatedUser();
+    this.getUserById(userId);
     this.activatedRoute.params.subscribe(params => {
       if (params['surveyId']) {
         this.getSurveyById(params['surveyId']);
@@ -113,7 +120,7 @@ export class SolveQuestionnaireComponent  {
       if(response.success){
         this.toastrService.success(response.message,"Your answer has been received");
         this.router.navigateByUrl("/questionnaire");
-
+        this.payment();
       }
       else{
         this.toastrService.error(response.message);
@@ -135,5 +142,40 @@ export class SolveQuestionnaireComponent  {
   showNext() {
     this.currentIndex = (this.currentIndex + 1) % this.survey.questions.length;
     this.selectedItems.splice(0, this.selectedItems.length);
+  }
+
+  findAuthenticatedUser(): number {
+    return this.authService.findAuthenticatedUser();
+  }
+  getUserById(id:number){
+    this.authService.getuserbyid(id).subscribe(response=>{
+      if(response.success){
+        this.user = response.data;
+      }
+    })
+  }
+  async payment(){
+    if (this.user.astWalletAddress==null || this.user.astWalletAddress=="") {
+      const userInput = await this.sweetAlertService.showInputPrompt('Wallet Addres', 'Enter your wallet address:');
+      if (userInput) {
+        this.user.astWalletAddress = userInput;
+        this.authService.updateUser(this.user).subscribe(
+          response=>{
+            this.toastrService.success(response.message);
+          }
+        );
+      } else {
+        return; // İptal edilirse işlemi sonlandırabilirsiniz
+      }
+    }
+    const senderToken : AnySurveyToken = {
+      amount: this.solvedSurvey.questionsAnswers.length.toString(),
+      receiverAddress : this.user.astWalletAddress
+    } 
+    
+    this.paymentService.adminTransfer(JSON.stringify(senderToken)).subscribe()
+    this.toastrService.success("Payment success");
+  
+      
   }
 }

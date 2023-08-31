@@ -4,4 +4,5 @@ export interface User{
     lastName:string,
     gender:string,
     age:number;
+    astWalletAddress:string;
 }

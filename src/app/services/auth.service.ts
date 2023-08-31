@@ -1,3 +1,4 @@
+import { User } from 'src/app/models/user';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginModel } from '../models/loginModel';
@@ -8,7 +9,6 @@ import { RegisterModel } from '../models/registerModel';
 import { ResetPassword } from '../models/resetPassword';
 import { Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
-import { User } from '../models/user';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -23,6 +23,9 @@ export class AuthService {
   }
   resetPassword(resetPassword:ResetPassword){
     return this.httpClient.post<SingleResponseModel<string>>(this.apiUrl + "resetpassword",resetPassword);
+  }
+  updateUser(user:User):Observable<ResponseModel>{
+    return this.httpClient.post<SingleResponseModel<ResponseModel>>(this.apiUrl + "updateuser",user);
   }
   login(loginModel:LoginModel){
     return this.httpClient.post<SingleResponseModel<TokenModel>>(this.apiUrl + "login",loginModel);

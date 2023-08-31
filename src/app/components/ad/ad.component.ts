@@ -1,10 +1,15 @@
+import { AnySurveyToken } from './../../models/anySurveyToken';
+import { PaymentService } from './../../services/payment.service';
 import { WatchedAd } from './../../models/watchedAd';
 import { StatisticsService } from './../../services/statistics.service';
 import { Ad } from './../../models/ad';
 import { AdService } from './../../services/ad.service';
-import { Component, OnChanges } from '@angular/core';
+import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/models/user';
+import { SweetAlertService } from 'src/app/services/sweet-alert.service';
+import { response } from 'express';
 
 declare var bootstrap: any; 
 
@@ -14,6 +19,8 @@ declare var bootstrap: any;
   styleUrls: ['./ad.component.css']
 })
 export class AdComponent {
+  user:User;
+  userWalletAddress:string;
   videoId:string;
   currentAdId:string="";
   startedTime:number;
@@ -21,9 +28,12 @@ export class AdComponent {
   ads:Ad[]= [];
   dataLoaded:boolean=false;
   constructor(private toastrService:ToastrService,private adService:AdService, 
-    private statisticsService : StatisticsService, private authService : AuthService) {}
+    private statisticsService : StatisticsService, private authService : AuthService,
+    private paymentService : PaymentService, private sweetAlertService: SweetAlertService) {}
   ngOnInit(){
     this.getAllUnWatchedAd();
+    const userId = this.findAuthenticatedUser();
+    this.getUserById(userId);
   }
   getAllUnWatchedAd(){
     this.adService.getAllUnWatchedAd().subscribe
@@ -52,7 +62,6 @@ export class AdComponent {
   }
 
   stopVideo(): void {
-    debugger
     const iframe = document.querySelector('#videoModal iframe') as HTMLIFrameElement;
     iframe.src = '';
     this.videoId=iframe.src;
@@ -77,10 +86,44 @@ export class AdComponent {
   startTimer(){
     this.startedTime = performance.now();
   }
-  payment(){
+
+  findAuthenticatedUser(): number {
+    return this.authService.findAuthenticatedUser();
+  }
+  getUserById(id:number){
+    this.authService.getuserbyid(id).subscribe(response=>{
+      if(response.success){
+        this.user = response.data;
+      }
+    })
+  }
+ 
+  async payment(){ 
+    if (this.user.astWalletAddress==null || this.user.astWalletAddress=="")  {
+      const userInput = await this.sweetAlertService.showInputPrompt('Wallet Addres', 'Enter your wallet address:');
+      if (userInput) {
+        this.user.astWalletAddress = userInput;
+        this.authService.updateUser(this.user).subscribe(
+          response=>{
+            this.toastrService.success(response.message);
+          }
+        );
+
+
+      } else {
+        return; // İptal edilirse işlemi sonlandırabilirsiniz
+      }
+    }
 
     if (this.setCurrentAd){
-      this.toastrService.success("Ödül Verildi.");
+
+      const senderToken : AnySurveyToken = {
+        amount: "4",
+        receiverAddress : this.user.astWalletAddress.toString()
+      } 
+      console.log(this.user.astWalletAddress.toString())
+    this.paymentService.adminTransfer(JSON.stringify(senderToken)).subscribe();
+      this.toastrService.success("Payment success");
     }
       
   }
