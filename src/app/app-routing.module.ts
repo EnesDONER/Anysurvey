@@ -1,4 +1,3 @@
-import { PartnershipLoginComponent } from './components/partnership-login/partnership-login.component';
 import { WalletComponent } from './components/wallet/wallet.component';
 import { AdComponent } from './components/ad/ad.component';
 import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
@@ -24,14 +23,13 @@ const routes: Routes = [
   {path:"questionnaire",component:QuestionnaireComponent, canActivate:[LoginGuard]},
   {path:"ad",component:AdComponent, canActivate:[LoginGuard]},
   {path:"solve-questionnaire/:surveyId", component: SolveQuestionnaireComponent, canActivate:[LoginGuard] },
-  {path:"wallet",component:WalletComponent},
+  {path:"wallet",component:WalletComponent, canActivate:[LoginGuard]},
   {path:"partnership",component:PartnershipComponent},
   {path:"create-survey",component:CreateSurveyComponent},
   {path:"contact",component:ContactComponent},
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
   {path:"add-content",component:AddContentComponent,canActivate:[PartnershipGuard]},
-  {path:"loginpartnership",component:PartnershipLoginComponent},
   {path:"ad-statistics",component:AdStatisticsComponent,canActivate:[PartnershipGuard]},
   {path:"survey-statistics",component:SurveyStatisticsComponent,canActivate:[PartnershipGuard]},
   {path:"survey-statistics/survey/:surveyId",component:SurveyStatisticsComponent,canActivate:[PartnershipGuard]},

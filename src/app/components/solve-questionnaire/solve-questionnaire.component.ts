@@ -111,7 +111,7 @@ export class SolveQuestionnaireComponent  {
 
     this.statisticsService.addSolvedSurvey(solvedSurveyModel).subscribe(response=>{
       if(response.success){
-        this.toastrService.success(response.message,"yanıtınız kayıt edildi");
+        this.toastrService.success(response.message,"Your answer has been received");
         this.router.navigateByUrl("/questionnaire");
 
       }

@@ -27,7 +27,6 @@ import { AdComponent } from './components/ad/ad.component';
 import { VideoIdPipe } from './pipes/video-id.pipe';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AddContentComponent } from './components/add-content/add-content.component';
-import { PartnershipLoginComponent } from './components/partnership-login/partnership-login.component';
 import { SurveyStatisticsComponent } from './components/survey-statistics/survey-statistics.component';
 import { AdStatisticsComponent } from './components/ad-statistics/ad-statistics.component';
 
@@ -53,7 +52,6 @@ import { AdStatisticsComponent } from './components/ad-statistics/ad-statistics.
     AdComponent,
     VideoIdPipe,
     AddContentComponent,
-    PartnershipLoginComponent,
     AdStatisticsComponent,
     SurveyStatisticsComponent,
   ],

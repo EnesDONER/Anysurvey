@@ -40,9 +40,9 @@ export class LoginComponent {
       let loginModel = Object.assign({},this.loginForm.value);
       this.authService.login(loginModel).subscribe(response=>{this.toastrService.info(response.message,"Giriş yapıldı") 
         localStorage.setItem("token",response.data.token),
-        this.router.navigateByUrl("/");
-        location.reload();
-        this.router.navigateByUrl("/");
+        this.router.navigateByUrl("/").then(() => {
+          window.location.reload(); // Sayfayı yenile
+        });
         
       },
       responseError=>{this.toastrService.error(responseError.error)})

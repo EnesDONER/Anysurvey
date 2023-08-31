@@ -1,11 +1,28 @@
 section{
     background-repeat: no-repeat;   
     background-size: cover;
+    background-image: url("../../../assets/images/bg-login-register.jpg");
+
 }
 @media (max-width: 992px) {
 
     section{
-        height: 1100px !important;
+        height: 1400px !important;
+    
     }
   }
+  @media (min-width: 992px) {
+    .card-body {
+      display: flex;
+      align-items: center; /* Dikey hizalama */
+      justify-content: flex-start; /* Yatay hizalama */
+    }
   
+    .card-body svg {
+      margin-right: 20px; /* SVG ile metin arasında boşluk bırakma */
+    }
+  }
+
+  .col-sm-6 .card .card-body{
+    background-color:#e3f2fd;
+  }

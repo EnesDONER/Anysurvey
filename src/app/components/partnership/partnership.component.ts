@@ -34,7 +34,7 @@ export class PartnershipComponent{
   registerPartnership(){
     if(this.registerForm.valid){
       console.log(this.registerForm.value);
-      this.router.navigateByUrl("/loginpartnership");
+      this.router.navigateByUrl("/login");
       let registerModel = Object.assign({},this.registerForm.value);
       this.authService.registerPartnership(registerModel).subscribe(response=>{this.toastrService.info(response.message)},
       responseError=>{this.toastrService.error(responseError.error)})
