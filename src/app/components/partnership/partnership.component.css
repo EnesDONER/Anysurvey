@@ -22,7 +22,7 @@ section{
       margin-right: 20px; /* SVG ile metin arasında boşluk bırakma */
     }
   }
-
   .col-sm-6 .card .card-body{
-    background-color:#e3f2fd;
+    background-color: #d2edf6;
   }
+

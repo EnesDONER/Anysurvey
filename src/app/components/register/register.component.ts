@@ -1,3 +1,4 @@
+import { Route, Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
@@ -13,6 +14,7 @@ export class RegisterComponent {
   
   constructor(private formBuilder:FormBuilder,
     private authService:AuthService,
+    private router:Router,
     private toastrService:ToastrService){ 
   }
   ngOnInit(){
@@ -34,7 +36,9 @@ export class RegisterComponent {
       console.log(this.registerForm.value);
 
       let registerModel = Object.assign({},this.registerForm.value);
-      this.authService.register(registerModel).subscribe(response=>{this.toastrService.info(response.message)},
+      this.authService.register(registerModel).subscribe(response=>{this.toastrService.info(response.message);
+        this.router.navigateByUrl("/login");
+      },
       responseError=>{this.toastrService.error(responseError.error)})
     }
   }

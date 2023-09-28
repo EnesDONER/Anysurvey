@@ -13,7 +13,7 @@ export class SweetAlertService {
       title: title,
       text: text,
       icon: 'info',
-      confirmButtonText: 'Tamam'
+      confirmButtonText: 'Okey'
     });
   }
 
@@ -22,10 +22,10 @@ export class SweetAlertService {
       title: title,
       text: text,
       input: 'text',
-      inputPlaceholder: 'Cüzdan Adresi',
+      inputPlaceholder: 'Wallet Address',
       showCancelButton: true,
-      confirmButtonText: 'Tamam',
-      cancelButtonText: 'İptal'
+      confirmButtonText: 'Okey',
+      cancelButtonText: 'Cancel'
     });
 
     return value;

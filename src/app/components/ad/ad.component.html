@@ -19,8 +19,8 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body d-flex justify-content-center align-items-center">
-        <iframe
+      <div *ngIf="tip=='youtube'" class="modal-body d-flex justify-content-center align-items-center">
+        <iframe 
           width="100%"
           height="420"
           [src]="'https://www.youtube.com/embed/' + videoId + '?autoplay=1' | safe"
@@ -29,7 +29,16 @@
           allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen
         ></iframe>
+        
       </div>
+
+      <div *ngIf="tip != 'youtube'" class  ="modal-body d-flex justify-content-center align-items-center">
+        <video width="100%" controls autoplay>
+          <source [src]="videoId2" type="video/mp4">
+          Tarayıcınız video etiketini desteklemiyor.
+        </video>
+      </div>
+
     </div>
   </div>
 </div>

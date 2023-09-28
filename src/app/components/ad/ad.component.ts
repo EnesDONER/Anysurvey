@@ -9,8 +9,6 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/user';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
-import { response } from 'express';
-
 declare var bootstrap: any; 
 
 @Component({
@@ -20,12 +18,16 @@ declare var bootstrap: any;
 })
 export class AdComponent {
   user:User;
+  tip:string="";
   userWalletAddress:string;
-  videoId:string;
+  videoId:string="";
+  videoId2:string= "https://anysurvey.blob.core.windows.net/test/14-cart-summary.component.ts - RentACar - Visual Studio Code 2023-05-21 21-42-32.mp4";
   currentAdId:string="";
   startedTime:number;
   watchedTime:number=3000;
   ads:Ad[]= [];
+
+
   dataLoaded:boolean=false;
   constructor(private toastrService:ToastrService,private adService:AdService, 
     private statisticsService : StatisticsService, private authService : AuthService,
@@ -46,25 +48,71 @@ export class AdComponent {
     responseError=>{this.toastrService.error(responseError.error)})
 
   }
-  setCurrentAd(ad:Ad){
-    const videoIdPattern = /(?<=v=|v\/|vi=|vi\/|youtu.be\/|\/v\/|embed\/|\/\d+\/|\/\d+\?v=|&v=|embed\/|youtu.be\/|\/v\/|e\/|watch\?v=|&v=|\/\w{11})([\w-]+)/;
-    const videoIdMatch = ad.videoURL.match(videoIdPattern);
+  setCurrentAd(ad: Ad) {
+    if (ad.videoURL.includes("youtube")){
+      this.currentAdId = "";
+      const videoIdPattern = /(?<=v=|v\/|vi=|vi\/|youtu.be\/|\/v\/|embed\/|\/\d+\/|\/\d+\?v=|&v=|embed\/|youtu.be\/|\/v\/|e\/|watch\?v=|&v=|\/\w{11})([\w-]+)/;
+      const videoIdMatch = ad.videoURL.match(videoIdPattern);
+    
+      if (videoIdMatch) {
+        debugger
+        //this.videoId = "https://www.youtube.com/embed/" + videoIdMatch[0] + "?autoplay=1 | safe"
+        //this.videoId= `https://www.youtube.com/embed/${videoIdMatch[0]}?autoplay=1`;
+        this.videoId = videoIdMatch[0];
+        this.tip= "youtube";
+        if (this.videoId) {
+          var videoModalElement = document.getElementById('videoModal');
+          if (videoModalElement) {
+            
+            var payModal = new bootstrap.Modal(videoModalElement);
+            payModal.show();
 
-    if (videoIdMatch) {
-      this.videoId = videoIdMatch[0];
-      var payModal = new bootstrap.Modal(document.getElementById('videoModal'));
-      payModal.show();
-      this.currentAdId=ad.id;
-    } else {
-      this.toastrService.error("This video cannot be played")
+            this.currentAdId = ad.id;
+          } else {
+            this.toastrService.error("Video modal element not found");
+          }
+        } else {
+          this.toastrService.error("Video ID not found");
+        }
+      }
     }
     
-  }
+
+      else{
+        debugger
+        //this.videoId = ad.videoURL;
+        this.tip="other";
+        this.videoId = encodeURIComponent(ad.videoURL);
+
+        console.log(this.videoId);
+
+        if (this.videoId) {
+          var videoModalElement = document.getElementById('videoModal');
+          if (videoModalElement) {
+            var payModal = new bootstrap.Modal(videoModalElement);
+   
+            payModal.show();
+      
+            this.currentAdId = ad.id;
+          } else {
+            this.toastrService.error("Video modal element not found");
+          }
+        } else {
+          this.toastrService.error("Video ID not found");
+        }
+      }
+    }
+
 
   stopVideo(): void {
     const iframe = document.querySelector('#videoModal iframe') as HTMLIFrameElement;
-    iframe.src = '';
-    this.videoId=iframe.src;
+   
+    if(this.tip =="youtube"){
+      iframe.src = '';
+      this.videoId=iframe.src;
+
+    }
+
     const finishedTime = performance.now(); // bileşen ekrandan kaldırıldığında bitiş zamanını kaydedin
     const time= finishedTime - this.startedTime; // iki zaman damgası arasındaki farkı hesaplayın
     console.log(`MyComponentComponent bileşeninin ekranda görüntülenme süresi: ${time} milisaniye`);
@@ -121,7 +169,6 @@ export class AdComponent {
         amount: "4",
         receiverAddress : this.user.astWalletAddress.toString()
       } 
-      console.log(this.user.astWalletAddress.toString())
     this.paymentService.adminTransfer(JSON.stringify(senderToken)).subscribe();
       this.toastrService.success("Payment success");
     }

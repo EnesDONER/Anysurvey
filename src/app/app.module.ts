@@ -30,7 +30,8 @@ import { AddContentComponent } from './components/add-content/add-content.compon
 import { SurveyStatisticsComponent } from './components/survey-statistics/survey-statistics.component';
 import { AdStatisticsComponent } from './components/ad-statistics/ad-statistics.component';
 
-
+import { MatIconModule } from '@angular/material/icon';
+import { SafeforazurePipe } from './pipes/safeforazure.pipe';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { AdStatisticsComponent } from './components/ad-statistics/ad-statistics.
     AddContentComponent,
     AdStatisticsComponent,
     SurveyStatisticsComponent,
+    SafeforazurePipe,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +66,7 @@ import { AdStatisticsComponent } from './components/ad-statistics/ad-statistics.
     RecaptchaModule,
     RecaptchaFormsModule,
     ReactiveFormsModule,
+    MatIconModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       positionClass:"toast-bottom-right"

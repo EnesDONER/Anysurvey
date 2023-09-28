@@ -2,9 +2,9 @@
 
 <section class="meetings-page" id="meetings" style="min-height: 700px;">
 
-  <h2 class="text-center" style="color: #1f272b;;" *ngIf="surveys.length == 0">No survey to solve</h2>
+  <h2 class="text-center" style="color: #1f272b;;" *ngIf="surveys?.length == 0">No survey to solve</h2>
 
-  <div *ngIf="!dataLoaded" style="margin-left : 45%;">
+  <div *ngIf="!dataLoaded" style="margin-left : 45%;">ve
     <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
