@@ -10,7 +10,6 @@ import { AdFilter } from 'src/app/models/adFilter';
 import { Chart,registerables } from 'node_modules/chart.js';
 Chart.register(...registerables);
 
-
 @Component({
   selector: 'app-ad-statistics',
   templateUrl: './ad-statistics.component.html',
@@ -29,6 +28,7 @@ export class AdStatisticsComponent {
   age51_old:number=0;
   adFilterForm:FormGroup;
   adFilter:AdFilter=null;
+  imageUrl:string="https://anysurvey.blob.core.windows.net/ad-videos/4-Ekran Görüntüsü (145).png";
   constructor(private statisticsService :StatisticsService, private toastrService:ToastrService, private formBuilder:FormBuilder, private adService:AdService ){
   }
   ngOnInit(){
@@ -82,7 +82,7 @@ export class AdStatisticsComponent {
   getAllAdByOwnerUserId(){
     this.adService.getAllAdByOwnerUserId().subscribe(response=>{
       if(response.success){
-        this.ads = response.data;
+        this.ads=response.data;
       }
       else{
       this.toastrService.error(response.message);
@@ -113,7 +113,9 @@ export class AdStatisticsComponent {
   setCurrentAd(ad:Ad):string{
     const videoIdPattern = /(?<=v=|v\/|vi=|vi\/|youtu.be\/|\/v\/|embed\/|\/\d+\/|\/\d+\?v=|&v=|embed\/|youtu.be\/|\/v\/|e\/|watch\?v=|&v=|\/\w{11})([\w-]+)/;
     const videoIdMatch = ad.videoURL.match(videoIdPattern);
-    
+
+    // todo azure için güncelleme gerekli
+
     if (videoIdMatch) {
       return videoIdMatch[0];
     } else {

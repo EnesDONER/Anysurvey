@@ -10,7 +10,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/user';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 declare var bootstrap: any; 
-
 @Component({
   selector: 'app-ad',
   templateUrl: './ad.component.html',
@@ -18,13 +17,13 @@ declare var bootstrap: any;
 })
 export class AdComponent {
   user:User;
-  tip:string="";
+  type:string="";
   userWalletAddress:string;
   videoId:string="";
-  videoId2:string= "https://anysurvey.blob.core.windows.net/test/14-cart-summary.component.ts - RentACar - Visual Studio Code 2023-05-21 21-42-32.mp4";
+  videoId2:string= "https://anysurvey.blob.core.windows.net/ad-videos/4-contra2.mp4";
   currentAdId:string="";
   startedTime:number;
-  watchedTime:number=3000;
+  watchedTime:number=30000;
   ads:Ad[]= [];
 
 
@@ -59,7 +58,7 @@ export class AdComponent {
         //this.videoId = "https://www.youtube.com/embed/" + videoIdMatch[0] + "?autoplay=1 | safe"
         //this.videoId= `https://www.youtube.com/embed/${videoIdMatch[0]}?autoplay=1`;
         this.videoId = videoIdMatch[0];
-        this.tip= "youtube";
+        this.type= "youtube";
         if (this.videoId) {
           var videoModalElement = document.getElementById('videoModal');
           if (videoModalElement) {
@@ -81,10 +80,12 @@ export class AdComponent {
       else{
         debugger
         //this.videoId = ad.videoURL;
-        this.tip="other";
-        this.videoId = encodeURIComponent(ad.videoURL);
+        this.type="other";
 
-        console.log(this.videoId);
+
+        this.videoId = ad.videoURL; // Kodlamaya gerek yok
+        var videoElement = document.getElementById('videoElement') as HTMLVideoElement;
+        videoElement.src = this.videoId;
 
         if (this.videoId) {
           var videoModalElement = document.getElementById('videoModal');
@@ -107,9 +108,16 @@ export class AdComponent {
   stopVideo(): void {
     const iframe = document.querySelector('#videoModal iframe') as HTMLIFrameElement;
    
-    if(this.tip =="youtube"){
+    if(this.type =="youtube"){
       iframe.src = '';
       this.videoId=iframe.src;
+
+    }
+    if(this.type =="other"){
+     
+      var videoElement = document.getElementById('videoElement') as HTMLVideoElement;
+      videoElement.pause();
+      
 
     }
 

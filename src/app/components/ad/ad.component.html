@@ -19,11 +19,11 @@
           aria-label="Close"
         ></button>
       </div>
-      <div *ngIf="tip=='youtube'" class="modal-body d-flex justify-content-center align-items-center">
+      <div *ngIf="type=='youtube'" class="modal-body d-flex justify-content-center align-items-center">
         <iframe 
           width="100%"
           height="420"
-          [src]="'https://www.youtube.com/embed/' + videoId + '?autoplay=1' | safe"
+          [src]="'https://www.youtube.com/embed/' + videoId + '?autoplay=1&controls=0' | safe"
           title="YouTube video player"
           frameborder="0"
           allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -32,11 +32,12 @@
         
       </div>
 
-      <div *ngIf="tip != 'youtube'" class  ="modal-body d-flex justify-content-center align-items-center">
-        <video width="100%" controls autoplay>
-          <source [src]="videoId2" type="video/mp4">
+      <div *ngIf="type == 'other'" class  ="modal-body d-flex justify-content-center align-items-center">
+        <video id="videoElement" width="100%"  autoplay>
+          <source id="otherVideo" [src]="videoId" type="video/mp4">
           Tarayıcınız video etiketini desteklemiyor.
         </video>
+        
       </div>
 
     </div>

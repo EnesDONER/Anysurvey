@@ -4,4 +4,5 @@ export interface Ad{
     companyName:string;
     description:string;
     videoURL:string;
+    videoImage:string;
 }

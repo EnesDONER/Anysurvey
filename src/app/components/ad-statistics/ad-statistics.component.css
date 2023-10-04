@@ -46,7 +46,7 @@
   }
   
   .card-front{
-    background-image: url(../../../assets/images/adw.png);
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
   }

@@ -5,6 +5,7 @@ import { AdService } from 'src/app/services/ad.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 declare var bootstrap: any; 
+declare var $ :any;
 export enum EnterType {
   Url = 'Url',
   ChooseFile = 'Choose File',
@@ -21,6 +22,8 @@ export class AddContentComponent {
   selectedType = EnterType.Url;
   selectedFile: File | undefined;
   selectedFileName: string | undefined;
+  selectedImageFileName:string | undefined;
+  selectedImageFile: File | undefined;
 
   constructor(private formBuilder:FormBuilder,private authService:AuthService, private adService:AdService ,private toastrService:ToastrService) {}
   ngOnInit(){
@@ -56,16 +59,21 @@ export class AddContentComponent {
     this.selectedFileName = " - "+ this.selectedFile?.name;
     console.log("file selected")
   }
-
-  uploadFile() {
-    if (this.selectedFile) {
-      const formData = new FormData();
-      formData.append('video', this.selectedFile);
-  
-      // API'ya POST isteği gönderme
-   console.log("upload")
-    }
+  onImageSelected(event: any) {
+    this.selectedImageFile = event.target.files[0];
+    this.selectedImageFileName = " - "+ this.selectedImageFile?.name;
+    console.log("image file selected")
   }
+
+  // uploadFile() {
+  //   if (this.selectedFile) {
+  //     const formData = new FormData();
+  //     formData.append('video', this.selectedFile);
+  
+  //     // API'ya POST isteği gönderme
+  //  console.log("upload")
+  //   }
+  // }
 
   createAdForm(){ 
     this.adForm = this.formBuilder.group({
@@ -73,10 +81,29 @@ export class AddContentComponent {
       companyName: ['', Validators.required],
       videoURL: [''],
       ownerUserId: [this.authService.findAuthenticatedUser(), [Validators.required]],
+      videoImage: ['', Validators.required],
       
     });
   }
   checkIfAdNull(){
+    if (!this.selectedImageFile){
+      this.toastrService.error("Choose video Image");
+      function alert() {
+        $("#chooseVideoImage").css("color", "red");
+        $("#paperclip").css("fill", "red");
+        setTimeout(function() {
+          $("#chooseVideoImage").css("color", "black");
+          $("#paperclip").css("fill", "blue");
+
+        }, 200); // 200 milisaniye sonra rengi geri çevir
+      }
+      
+      // Döngü ile yanıp sönme işlemini 5 kez çağıralım
+      for (let i = 0; i < 5; i++) {
+        setTimeout(alert, i * 400); // Her seferinde 400 milisaniye bekleyerek işlemi tekrarla
+      }
+      return false;
+    }
     if(this.adForm.valid){
       var payModal = new bootstrap.Modal(document.getElementById('payModal'));
       payModal.show();
@@ -92,7 +119,8 @@ export class AddContentComponent {
       console.log(this.adForm.value);
       this.isItPaid=false;
       let adModel = Object.assign({},this.adForm.value);
-      this.adService.add(adModel).subscribe(response=>{this.toastrService.success(response.message,"Ad added");
+      const imageContainerName = "ad-images";
+      this.adService.add(adModel,imageContainerName,this.selectedImageFile).subscribe(response=>{this.toastrService.success(response.message,"Ad added");
       this.createAdForm()},
       responseError=>{this.toastrService.error(responseError.error);
         this.toastrService.error(responseError.error);
@@ -109,9 +137,10 @@ export class AddContentComponent {
       console.log(this.selectedFile)
       this.isItPaid=false;
       let adModel = Object.assign({},this.adForm.value);
-      const containerName = "ad-videos";
-      console.log("uploadd")
-      this.adService.addAdAndUpload(adModel, containerName, this.selectedFile).subscribe(
+      const videoContainerName = "ad-videos";
+      const videoImageContainerName = "ad-images";
+      console.log("uploadd");
+      this.adService.addAdAndUpload(adModel, videoContainerName, videoImageContainerName , this.selectedFile,this.selectedImageFile).subscribe(
         response => {
           this.toastrService.success(response.message, "Ad added");
           this.createAdForm();

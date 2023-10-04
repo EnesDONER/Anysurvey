@@ -17,18 +17,32 @@ export class AdService {
 
   constructor(private httpClient:HttpClient , private authService:AuthService) { }
   
-  add(ad:Ad):Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>(this.apiUrl+"content/addad",ad)
+  add(ad:Ad,imageContainerName: string,videoImage: any):Observable<ResponseModel>{
+    const formData = new FormData();
+    formData.append('CompanyName',ad.companyName); 
+    formData.append('Description', ad.description);
+    formData.append('OwnerUserId',ad.ownerUserId.toString());
+    formData.append('VideoUrl', ad.videoURL);
+    formData.append('ImageContainerName', imageContainerName);
+    formData.append('VideoImage', videoImage, videoImage.name);
+    
+    // HTTP başlıklarını ayarlayın
+    const headers = new HttpHeaders({
+      'Accept': 'application/json',
+    });
+    return this.httpClient.post<ResponseModel>(this.apiUrl+"content/addad",formData, { headers })
   }
-  addAdAndUpload(ad: Ad, containerName: string, formFile: any): Observable<any> {
+  addAdAndUpload(ad: Ad, videoContainerName: string, imageContainerName: string,videoUri: any, videoImage: any): Observable<any> {
     // FormData oluşturun
     const formData = new FormData();
     formData.append('CompanyName',ad.companyName); 
     formData.append('Description', ad.description);
     formData.append('OwnerUserId',ad.ownerUserId.toString());
-    formData.append('ContainerName', containerName);
-    formData.append('FormFile', formFile, formFile.name); // Dosya adını ekleyin
-  
+    formData.append('VideoContainerName', videoContainerName);
+    formData.append('ImageContainerName', imageContainerName);
+    formData.append('VideoUri', videoUri, videoUri.name); // Dosya adını ekleyin
+    formData.append('VideoImage', videoImage, videoImage.name);
+    
     // HTTP başlıklarını ayarlayın
     const headers = new HttpHeaders({
       'Accept': 'application/json',
