@@ -4,9 +4,7 @@ import { Injectable } from '@angular/core';
 import { ListResponseModel } from '../models/listResponseModel';
 import { Observable } from 'rxjs';
 import { Ad } from '../models/ad';
-import { SingleResponseModel } from '../models/singleResponseModel';
 import { ResponseModel } from '../models/responseModel';
-import { File } from 'buffer';
 
 @Injectable({
   providedIn: 'root'

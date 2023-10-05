@@ -65,16 +65,6 @@ export class AddContentComponent {
     console.log("image file selected")
   }
 
-  // uploadFile() {
-  //   if (this.selectedFile) {
-  //     const formData = new FormData();
-  //     formData.append('video', this.selectedFile);
-  
-  //     // API'ya POST isteği gönderme
-  //  console.log("upload")
-  //   }
-  // }
-
   createAdForm(){ 
     this.adForm = this.formBuilder.group({
       description :['', Validators.required],
@@ -104,6 +94,7 @@ export class AddContentComponent {
       }
       return false;
     }
+
     if(this.adForm.valid){
       var payModal = new bootstrap.Modal(document.getElementById('payModal'));
       payModal.show();
@@ -122,8 +113,8 @@ export class AddContentComponent {
       const imageContainerName = "ad-images";
       this.adService.add(adModel,imageContainerName,this.selectedImageFile).subscribe(response=>{this.toastrService.success(response.message,"Ad added");
       this.createAdForm()},
-      responseError=>{this.toastrService.error(responseError.error);
-        this.toastrService.error(responseError.error);
+      responseError=>{
+        this.toastrService.error(responseError.error,"If you have paid but think the ad has not been added, please contact us.");
       })
     }
   }

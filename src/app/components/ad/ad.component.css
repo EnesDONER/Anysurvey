@@ -4,7 +4,10 @@
   }
   img {
     width: 100%;
-    overflow: hidden;
+    height: 20rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
   }
   
   
@@ -17,43 +20,6 @@
   border-bottom-left-radius: 20px; 
   
   }
-  
-  /* .meeting-item .down-content .date {
-  
-  text-align: center;
-  display: inline-block;
-  margin-right: 20px;
-  }
-  
-  .meeting-item .down-content .date h6 {
-  font-size: 13px;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: #a12c2f;
-  }
-  
-  .meeting-item .down-content .date span {
-  display: block;
-  color: #1f272b;
-  font-size: 22px;
-  margin-top: 7px;
-  }
-  
-  .meeting-item .down-content h4 {
-  font-size: 18px;
-  color: #1f272b;
-  font-weight: 600;
-  display: inline-block;
-  margin-bottom: 15px;
-  }
-  
-  .meeting-item .down-content p {
-  margin-left: 50px;
-  color: #1f272b;
-  font-size: 14px;
-  } */
-  
-  
   .meeting-item .thumb .price {
     position: absolute;
     left: 20px;

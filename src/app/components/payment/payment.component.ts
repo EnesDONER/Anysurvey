@@ -2,7 +2,6 @@ import { PaymentService } from './../../services/payment.service';
 import { ToastrService } from 'ngx-toastr';
 import { Component, DoCheck, EventEmitter, Input, Output } from '@angular/core';
 import { Card } from 'src/app/models/card';
-import { response } from 'express';
 import { AuthService } from 'src/app/services/auth.service';
 
 
@@ -152,7 +151,6 @@ export class PaymentComponent implements DoCheck{
     this.cardId=id;
   }
   payment(){
-
       this.paymentService.payment(this.cardId ,this.fee).subscribe(response=>{
          if(response.success){
           this.toastrService.success(response.message,"Payment success");

@@ -93,13 +93,11 @@
                 <div class="price">
                   <span> {{ad.companyName}}</span>
                 </div>
-                <img src="../../../assets/images/3.jpg" alt="" />
+                <img  [src]="ad.videoImage ? ad.videoImage : '../../assets/images/3.jpg' " alt="video image" />
               </div>
               <div class="down-content">
-                <h4></h4>
                 <div>{{ad.description}}</div>
-                <h4></h4>
-                <div class="input-group mb-3">
+                <div class="input-group mt-3 mb-1">
                   <button
                     (click)="setCurrentAd(ad)" 
                     class="btn btn-outline-success"
