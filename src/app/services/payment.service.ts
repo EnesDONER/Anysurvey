@@ -12,8 +12,8 @@ import { AnySurveyToken } from '../models/anySurveyToken';
 })
 export class PaymentService {
 
-  apiUrl="https://localhost:7162/api/";
-  apiUrlNode="http://localhost:8080/";
+  apiUrl="https://webapi20231005142517.azurewebsites.net/api/";
+  apiUrlNode="https://anysurveytoken.azurewebsites.net/";
 
   constructor(private httpClient:HttpClient , private authService:AuthService) { }
 

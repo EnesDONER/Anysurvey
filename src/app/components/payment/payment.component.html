@@ -98,7 +98,7 @@
               <label>Security Number</label>
               <input (focus)="turn()" (blur)="turn()" class="cvv" type="number" [(ngModel)]="cvv" placeholder="CVV" (keydown)="onCardNumberKeyDown($event,3)"/>
               
-              <button class="buy" data-bs-dismiss="modal" (click)="setDataEvent(); addCard()"><i class="material-icons"></i> Add card and payment {{fee}} $</button>
+              <button class="buy" data-bs-dismiss="modal" (click)="setDataEvent(); addCard()"><i class="material-icons"></i> Add card </button>
             </div>
           </div>
           </div>

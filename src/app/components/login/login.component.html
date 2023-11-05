@@ -22,7 +22,7 @@
             <label class="form-label" for="email">Email address</label>
             <p class="help-block text-danger" *ngIf="loginForm.get('email').touched && loginForm.get('email').errors?.['email']">Please enter a valid email</p>
           </div>
-        
+
           <!-- Password input -->
           <div class="form-outline mb-3">
             <input
@@ -34,10 +34,11 @@
             />
             <label class="form-label" for="password">Password</label>
           </div>
-        
-          <div class="d-flex justify-content-between align-items-center">
+
+      
+          <div class="d-flex flex-column justify-content-between align-items-center">
             <!-- Checkbox -->
-            <div class="form-check mb-0">
+            <div class="form-check mb-2">
               <label for="recaptcha"></label>
               <re-captcha
                 (resolved)="resolved($event)"
@@ -47,11 +48,11 @@
               >
               </re-captcha>
             </div>
-            <a routerLink="/forgetPassword" class="text-body">Forgot password?</a>
+            <a routerLink="/forgetPassword" class="text-body mt-2">Forgot password?</a>
           </div>
-        
+
           <div class="text-center text-lg-start mt-4 pt-2">
-            <button 
+            <button
               (click)="login()"
               type="button"
               class="btn btn-primary btn-lg"

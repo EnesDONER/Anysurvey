@@ -13,7 +13,7 @@ import { SingleResponseModel } from '../models/singleResponseModel';
 })
 export class SurveyService {
 
-  apiUrl="https://localhost:7162/api/"
+  apiUrl="https://webapi20231005142517.azurewebsites.net/api/"
 
   constructor(private httpClient:HttpClient , private authService:AuthService ) { }
   

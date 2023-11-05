@@ -8,7 +8,7 @@ import { ResponseModel } from '../models/responseModel';
   providedIn: 'root'
 })
 export class ContactService {
-  apiUrl="https://localhost:7162/api/"
+  apiUrl="https://webapi20231005142517.azurewebsites.net/api/"
 
   constructor(private httpClient:HttpClient ) { }
   sendMail(contact:Contact):Observable<ResponseModel>{

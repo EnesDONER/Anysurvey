@@ -109,7 +109,6 @@ export class PaymentComponent implements DoCheck{
     this.paymentService.getAllCard().subscribe(response=>{
       if(response.success){
         this.cards=response.data;
-        console.log(this.cards)
       }
       else{
         this.toastrService.error("kart yok")
@@ -132,12 +131,12 @@ export class PaymentComponent implements DoCheck{
     this.paymentService.addCard(cardModel).subscribe(response=>{
       if(response.success){
         this.toastrService.success(response.message,"Card aded");
+        this.toastrService.info(response.message,"Click the payment button again to pay");
         this.ncard=0;
         this.namecard="";
         this.cvv=0;
-        this.date="";
-        this.payment();
-        setTimeout(() => window.location.reload(), 1000)
+        this.date=""
+       // setTimeout(() => window.location.reload(), 1000)
         }
       else{
         this.toastrService.error(response.message);
@@ -172,4 +171,5 @@ export class PaymentComponent implements DoCheck{
       }
       )
     }  
+   
 }

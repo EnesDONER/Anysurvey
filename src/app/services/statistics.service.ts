@@ -16,7 +16,7 @@ import { SurveyStatistic } from '../models/surveyStatistic';
 })
 export class StatisticsService {
 
- apiUrl="https://localhost:7162/api/"
+ apiUrl="https://webapi20231005142517.azurewebsites.net/api/"
 
   constructor(private httpClient:HttpClient ) { }
   

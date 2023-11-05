@@ -20,10 +20,9 @@ export class AdComponent {
   type:string="";
   userWalletAddress:string;
   videoId:string="";
-  videoId2:string= "https://anysurvey.blob.core.windows.net/ad-videos/4-contra2.mp4";
   currentAdId:string="";
   startedTime:number;
-  watchedTime:number=30000;
+  watchedTime:number=3000;
   ads:Ad[]= [];
 
 
@@ -79,20 +78,17 @@ export class AdComponent {
 
       else{
         debugger
-        //this.videoId = ad.videoURL;
         this.type="other";
-
-
-        this.videoId = ad.videoURL; // Kodlamaya gerek yok
-        var videoElement = document.getElementById('videoElement') as HTMLVideoElement;
-        videoElement.src = this.videoId;
-
+        this.videoId = ad.videoURL; 
+        
         if (this.videoId) {
           var videoModalElement = document.getElementById('videoModal');
+          var videoElement = document.getElementById('videoElement') as HTMLVideoElement;
+          
           if (videoModalElement) {
-            var payModal = new bootstrap.Modal(videoModalElement);
-   
-            payModal.show();
+            var videoModal = new bootstrap.Modal(videoModalElement);
+            videoModal.show();
+            videoElement.src = this.videoId;
       
             this.currentAdId = ad.id;
           } else {
@@ -107,18 +103,14 @@ export class AdComponent {
 
   stopVideo(): void {
     const iframe = document.querySelector('#videoModal iframe') as HTMLIFrameElement;
-   
+
     if(this.type =="youtube"){
       iframe.src = '';
       this.videoId=iframe.src;
-
     }
     if(this.type =="other"){
-     
       var videoElement = document.getElementById('videoElement') as HTMLVideoElement;
       videoElement.pause();
-      
-
     }
 
     const finishedTime = performance.now(); // bileşen ekrandan kaldırıldığında bitiş zamanını kaydedin
@@ -131,11 +123,9 @@ export class AdComponent {
       this.ads.splice(indexToDelete,1);
       this.currentAdId="";
       this.payment();
-      //setTimeout(() => window.location.reload(), 700)
-    
     }
     else(
-      this.toastrService.error("Ödül Verilmedi.")
+      this.toastrService.error("No Award Given.")
     ) 
     this.videoId="";
   }

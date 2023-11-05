@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  apiUrl="https://localhost:7162/api/auth/";
+  apiUrl="https://webapi20231005142517.azurewebsites.net/api/auth/";
   constructor(private httpClient:HttpClient,private router:Router) { }
   
   sendResetPasswordMail(email:string){
@@ -83,5 +83,4 @@ export class AuthService {
     localStorage.clear();
     this.router.navigate(["/"])
   }
-
 }

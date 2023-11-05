@@ -10,3 +10,9 @@ section{
     }
   }
   
+  @media (max-width: 400px) {
+    .form-check{
+        margin: 0;
+        padding: 0;
+    }
+  }

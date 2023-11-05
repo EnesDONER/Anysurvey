@@ -38,7 +38,7 @@ export class LoginComponent {
   login(){
     if(this.loginForm.valid){
       let loginModel = Object.assign({},this.loginForm.value);
-      this.authService.login(loginModel).subscribe(response=>{this.toastrService.info(response.message,"Giriş yapıldı") 
+      this.authService.login(loginModel).subscribe(response=>{this.toastrService.info(response.message,"Login success") 
         localStorage.setItem("token",response.data.token),
         this.router.navigateByUrl("/").then(() => {
           window.location.reload(); // Sayfayı yenile

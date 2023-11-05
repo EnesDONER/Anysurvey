@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { ConstantPool } from '@angular/compiler';
 import { AuthService } from './../../services/auth.service';
 import { ChangeDetectorRef, Component } from '@angular/core';
@@ -12,7 +13,7 @@ export class NaviComponent {
 user:User = null;
 isUserAuthenticated :boolean = false;
 isUserPartnership :boolean = false;
-constructor(private authService:AuthService){}
+constructor(private authService:AuthService, private toastrService:ToastrService){}
 ngOnInit(){
   this.isAuthenticated();
   this.isPartnership();
@@ -45,5 +46,7 @@ logout(){
   this.isUserAuthenticated = false;
   this.isUserPartnership = false;
   this.user= null;
+  this.toastrService.info("Logout")
+  
 }
 }

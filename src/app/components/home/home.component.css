@@ -129,7 +129,7 @@ button:focus{outline: 0;}
   
 
   .heading_container {
-  padding-top: 10vh;
+  padding-top: 8vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -175,6 +175,7 @@ button:focus{outline: 0;}
   
   .work_section .detail_container .box {
     margin-bottom: 20px;
+    margin: 20px;
     padding: 20px;
     -webkit-box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.15);
             box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.15);
@@ -221,14 +222,11 @@ button:focus{outline: 0;}
   .work_section .btn-box a {
     display: inline-block;
     padding: 10px 25px;
+    margin-left: 40px;
     background-color: #d8bf36;
     color: #ffffff;
     border-radius: 30px;
   }
-  .work_section .container{
-    margin: 75px;
-  }
-  
   
 .layout_padding {
     padding: 75px 0;
@@ -256,6 +254,7 @@ button:focus{outline: 0;}
   }
   
 .heading_container {
+    padding: 20px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -287,14 +286,22 @@ button:focus{outline: 0;}
   a{
     text-decoration: none;
 }
-@media (max-width: 850px) {
+@media (max-width: 400px) {
+  .slider {
+    height: 240px !important;
+    max-width: 100% !important;
+  }
+}
+
+
+@media (min-width: 401px) and (max-width: 850px){
   .slider {
     height: 450px !important;
     max-width: 100% !important;
   }
 }
 
-@media (min-width: 850px) {
+@media (min-width: 851px) {
   .slider {
     height: 690px !important;
     max-width: 80% !important;
